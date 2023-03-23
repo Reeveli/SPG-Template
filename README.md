@@ -7,6 +7,7 @@ By Killet & Reeveli. Default scripts for SPG Arma 3 missions. Drag and drop all 
  - Reeveli's User Marker System: **Do NOT** use the standalone Workshop version in addition to these default scripts! See [mod documentation](https://docs.google.com/document/d/1v2NwtL5S1k7O54kIimPlOhjQqLtxF0DVTB81fbSFIBk) for instructions
  - Reeveli's User Artillery System: See the [SPG artillery manual](https://docs.google.com/document/d/1BdlAftkMrQUzYFo9iGOmSjMFkSRXW_wHvGLC8H2S5rc) for instructions
  - Reeveli's Resticted Zeus framework: Experimental feature. No documentation as of yet, ask Reeveli for details if you are interested
+ - [Reeveli's Advamced Gestures](https://steamcommunity.com/sharedfiles/filedetails/?id=2809634827): **Do NOT** use the standalone Workshop version in addition to these default scripts!
 
 ## SPG Addon Settings
 
@@ -26,6 +27,13 @@ By Killet & Reeveli. Default scripts for SPG Arma 3 missions. Drag and drop all 
  - Enable usage of the military working dog. See additional readme file in \scripts\MWD\ folder
  - Admin Panel: List players by Steam UID to have automatic access to curator during mission. Logged in admin is always allowed
 
+## General Features
+
+ - Players will now get automatic earplugs when leaving the arsenal if they have none
+ - Players will no longer lose TFAR radios when exiting arsenal
+ - If players use the custom "save loadout" option at arsenal loadout will be restored on respawn
+ 
+ 
 ## Curator Features
 
  - Custom keybind to toggle curator camera hearing: Only useful if not playing as virtual curator. Set keybind in Toggle curator camera hearing keybind options
@@ -78,6 +86,8 @@ Zeus Enhanced -mod is required
  - Killet´s Save respawn loadout system: Add `[this] call KLT_A_fnc_KLTSaveLoadout;` to the init field of an object to be able to save your respawn loadout from it
  - VCOM: Can be enabled and tweaked in VCOM addon settings
  - Icon viewer function: Can be run from editor. Good for finding icons for scripts etc. `[] call Rev_fnc_icon_viewer`
+ - Area heal function: `[_target] call Rev_fnc_heal_area`
+ - Disable vehicle info panels: If you aim to disable vanilla GPS panel make sure to disable it both for the players themselves (individually) and to each vehicle. `[vehicle player,false,["MinimapDisplayComponent"]] call Rev_fnc_info_panel;`
 
 
 
