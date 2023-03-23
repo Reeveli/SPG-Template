@@ -34,7 +34,7 @@ By Killet & Reeveli. Default scripts for SPG Arma 3 missions. Drag and drop all 
  
 ## Curator Modules
 Zeus Enhanced -mod is required
- - HALO jump terminal: Set an object to act as terminal for players to perform Liberation style HALO jumps. Can be also started locally on a player by `["insert_plane_class"] Rev_fnc_halo_start function`
+ - Add HALO jump terminal: Set an object to act as terminal for players to perform Liberation style HALO jumps. Can be also started locally on a player by `["insert_plane_class"] Rev_fnc_halo_start function`
  
  - Killet´s dust storm: You can now enable a small or a global sandstorm
  - Icon viewer: In-game browser for .paa files. Good for finding icons for scripts etc.
@@ -51,6 +51,8 @@ Zeus Enhanced -mod is required
  - Promote/remove spectator: Available for players
  - ZEN showcase modules: Showcase modules for all ZEN dynamic dialog options, are only visible when in editor preview (so not during actual missions)
  - Change post processing effects for all players (effect as found in SPG addon options)
+ - Reeveli's Rectricted Zeus: Promote player to RZ. Part of the experimental RZ system. Do not use unless you know what you are doing
+
 
 ## Curator Context Actions
 Zeus Enhanced -mod is required
@@ -76,3 +78,8 @@ Zeus Enhanced -mod is required
  - Killet´s Save respawn loadout system: Add `[this] call KLT_A_fnc_KLTSaveLoadout;` to the init field of an object to be able to save your respawn loadout from it
  - VCOM: Can be enabled and tweaked in VCOM addon settings
  - Icon viewer function: Can be run from editor. Good for finding icons for scripts etc. `[] call Rev_fnc_icon_viewer`
+
+
+
+## License
+Scripts and files included are only to be used in SPG's Arma 3 missions, please do not distribute this package or parts of it around the internet without our permission. Feel free to ask from Reeveli and Killet about usage of any scripts/functions, we are always happy to help fellow coders.
