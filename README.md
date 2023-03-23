@@ -7,7 +7,7 @@ By Killet & Reeveli. Default scripts for SPG Arma 3 missions. Drag and drop all 
  - Reeveli's User Marker System: **Do NOT** use the standalone Workshop version in addition to these default scripts! See [mod documentation](https://docs.google.com/document/d/1v2NwtL5S1k7O54kIimPlOhjQqLtxF0DVTB81fbSFIBk) for instructions
  - Reeveli's User Artillery System: See the [SPG artillery manual](https://docs.google.com/document/d/1BdlAftkMrQUzYFo9iGOmSjMFkSRXW_wHvGLC8H2S5rc) for instructions
  - Reeveli's Resticted Zeus framework: Experimental feature. No documentation as of yet, ask Reeveli for details if you are interested
- - [Reeveli's Advamced Gestures](https://steamcommunity.com/sharedfiles/filedetails/?id=2809634827): **Do NOT** use the standalone Workshop version in addition to these default scripts!
+ - [Reeveli's Advanced Gestures](https://steamcommunity.com/sharedfiles/filedetails/?id=2809634827): **Do NOT** use the standalone Workshop version in addition to these default scripts!
 
 ## SPG Addon Settings
 
