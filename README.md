@@ -92,4 +92,4 @@ Zeus Enhanced -mod is required
 
 
 ## License
-Scripts and files included are only to be used in SPG's Arma 3 missions, please do not distribute this package or parts of it around the internet without our permission. Feel free to ask from Reeveli and Killet about usage of any scripts/functions, we are always happy to help fellow coders.
+Scripts and files included in this package are only to be used in SPG's Arma 3 missions, please do not distribute this package or parts of it around the internet without our (Killet & Reeveli) permission. Feel free to ask us about usage of any scripts/functions, we are always happy to help fellow coders.
