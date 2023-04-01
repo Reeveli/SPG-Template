@@ -11,7 +11,7 @@ By Killet & Reeveli. Default scripts for SPG Arma 3 missions. Drag and drop all 
 
 ## SPG Addon Settings
 
- - Enhanced flashbang: Define which (or any) cladd of grenades will act as enhanced flashbangs.
+ - Enhanced flashbang: Define which (or any) class of grenades will act as enhanced flashbangs.
  
  	- Flashbangs are now omidirectional
 	-	Custom effects for players
