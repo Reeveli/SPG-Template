@@ -1,0 +1,881 @@
+TODO:
+	Ask Killet if UTXG compass code could be removed. Currently not listed in Git readme
+	Killets arsenal system Git readme
+		Logisystem
+
+7.8.3
+	SPG_settings.sqf
+		Fixed wrong tooltip on MWD option
+		Re-enabled curator list option
+
+7.8.2
+	Pinglist visibility improved to be tied to HUD presence
+		fn_pinglistInit.sqf updated to 1.1
+
+	Created postinit function to add medical hint text EH to players
+
+7.8.1
+	Fixed missing function definition and file for post processing curator moduel
+
+7.8
+	From Rev_7_5 branch
+
+	New features:
+		Curator module and editor preview module for post processing effects
+		Player ping list (enabled by default in SPG settings) added to non RZ curators
+			Playes who ping curator will be logged in the list with mission time, pressing the entry will move curator camera to player position
+		Function (which can be run from editor) and curator module to start icon viewer
+	
+	initPlayerLocal.sqf
+		Fixed small typo in line 11
+
+    Player ping list
+        description.ext
+            dialog added
+        SPG_settings updated to 1.5
+
+	scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf updated to 1.3
+		New curator module for post processing
+		Injure action renamed for clarity
+
+	New function and curator module for icon viewer
+    
+	Curator module for changing post processing effects mid game
+        scripts\KLT\KilletsEnviro\fn_enviro.sqf updated to 1.1
+        New curator module in zeus_init
+	
+	scripts\SPG\SPG_settings.sqf updated to 1.5_SPG
+        Corrected wrong tooltip for "Rev_offroad_speed" slider setting
+ 		 Added setting for pinglist
+		 Added missing setting for MWD
+
+	Artillery system		
+		scripts\Reeveli_artillery\User_artillery\Artillery_dialog\fn_dialog_gps.sqf updated to 1.1
+			Deleted unused arrays _arr1 & _arr2
+		scripts\Reeveli_artillery\User_artillery\Area_bombing\fn_bomb_map_dialog_onUnload.sqf updated to 1.1
+			Fixed bug were selected bomb amount was not rounded to whole numbers
+			Pattern option neutered, left as legacy
+        Area bombing
+            Pattern option removed
+                scripts\Reeveli_artillery\User_artillery\Area_bombing\bomb_map_dialog.hpp updated to 1.1
+                scripts\Reeveli_artillery\User_artillery\Area_bombing\fn_bomb_map_dialog.sqf upfated to 1.2
+                scripts\Reeveli_artillery\User_artillery\Area_bombing\fn_bomb_map_dialog_onUnload.sqf updated to 1.1
+                scripts\Reeveli_artillery\User_artillery\Area_bombing\fn_bomb_plane.sqf updated to 1.2
+                scripts\Reeveli_artillery\User_artillery\Area_bombing\fn_bomb_ordance.sqf updated to 1.5
+
+7.7.1
+    User artillery system, hotfix for curator placed TRPs
+        fn_zeus_trp_dialog updated to 1.1
+        fn_player_init updated to 1.2.
+7.7
+	From Rev_7_4_2 branch
+	
+	Added a system to restrict vehicle offroad speed
+		Settings foudn in addon otpions > SPG Settings > Vehicle control
+
+	New suppressive fire system
+
+    fn_zeus_init
+        updated to 1.2.1
+
+    fn_camofaces updated to 1.7    
+	onPlayerRespawn
+         camo faces code removed as unnecessary
+		 
+	scripts\Reeveli_fnc\Rev_restricted_zeus\Rev_RZ_settings.sqf description fixed
+
+    User artillery        
+        Area bombing
+            fn_bomb_plane updated to 1.1.1
+                Server ammo update is now calculated based on ordnance amount, not sortie
+        Resupply
+            fn_supply_create updated to 1.1.1
+            Fixed parachute creation value to be determined by the same value as box altitude
+        Dynamic briefing
+            fn_dynamic briefing updated to 1.2
+                Deleted all refences to old dynamic webpage, iclusinf taking entire brieing put of spawn scope
+                Added clustermissile, supplydrop, gunship support, area bombing to briefing
+            fn_webage function file/definition deleted
+
+    Entire Rev_utilities folder removed
+        Player reset function not needed, is covered by ACE addon options
+        SPG_Settings updated to 1.4 remove player reset option
+
+	All ZEN dialog showcase modules updated to use full parameters and proper header
+
+	initPlayerLocal
+		Old code for creating curator modules removed	
+	
+    defines.hpp
+        Deleted dynamic webpage button definition
+
+7.6.2
+	fn_air_map_dialog updated to 2.4.2
+
+	initplayerLocal
+		Earplugs are now longer added to virtual curator type players
+
+7.6.1
+	TFAR_spg_radio_beta item requirement removed from radio_dialog.sqf and fn_air_disconnect
+	fn_server_init updated to 1.7 from development branch
+
+7.6
+	From Rev_7_3 branch
+
+    Artillery UI changed
+		Complete interface change, along with numerous additional feature changed, user documentation inboud eventully to training docs
+		For complete system changelog see development branch changelogs 7.0 -- 7.3
+		New ordnance type, area bombing along with scrited napalm
+		In-game curator can now add TRPs
+			TRP placement ZEN context action is now removed for RZ
+		All artillery related functions are now separated from main Rev_fnc folder to their own main folder	
+	
+    New suppressive fire system added
+        New functions added
+        fn_zeus_init updated
+	
+    Blackout
+        fn_blackout updated to 1.4 to use boolean instead of number parameter for clarity
+        fn_blackout_dialog updated to 1.1 to use boolean instead of number parameter for clarity
+	
+	Marker system
+        scripts\Reeveli_fnc\Rev_markers_script\fn_removal.sqf
+            Updated to 1.2
+            disabling markers after briefing now longer cripples custom displays
+            additional code filtering only for user placed markers to prevent any future script incompabilities
+
+    Rev_halo
+        fn_jump.sqf updated to 1.1
+        damage protection added
+	    Old BIS_fnc_addStackedEventHandlers replaced with with missionEventhandlers
+            fn_halo_start updated to 1.1
+            halo_dialog.hpp updated to remove new eventhandlers 
+		
+	Admin system
+        initPlayerLocal
+            Curator module creating for whitelisted players moved to a standalone postinit function Rev_fnc_admin_client_init		
+        fn_admin_preinit
+            Updated to 1.2
+            Added EH to make all units editable when entering the interface
+            setVehicleVarName is now remote executed for all machines
+
+    Player foliage removal action enabled by default
+
+	defines.hpp imported from Rev_7_3
+
+	scripts\Reeveli_fnc\AL_grenades\fn_stun_grenade.sqf
+        Updated to 1.2
+
+	fn_player_rating_reset updated to 1.1
+
+
+7.5
+	From Rev_6_9 branch
+
+    New version for User Marker mod update testing
+        All functions/dialogs renamed to avoid duplicates with mod version (idds and preinit settings remain the same atm)
+        Added diag_log for debugging to fn_save, fn_worlds
+
+	Zeus artillery dynamic dialog slider bug fixed by adding custom id
+
+	Admin
+        fn_admin_zeus updated to 1.2 (fixed logged admin demotion every time)
+		Fixed a few function headers with wrong info
+
+	RZ
+        Enabled artillery firemission module
+        Disabled camera editing area to enable RZ camera placement on map in init_server
+        Added new eventhandler to post_player to delete created units
+        Removed call Rev_RZ_fnc_state_machine from post_player as that function no longer exist
+        in post_plater main CBA EH id is now stored in uiNamespace variable, deletion index is now defined via it
+
+	Advanced gestures
+        New functions created
+        New setting file added to scripts\SPG\CBApreinit.hpp
+
+	Artillery system
+        Max range is now set via addonoption
+        HE, ILM, SMK ammo regen placement moved to _type -functions to prevent abuse of super fast artillery calls
+		User artillery resupply plane is now made captive
+		User artillery web document link changed to up to date one
+		User artillery missile, air support & resupply minimum altitude raised to 100m
+
+	Medical functions
+        All functions updated to have correct headers, default params
+
+	Rev_zeus
+        All functions have received headers
+
+7.4
+	User Marker System updated to latest mod standard
+7.3.8
+	New code for curator camera function for two-way reliability
+	fn_intro update
+	New SPG function category
+		New briefing entry for SMP
+7.3.7
+	SPG admin UID list enabled once again - hopefully
+	Flashbang script reworked - see featurelist for description of function
+		CBA option removed
+7.3.6
+	Updated camofaces to newest version
+    Added fix to prevent player surrendering from flashbangs
+7.3.5
+	Toggle Zeus hearing
+		Changed code so that when toggle is not activated normal key function still works (to eliminate problems with old default key numpadenter)
+    
+    User artillery system
+		Resupply plane is now made captive
+		Web document link changed to up to date one
+		Missile, air support & resupply minimum altitude raised to 100m
+7.3.4
+	Changed toggle key for zeus hearing to insert instead of numpad enter so it does not interfere with arma 3 default keybindings
+7.3
+	From Rev_6_7 branch
+		Flashbangs
+			Fixed bug with flashbang time setting
+			Two new functions created to support flashbang auto-surrendering AI's if players are nearby
+		
+		Admin system
+			Admin panel updated to now include script version
+        		description.ext appended with new custom value for sciript version tracking, SET ON LINE 1
+    		Server FPS fetch put into spawn to get in scheduled
+        		Control default text changed 
+			Bug with non-admin curator should now be fixed   
+        		Player curator modules are now defined using player names instead of UIDs to avoid false negatives of the latter command on server
+
+		Resricted Zeus (Tested successfully with all features 10.01.2022 on dedicated)
+			Removed IR laser & flashlights module access
+        	Locality safety made CBA option
+           		New CBA options file added to handle RZ options, added to CBA preinit list
+        	RZ module now has a unique variable new set in init_server
+		
+    	New function to constantly reset player rating
+			New SPG option added to toggle it
+			New postinit function added to initiliaze system
+
+		Fixed a few missing semicolons in air_dialog and supply_map_dialog
+
+	New folder KLT\Intro
+		One new file added
+
+7.2
+	From Rev_6_6 branch
+
+	User artillery system 2022 rework
+		Almost every file updated
+		All functions should now have headers
+		New ordnance option added: gunship support
+			New CBA options added for gunship
+		Too many new features added to CAS, missile and supply drops to list here, see the artillery system documentation/tutorial
+			New dialogs added to description.ext
+			defines.hpp updated with necessary imports
+			CAS now loiters above the area if player take scontrol of turret/co-pilot
+		Alternative missile warhead functions removed, all references to old Rev_arty_alias_enabled removed
+		AI's now react to artillery strikes, AI mods like VCOM may override this behaviour
+		CBA options have been combed of excess options, many options removed
+		Zeus cruise missile dialog updated to use slider for altitude
+		Players can no longer open artillery interface if they are
+			surrendering
+			handcuffed
+			escorting a prisoner
+
+	Reeveli's HALO system
+		Dialog rewritten, deploy is now disabled untill DZ has been selected
+        All HALO function now have headers
+
+	KLT custom camera
+        Is now a toggle between TFAR camera hearing states
+        RZ condition included
+        KLT milsim functions and definitions removed as obsolete
+
+	Changes to curators
+		New zeus module/system to mimick user resupply pods, but for curator instead
+
+	Misc
+    	Added header to grass_removal
+		Server fps is no longer a public varibale, admin panel GUI modified to fetch value instead
+		Radio arsenal function will now exit if TFAR is not loaded
+7.1
+	From Rev_6_2_2 branch
+
+	Resupply system smoke UI folder and included icon deleted, direct reference to ZEN origin is now used instead
+	Small improvements to admin panel
+        In SP server module now has all addons enabled fn_admin_preinit
+	defines.hpp cleaned, import command is now used
+
+	Bug fixes
+		User Marker System fixed
+		Added missing call for tactical missile in user artillery radio dialog
+
+	Function headers added:
+        Artillery briefing functions
+        radio_dialog
+        User artillery
+            arillery_completed
+            artillery_condition
+            artillery_system
+		Air support
+			air_dialog
+			air_dialog_close
+			air_disconnect
+			air_selection
+			air_start
+
+7.0
+	From Rev_6_2 dev branch
+
+	New admin console system, replacing old add zeus ACE-selfinteraction
+		onPause script and GUI defines added to description.ext
+		All KLT functions and files related to the old zeus module shave been removed
+			Auto-update loop was also removed as that was an problem with Restricted Zeus
+		Slight changes to UID list in SPGsettings.sqf to turn the list into a valid array
+		initplayerLocal appended as necessary
+
+	Initial release of Resticted Zeus framework
+		Added RZ check for KLT zeus camera keypress
+
+	All Rev-artillery sounds repacked to reduce file size
+
+	Function headers for:
+		Artillery/warhead functions
+		Artillery/resupply functions
+	
+	Fixed
+		Missing semicolons in halo_rsc
+		Added missiong flashbang sounds to initsounds.hpp
+			New folder created in sonds\ to contain new files
+		fn_InitLogistics.sqf systemchat made to server only
+		
+
+6.5.0
+	Added Feature: Sandstorm script
+		*You can now add a small sandstorm on a local spot by zeus module. 
+		*You can now add a global sandstorm with a self defined intensity level and time duration.
+		
+	Tweaked: 
+		File size reduced for all sound files located in the KLT folder.
+		
+	Fixed: MWD was set to debug mode by default. This is now not the case.
+
+6.4.0
+	Added Feature: MWD (Military Working Dog)
+			You can now make use of a military search dog to track down enemies.
+	
+	Added Feature: Killets Logistics System
+			You can now add cargo to vehicles so that you actually can see the cargo.
+			No more magic about the ace virtual cargo.
+	
+	Tweaked: Deactivated code about the can rock throwers into the init.sqf
+
+
+
+6.3.7
+	Added a ported version of Achillies suppressive fire system for Zeus
+	Added a new function (to be used in editor) for replacing units with agents
+		Instruction include din function header: scripts\Reeveli_fnc\Rev_editor\fn_replaceWithAgent.sqf
+
+	Earplug checks added to initPlayerLocal and onPlayerRespawn
+	KLT radio jammer functions disabled
+	scripts\KLT\Forceflashlights\fn_forceflashlights.sqf updated
+
+6.3.6
+	fixed some errors in fn_air_strike header
+	fixed some errors in fn_zeus_ordance header
+
+
+6.3.5
+	radio_dialog once again updated to fix say3d bugs
+		Voice range tripled
+
+	Function headers added:
+		All flashbang functions
+		scripts\Reeveli_fnc\Rev_arsenal\fn_radio_arsenal.sqf
+
+
+6.3.4
+	Fixed issue were UAV terminal was present after CAS plane crashed if had none in inventory before
+	Renamed ZEn context actions consistently
+
+	All old Achilles code deleted from Reeveli's functions
+	All separate ZEn functions moved into main directory
+
+	Rev_air_strike functions overhaul
+		Proper documentation for functions
+		Minor code improvements
+		Old achilles functions deleted for good
+		Bomb velocity tweaked in ordance drop
+
+	Injury functions moved to mecial folder
+
+	fn_zeus_missile given proper header
+    Fixed flight tracker in zeus_cruise_missile 
+
+6.3.3
+	Deleted two old unused suppressive fire scripts
+	More fixes for 3d sound calls in radio_dialog
+		Volume increased as well
+
+
+6.3.2
+	Obsolete healing aura script removed from Rev_medical
+    dialog_start updated to fix issues with ammo amount hints
+	Removed debug systemchat from filter_weapon
+    Forced map closure at CAS plane creation
+
+
+6.3.1
+	Deleted leftover example.sqf
+
+6.3
+	Resupply option added to artillery system
+		Adjust settings from CBA options
+    Artillery settings subcategories renamed for consistency and clarity
+    Available ammo hint made more redable
+
+6.2
+	**ARTILLERY SYSTEM 2.0**
+	Complete code overhaul
+	All varibales renamed for consistency
+	CBA options renamed to 'Artillery System'
+	New CBA event system to handle ammo regeneration
+	New sound files for 3D dialog
+		Definitions in config file
+		Calls from radio dialog
+	New radio dialog when fire mission is completed
+	Added hasinterface condition to scripts\Reeveli_fnc\Rev_artillery\fn_artillery_master.sqf
+	Internal functions reorganised for consistency
+	New missile system, scipt turned into multiple functions
+		User missile spawn position fixed, getRelPos --> getPos
+	Added hintsilet on night time dialog closure
+		All playsound + hint popups converted into CBA_waitandExecute calls
+	Radio_dialog script overhaul: new killed and ACE uncon EHs to cancel dialog
+	User artillery strike system overhaul, several new functions, less spwning, more uncheduled CBA_fnc_waitandExecute
+	ALIAS missile warhead overhaul, several new functions to replace the scripts, old ones left as backup. Some script are still necessary
+	If missile laser is cutoff before launch the missile will track to last known position
+	scripts\Reeveli_fnc\Rev_artillery\Zeus_artillery\zeus_cruisemissile.sqf teawks to make it more ZEN friendly, loss of Achilles compat most likely
+		New function approach for zeus missile, left unused as was working a bit wierd
+	New CAS feature and functions, voices etc to support it
+
+	**Zeus**
+	Added IFA3 and FoW plane support added for ZEN zeus airstrike
+    Added example ZEN dialog control for radius slider
+    ZEN zeus artillery dialog updated to use radius slider
+    
+	Blackout script replaced with new superior function
+		Significant performance increases expected
+	ZEN blackout module updated to use radius slider
+	
+	**MEDICAL**
+	Area heal function now displays the names of players being healed by action
+
+	**BUG FIXES**
+	Fixed issue where marker menu didn't open in briefing view
+    Renamed some varibales in zeus airstrike branch for consistency
+    Flashbang animation fixed for ACE medical
+	Cruise missile can now be targeted by all lasers
+
+6.1
+	Imported latest release of Reeveli's user marker system
+	Foliage removal action only avisible if player is prone
+	Removed leftover debug messaged on Zeus HE artillery
+
+6.0.1
+	Critical bugfix to marker system briefing
+		Access to documentation changed to main menu instead of map briefing entry
+		New control for documentation
+	Selected channel is now changed to that when marker menu is open
+
+	Critical bugfix for HALO system
+		onMapClick EH is removed even if using esc
+	HALO menu expanded
+		Plane type is now illustared in a new panel
+		Current weather is now illustared in a new panel
+	Player list is now updated in real time when HALO menu is open
+	Change to how system is called, now you must pass the plane class as argument:
+		["O_T_VTOL_02_infantry_dynamicLoadout_F"] call Rev_fnc_halo_start;
+
+	Added hintsilent to onUload for artillery dialog
+    Flight tracker values are now rounded for user and Zeus tactical missiles
+
+6.0
+	Reeveli's user marker system implemented
+		Read the documentation found in SPG training docs for details
+	
+	HALO jump system implemented
+		Functionality same as in Liberation, but brand new code
+		Can be called (locally) by call Rev_fnc_halo_start
+		Zeus module added to make objects HALO terminal
+	
+	Enhanced flashbangs added
+		Options found under SPG addon settings
+
+5.1.2
+	Added independent CBA option to force player profile facewear removal
+
+5.1.1
+	Made ZEN zeus artillery option for forced to default values
+	Fixed potential compability issues between Achilles and ZEN functions, IT IS NOT ADVISED TO RUN BOTH ACHILLES AND ZEN, use only the latter as Achilles is no longer supported	
+
+5.1
+	Added ZEN context menu actions
+		Improved group surrender (available for groups and units), found under "captives"
+			Same as the module, unlike the vanilla ZEN or ACE actions this also surrender units inside vehicles
+		Injure unit (available for units), found under "heal"
+			Recreates the old Achilles functionality where you can set specific injuries on body parts
+		Promote/remove spectator (available for players)
+			Replaces the old module. Promote or remove player to/from ACE spector. 
+		Suppress squads (available for groups and units)
+			Replaces the old module, duration 20s
+		Reeveli's fire support (available on position)
+			Access to all Zeus fire support features (Missiles, artillery, airstrike)
+	
+	Added ZEN modules
+		Tactical missile strike (includes option for clusters) under Reeveli's ZEN Firesupport
+
+	Reeveli's artillery system
+		Added cluster missiles as an option both for Zeus and user artillery
+		Unnecessary missile start speed CBA option eliminated
+	
+	Added experimental foliage removal ACE-self-interaction. The theory is to make shooting from a prone position more viable.
+		Can be enabled/disabled from SPG settings
+
+	Critical bugfixes
+		Zeus artillery shell craters fixed
+		Zeus artillery shell speeds fixed
+		ZEN blackout module fixed
+	
+	Minor bugfixes    
+		Added one default value array to beginning of CBASettings.sqf
+        Added player squad skill array to CBASettings.sqf
+		Fixed wrong tooltip in ZEN showcase module 3
+
+5.0.2
+	Added missing marker removal function
+
+5.0.1
+	Hotfix for Vcom overloading network in dedicated envronment
+		Vcom CBASettings and Vcominit edired to initilaize Vcom correctly
+
+	Module fixes
+		Group surrender module locality fixed
+		Group suppress module locality fixed
+
+5.0
+	Zeus Enhanced upgrade:
+		Reeveli's Zen functions #included in description.ext
+		All Reeveli's Zeus modules are now added via new postinit-function, #include removed from initPlayerLocal
+		Added Reeveli's airstrike ZEN module
+		Added Reeveli's artillery barrage ZEN module
+		Added Reeveli's squad surrender ZEN module
+			Squad surrender function made independent of Achilles
+			Fixed bug where units from vehicles didn't surrender
+		Added Reeveli's blackout ZEN module
+			Blackout script and achilles module made compatible with ZEN dialog
+		Added Reeveli's end mission ZEN module
+		Added Reeveli's ZEN spectator module
+			fn_spectator made to be independent of Achilles
+		Added Reeveli's ZEN suppress module
+			fn_suppress made to be independent of Achilles
+			fn_suppress is now correctly spawn in Achilles aswell		
+		Added Reeveli's ZEN showcase modules
+			Showcase modules for all ZEN dynamic dialog options, are only visible when in editor preview (so not during actual missions)
+		
+	VCOM Update
+		VCOM options can now be set in addon options in editor
+		SPG VCOM option removed (code included is now included in VCM_ActivateAI setting found in VCOM category)
+
+		Changes (for archival reasons)
+			CBASettings turned into a normal fuction (spawning and sleeps removed)
+				Pre-init already included in SPG/CBApreinit.hpp
+				VCM_ActivateAI default value changed to false
+
+
+	General updates:
+		Reeveli's airstrike
+			Support added for CUP planes
+			Cluster bombs added
+
+		Reeveli's user artillery
+			New CBA option to make HE either mortar or howitzer
+			Script now works in singleplayer as well
+		
+    	Added SPG options to disable map markers/chats
+    			
+		Achilles module confirmation messages removed from 3 zeus_type scripts (as ZEN also uses those scripts) and the confirmation message is now moved to dialog window ending
+    	User artillery dialogs' (forward_observer) idd numbers chnaged to unique ones
+    	Briefing entry for user artillery instructions wont appear if artillery system is turned off
+		fn_smoke_launcher cleaned of a lot of dead code
+
+4.4
+    Added line for briefingname to description.ext
+    Corpe manager settings changed and made on by default
+    VCOM CBA settings moved to CBA preinit
+    Removed #include "scripts\klt\compass\cfgVehicles.hpp" from description
+    Added SPG flag texture to \img
+
+    SPG CBA settings reorganized iternally:
+		All sub categories organized in alphabetical order
+		Lots of dead code removed, including removed options for curator update (use ACE zeus one instead)
+		Steam UID list reduced only to two since more and more people are usign this template, remember to add our own if needed
+		Added mapmarker and chat command options
+
+	Old KLT updatecurator objects function removed, use ACE one found ander ACE >> Zeus options instead
+
+4.3.2
+	Added function for healing aura around and objest (same from liberation). Users must code their own activation method (ace-action, user action etc)
+	Added missing modules description to readme-file
+	UTXG Compass is now toggleable mid mission from SPG settings
+
+4.3.1
+	Added Save respawn loadout function on object by request from Toru 
+	Player can now save their loadouts from anyobject by adding the following to an init field of an object.
+	[this] call KLT_A_fnc_KLTSaveLoadout;
+	
+	Files Edited:
+	OnPlayerKilled.sqf
+	scripts\KLT\arsenal_presets\Arsenal_init.hpp
+	scripts\KLT\arsenal_presets\Arsenal_SaveLoadout.sqf
+	
+	System check automaticlly if the loadout should be saved on arsenal or on playerkilled.
+	
+
+4.3
+	New Zeus modules (found in Reevelis modules in-game)
+		Promote player to spectator
+		Blackout module, turnoff or restore power around an area
+		
+	Minor typo fix in Reeveli's artillery settings
+
+4.2
+	Reeveli's artillery system 2.0
+		Code rewritten for better network performance
+		AI squads will now go to combat mode when under fire from artillery (unfortunately only when craters are being spawned)
+		Hopefully issues with the dynamic briefing are finally fixed for good
+	
+	Overhaul of Reeveli's functions and scripts
+		New file structure
+		Numerous optimisations, purging of dead code etc
+
+	Curator update feature turned into a postinit function
+		Function rewritten 
+		Callcompile/spawn removed from initServer
+		Entry added to KLT/Zeus/functions.hpp
+
+
+4.1.4
+   Bugs
+	* Bug fix related to KLTA_Initrestrictions 
+	* Fixed typo on mission success string in the end missions.
+
+   Features
+	Updated Vcom to latest version 3.4.0
+		* Added Activate VCOM button in SPG CBA Settings.
+	
+	Added Params and description to initplayerlocal, initplayerserver, initserver, onplayerrespawn,onplayerkilled.
+	
+   Tweaks
+	Added multiple respawn point usage template in description.ext 
+	Added ACE Spectator Default value in Description 
+	Increased Respawn time to 30 sec from 10 sec 
+	
+
+4.1.3
+	Bug Fix
+		* Fixed multiple command call in the scripts\SPG_settings.sqf
+		  KLT_A_fnc_KLTArsenal was run twice if the restriction was inactive or active.
+		  Created seperate initfunction for restrictions check.
+
+4.1.2
+	Hotfix for problems with initplayerlocal and  dynamic briefing for artillery system
+
+4.1	Added Feature:
+		* v.1 of SPG Module Jamming Device. 
+		* v.1 of SPG Module rock throwers. (Require the Cans mod right now. May add a custom Muzzle in the future to prevent mod requirement)
+		
+	Bug Fix: 
+		* It is now possible to disable the ColorCorrections effect.
+
+
+
+4.0
+	SPG settings are now configured from the addon-options menu!
+		New CBA-preinits entry in description.ext
+		New folder/file for SPG-settings, old file removed
+
+	Enforce SPG tag fuctionality restored to scripts
+		Function added to description.ext
+		Custom debriefs enabled by default in description.ext
+		Added "tag missing" ending type to debriefs
+		Folder/script file added to scripts/KLT
+		Script modified to take addon-options into account
+
+	Changes to Killets preset arsenals
+		VALUE FOR DISABLED IS NOW 1, NOT 100, other values moved accordingly
+		User is able to define what item/object is the arsenal from addon-options
+
+	Reeveli's custom mission ending module now included for Zeus
+		Readded ending if unit tag is missing (to go with the addon-option)
+
+	Rewrote curator update function to accept addon-options input
+
+3.1
+	Reeveli's heal function (re)added. Apparently was lost at some point in history
+		Entry into Reeveli's function library
+		Sounds added to description.ext
+
+	Updated Camofaces function
+		Now supports multiple type of face types. Activated from SPG settings
+
+	New briefing entry for artillery
+		Activated from Rev_artillery_master.hpp
+		Entry into Reeveli's function library
+
+3.0
+	TFAR Beta upgrade
+		Pre-defined ferquensies feature removed from SPG_setting.sqf and Reevelis_radio_arsenal.hpp. Use the new CBA options instead.
+		Removed TFAR settings both as script file, as a preinit in CBApreinit.hpp and as #included function in description.ext
+		scripts\KLT\TFARsettings folder and all contents deleted us obsolete
+		TfarFix removed form the list of functions in scripts\KLT\arsenal_presets\Arsenal_Init.hpp
+		All old TFAR radios in ALL arsenal presets have been updated to new beta radios. STATUS OF RADIOS FROM OTHER MODS BESIDES FRXA ARE UKNOWN AT THIS TIME
+		Deleted the ancient scripts\KLT\arsenal_presets\fn_TfarFix.sqf
+	 
+	Reeveli's artillery system overhaul
+		New UI, lots of files not listed here added and modified to support this
+		Created new folder 'Dialogs' in scripts\
+		Created defines.hpp with all base RCS classes
+		Included defines.hpp to description.ext
+		Included to files for Reeveli's artillery in description.ext
+		Filepath for all radio_dialog.hpps have bene changed. Necessary changes to description.ext
+		Several additions to scripts\Reeveli_fnc\Reevelis_fnc.hpp
+		Added artillery system initilizition to initServer.sqf
+		There is now a new in-game briefing section about the new artillery UI, initialized from scripts\Reeveli_fnc\Rev_artillery\Rev_artillery_master.hpp
+		user_CruiseMissile.sqf updated to 1.3 from 2.0 template branch. Missile is now lost of the laser is turned off.
+		Changes to arty action, turned it into class based one, allowed inheritance. Hopefully ending bugs with players not getting the action always
+		Artillery action defined independently of Achilles
+		Deleted unused clock icon
+		Deleted all old supply_scripts
+		New location for artillery CBAsettings file, filepath updated in description.ext
+		
+
+2.6.3	
+	By Killet 2020-07-12: 1700
+	Added Zeus module to create sandstorm at a specific location.
+
+2.6.2
+    Fixed(?) the bug with the first missile in session not launching
+        Changes to zeus_CruiseMissile.sqf
+        Changes to missile_strike.sqf to enable initialization	
+    
+	Optional flight tracker to the Zeus missile
+        Changes to missile_strike.sqf to enable tracker
+        Changes to zeus_CruiseMissile.sqf to enable tracker
+    
+    Updated all _supply scripts to a avoid unnecessary warnings in sp log
+
+    Changes to user_CruiseMissile.sqf
+	New radio_dialog.sqf to fix issues when players had no radio in inventory
+    Renamed listed target to "Designated target" in user arillery dialog
+	Deleted CruiseMissile.sqf as unnecessarry
+
+2.6.1
+	Updated updated missile system
+		Better target tracking for improved hit probability
+			Updated scripts\Reeveli_fnc\Rev_artillery\User_artillery\type_missile.sqf
+			Added condition to prevent instant hit bug to type_missile.sqf
+		User called missiles now follow laser allowing player to track moving targets
+		New info panel for missile tracking, both Zeus and user
+		Optimised pitchtoTgt.sqf
+		Remote exec of main script in scripts\Reeveli_fnc\Rev_artillery\Zeus_artillery\missile_strike.sqf
+		New missile functions added to scripts\Reeveli_fnc\Reevelis_fnc.hpp
+	
+	New CBA options for missile system
+		Enable/disable craters for user called missiles
+		Option to enable alternative more powerfull warhead and custom effect made by ALIAScartoons
+
+	Fixed bug in radio_dialog.sqf
+
+2.6
+	Improvement to pre-programmed radio freqs: This script now properly supports long range at game start
+
+	New custom Zeus module (if running Achilles): Call in cruise missile on target location. Found under Reeveli's Fire support
+
+	Premier of the new user artillery system
+		This new artillery system allows players to call in artillery during mission in a far more realistic manner
+		System is disabled by default
+		Settings are adjusted from CBA options, not sfrom SPG_settings
+		Contact Reeveli for usage instruction should you wish to utilize the system in your mission
+	Added CfgRadios into description.ext
+		Added entries for different artillery radio languages in description.ext
+	Added class into preinit functions for user artillery system settings in description.ext
+	Added entry into initPlayerLocal.sqf for new artillery stuff
+
+	Updates to the custom Zeus artillery module
+		Smoke and flares are now available
+		Airburts smoke grenades for greater area coverage compared to vanilla
+		Flares are significantly stronger than in vanilla
+		Module now allows the user to set delay between rounds
+		New sound effects for passing grenades
+	
+	Removed custom smoke generator Zeus module as unnecessarry (there is a hotkey in RHS)
+	Removed smoke_genrator.sqf in Rev_smokes
+	Many additions to Reevelis_fnc.hpp
+	Removed Rev_zeus_artillery folder, all artillery stuff is in the new Rev_artillery
+		Removed artillery module from Reevelis_modules.hpp
+		New filepath for artillery sounds
+
+2.5.2
+	Added Reevelis Camofaces script to SPG Settings.
+	Script has been added as a function located in scripts\Reeveli_fnc\Rev_CamoFaces
+	This can be called from " [] call Rev_fnc_Camofaces; "
+2.5.1
+	Removed correct loadout zeus module from Reevelis_modules.hpp as it was not intended for public release
+	Removed support for scripted napalm from Zeus air strike module as it was not intended for public release
+	Cleaned some code from artillery_sounds.hpp
+	Optimisation of scripts\KLT\arsenal_presets\fn_Init_Arsenal.sqf
+	Privated variables in SPG_settings.sqf
+
+	Radio retention and pre-define frequensies are now handeled from SPG_settings.sqf
+		Radio retention removed from fn_Init_Arsenal.sqf
+		Option to enable/disable radio retentio at arsenal added to SPG_settings.sqf
+		Option to define radio frequensies added to SPG_settings.sqf
+		scripts\Reeveli_fnc\Rev_arsenal\Reevelis_radio_arsenal.sqf restructured to accept params from SPG_settings.sqf
+
+2.5
+	Reeveli's radio framework enabled in fn_Init_Arsenal.sqf line 53
+	Complete replacement of fn_TfarFix by Reeveli's new radio framework.
+		Old file left as legacy
+		New framework now supports all radios
+		Improved retention of of hand held radios when leaving the arsenal: Old radio frequensies are restored automatically.
+		Long range frequensies are ported over if switching radio at arsenal
+		It is now possible to pre program default radio frequensies at the beginnign of the mission. Example arrays present for defined or random freqs at scripts\Reeveli_fnc\Rev_arsenal\Reevelis_radio_arsenal.sqf lines 17-20
+	
+
+	Reeveli's custom Zeus modules included in initplayerLocal.sqf (Unavailable unless Achilles is being run)
+		Artillery strikes with selectable round count and radius, optional craters
+		Air strikes with selectable bomb types, plane types, bomb amounts, plane sides and approach angles. Some planes/bombs require various RHS mods to be present
+		If RHS mod is running module for compatible vehicles to generate smoke screen with their engines, should support ALL RHS vehicles with smoke generators
+		Module to manually force AI vehicles to fire smoke screen. This is very much w.i.p, only very limited vehicle range at the moment, most vanilla vehicles should work, Rhs bmp-2, m113 and Abrams, possbily t-72 line
+		Module to suppres squad: They are forced prone and will only return fire to those they are shooting them, duration 20s. Duration can be changed in scripts\Reeveli_fnc\Reevelis_modules.hpp line 16
+		Module to force AI squad to surrender: Disembark vehicles, turn off engines and raise hands
+
+	CfgmMusic and CfgSounds separated for easier addon integration in description.ext
+	CfgmMusic and CfgSounds separated into independent files in \sound\
+	Reeveli's arty sounds added to CfgSounds in description.ext
+
+	Added #include "scripts\Reeveli_fnc\spg_patch.hpp" to description.ext
+	Spg insignia added as item to any arsenal that allows identity change (arsenal template present in this package supports this feature)
+		Insignia presense in vehicles not tested at this time (this is an mp exclusive feature)
+
+2.4
+	Changed Name from
+	scripts\klt\CuratorUpdade
+
+	To 
+	scripts\klt\CuratorUpdate
+
+2.3
+    fn_TfarFix.sqf
+        Improved radio retention when arsenal is closed. Previous frequensies should be saved now. By Cat
+        Added functionality to automatically add earplugs if player has none in inventory or equipped. By Reeveli
+	
