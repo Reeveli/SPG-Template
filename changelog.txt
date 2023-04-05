@@ -3,6 +3,9 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+7.8.4
+	Added Ace arsenal separation for medical items from Rev_7_6 branch
+
 7.8.3
 	SPG_settings.sqf
 		Fixed wrong tooltip on MWD option

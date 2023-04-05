@@ -32,6 +32,7 @@ By Killet & Reeveli. Default scripts for SPG Arma 3 missions. Drag and drop all 
  - Players will now get automatic earplugs when leaving the arsenal if they have none
  - Players will no longer lose TFAR radios when exiting arsenal
  - If players use the custom "save loadout" option at arsenal loadout will be restored on respawn
+ - Ace medical items will now be shown as a separate category in ACE arsenal
  
  
 ## Curator Features

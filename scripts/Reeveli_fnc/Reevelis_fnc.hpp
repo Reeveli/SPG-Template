@@ -23,6 +23,7 @@ class Rev
     class Arsenal
 	{
 		file="scripts\Reeveli_fnc\Rev_arsenal";
+		class ACE_arsenal {postInit=1;};		
 		class radio_arsenal {};		
 	};
     class Editor
