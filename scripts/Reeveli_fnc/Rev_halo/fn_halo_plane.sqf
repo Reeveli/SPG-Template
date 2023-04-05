@@ -14,6 +14,7 @@
  *
  1.1
 	Defined z coordinate for final waypoint pos
+	Cargo index now start at 1 to avoid cockpit placement in some planes
  */
 
 if (!hasInterface) exitWith {false};
