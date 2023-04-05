@@ -1,6 +1,32 @@
-//Function to be run locally on all units being prepared for HALO jump
+/*
+ * Author: Reeveli
+ * Part of Reeveli's HALO system.
+ * Client side function to embark a player to the HALO plane.
+ * Called from scripts\Reeveli_fnc\Rev_halo\fn_halo_plane.sqf
+ *
+ * Arguments: <NONE>
+ *
+ * Return Value: <NONE>
+ *
+ * Example:
+ * [_plane_vehicle,_cargoIndex] remoteExec ['Rev_fnc_embark',_x,false];
+ *
+
+1.1
+	Updated function header and params
+
+ */
+
+
+
 if !(hasInterface) exitWith {};
-params ["_plane","_cargoIndex"];
+
+params [
+	["_plane", objNull, [objNull]],
+	["_cargoIndex", 1, [0]]
+];
+
+
 private _unit = player;
 private _loadout = getUnitLoadout _unit;
 
