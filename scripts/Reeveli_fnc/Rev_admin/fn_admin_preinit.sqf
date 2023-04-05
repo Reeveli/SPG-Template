@@ -2,6 +2,7 @@
 /*
  * Author: Reeveli
  * Part of SPG admin console, preinit function to prepare necessary preinit module for something in CBA not to break. Module is used for admin access via the admin console.
+ * Called as a preinit function
  *
  * Arguments:
  * NONE

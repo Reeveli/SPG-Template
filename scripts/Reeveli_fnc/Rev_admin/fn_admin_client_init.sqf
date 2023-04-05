@@ -1,6 +1,7 @@
 /*
  * Author: Reeveli
  * Part of SPG admin console, creates curator module if client is whitelisted
+ * Called as a postinit function
  *
  * Arguments:
  * NONE

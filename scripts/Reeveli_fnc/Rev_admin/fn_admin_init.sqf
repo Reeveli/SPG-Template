@@ -1,6 +1,7 @@
 /*
  * Author: Reeveli
  * Part of SPG admin console, adds serverside eventhandler for tracking FPS and zeus promotion
+ * Called as a postinit function
  *
  * Arguments:
  * NONE
