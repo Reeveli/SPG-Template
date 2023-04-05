@@ -3,8 +3,12 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+???
+	scripts\Reeveli_fnc\Rev_halo\fn_halo_plane.sqf updated to 1.1
+
 7.8.4
 	Added Ace arsenal separation for medical items from Rev_7_6 branch
+		Defined z coordinate for final waypoint pos
 
 7.8.3
 	SPG_settings.sqf

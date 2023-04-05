@@ -12,6 +12,8 @@
  * Example:
  * call Rev_fnc_halo_plane
  *
+ 1.1
+	Defined z coordinate for final waypoint pos
  */
 
 if (!hasInterface) exitWith {false};
@@ -61,7 +63,8 @@ _wp5 setWaypointSpeed "NORMAL";
 _wp5 setWaypointStatements ["true",
 "
 	if (local this) then {
-		vehicle this animateDoor ['Door_1_source', 1];
+		vehicle this animate ['ramp_top',1];
+		vehicle this animate ['ramp_bottom',1];
 		private _jumpers = (crew (vehicle this)) select {_x in ([] call CBA_fnc_players)};
 		[vehicle this,'Approaching the LZ. Get ready.'] remoteExec ['vehicleChat',_jumpers,false];			
 	};
@@ -86,7 +89,7 @@ _wp2 setWaypointStatements ["true",
 "
 ];
 
-_wp3 = _group addWaypoint [_fin_pos, 0, 3];
+_wp3 = _group addWaypoint [[_fin_pos select 0, _fin_pos select 1, _height], 0, 3];
 _wp3 setWaypointType "MOVE";
 _wp3 setWayPointBehaviour "CARELESS";
 _wp3 setWaypointSpeed "NORMAL";
@@ -95,7 +98,7 @@ _wp3 setWaypointStatements ["true", "_cleanUpveh = vehicle leader this;{deleteVe
 deleteMarkerLocal 'Rev_drop_zone';
 
 private _pasengers = ([_caller] call Rev_fnc_transport_check) select 0;
-private _cargoIndex = 0;
+private _cargoIndex = 1;
 {
 	[_plane_vehicle,_cargoIndex] remoteExec ['Rev_fnc_embark',_x,false];
 	_cargoIndex = _cargoIndex + 1;
