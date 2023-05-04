@@ -1,3 +1,8 @@
+/*
+Custom defines by Reeveli
+1.1
+	Some end of line ; fixes to clean rtp error printouts
+*/
 // Control types
 #define CT_STATIC           0
 #define CT_BUTTON           1
@@ -251,7 +256,7 @@ class Rev_arty_warningText: RscText
 class Rev_arty_warningNight: RscText
 {		
 	moving = true;
-	x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 32 * pixelGridNoUIScale * pixelW;" //REV_ARTY_DIAG_CASE_X + 32 * pixelGridNoUIScale * pixelW;
+	x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 32 * pixelGridNoUIScale * pixelW"; //REV_ARTY_DIAG_CASE_X + 32 * pixelGridNoUIScale * pixelW;
 	y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 49 * pixelGridNoUIScale * pixelH"; //REV_ARTY_DIAG_CASE_Y + 49 * pixelGridNoUIScale * pixelH;
 	w = 30.5 * pixelGridNoUIScale * pixelW;
 	h = 5 * pixelGridNoUIScale * pixelH;
@@ -339,8 +344,8 @@ class Rev_arty_cancel: RscButton
 class Rev_arty_ok: Rev_arty_cancel
 {
 	idc = IDC_ARTY_DIAG_OK;
-	x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 18.5 * pixelGridNoUIScale * pixelW;" //REV_ARTY_DIAG_CASE_X + 18.5 * pixelGridNoUIScale * pixelW;
-	text = "Send message"
+	x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 18.5 * pixelGridNoUIScale * pixelW"; //REV_ARTY_DIAG_CASE_X + 18.5 * pixelGridNoUIScale * pixelW;
+	text = "Send message";
 	onLoad = "params ['_control', ['_config', configNull]]; _control ctrlEnable false;";
 	onButtonClick = "params ['_control'];closeDialog 1;";
 	tooltip = "";	
@@ -354,7 +359,7 @@ class Rev_arty_pen: RscPicture
 	idc = IDC_ARTY_DIAG_PEN;
 	//Text is randomised in Artillery_dialog\fn_dialgog_pen
 	text = "\a3\UI_F_Enoch\Data\CfgMarkers\circle1_ca.paa";
-	x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 5.5 * pixelGridNoUIScale * pixelW;" //REV_ARTY_DIAG_CASE_X + 5.5 * pixelGridNoUIScale * pixelW;
+	x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 5.5 * pixelGridNoUIScale * pixelW"; //REV_ARTY_DIAG_CASE_X + 5.5 * pixelGridNoUIScale * pixelW;
 	y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 49 * pixelGridNoUIScale * pixelH"; //REV_ARTY_DIAG_CASE_Y + 49 * pixelGridNoUIScale * pixelH;
 	w = 12 * pixelGridNoUIScale * pixelW;
 	h = 4 * pixelGridNoUIScale * pixelH;
