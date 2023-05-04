@@ -9,6 +9,8 @@
  * Example:
  * call Rev_markers2_fnc_get_load
  *
+ 1.1
+	Added default value to Rev_markers_counter
  */
 
 if !(hasInterface) exitwith {};
@@ -27,7 +29,7 @@ private _markers = (parseSimpleArray (_ctrl lbData _index)) select 1;;
 private _index_c = lbCurSel _ctrl2;
 private _channel = _ctrl2 lbData _index_c;
 
-private _counter = missionNamespace getVariable "Rev_markers_counter";
+private _counter = missionNamespace getVariable ["Rev_markers_counter",0];
 
 private ["_num","_id","_m"];
 {
