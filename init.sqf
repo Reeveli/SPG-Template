@@ -1,6 +1,5 @@
 if ((!isServer) && (player != player)) then {waitUntil {player == player};};
 enableSaving [ false, false ];
-enableEnvironment [false,false];
 
 /*
 if (isClass (configFile >> "CfgPatches" >> "JNS_CANS")) then
