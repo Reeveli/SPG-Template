@@ -18,6 +18,8 @@
  * Example:
  * [_display,_exitCode] call Rev_arty_fnc_missile_map_dialog_onUnload
  *
+ 1.1.1
+	Deleted leftover systemchat at function end
  1.1
 	Removed code for Rev_arty_mis_laser as it no longer exists
  */
@@ -100,5 +102,3 @@ if !(isMultiplayer) exitWith {
 };
 Rev_arty_radio_dialog = _radio_args execVM 'scripts\Reeveli_artillery\User_artillery\Radio_dialog\radio_dialog.sqf';
 missionNamespace setVariable ['Rev_artillery_call',nil];
-
-systemChat "JEE";
