@@ -10,6 +10,10 @@
  * Example:
  * [] spawn Rev_arty_fnc_supply_transport
  *
+ 1.3.1
+	Adjusted box attchment point to avoid collisions with some planes
+		Old [0,0,-5]
+		New [0,10,-10]	
  1.3
 	_altitude param default value increased to 300
 	plane flying altutude now fixed to 300
@@ -72,7 +76,7 @@ clearItemCargoGlobal _box;
 clearWeaponCargoGlobal _box;
 clearMagazineCargoGlobal _box;
 clearBackpackCargoGlobal _box;
-_box attachto [_plane_vehicle,[0,0,-5]];
+_box attachto [_plane_vehicle,[0,10,-10]];
 _box hideObjectGlobal true;
 
 private _list = uiNamespace getVariable ["Rev_supply_list",[]];
