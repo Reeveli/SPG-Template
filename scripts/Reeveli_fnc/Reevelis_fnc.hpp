@@ -1,3 +1,12 @@
+/*
+ * Author: Reeveli 
+ * Reeveli's custom function definitions.
+
+1.1 SPG
+    Added teleportation system functions
+ */
+
+
 
 class Rev
 {
@@ -90,6 +99,20 @@ class Rev
 		file ="scripts\Reeveli_fnc\Rev_suppress";
         class suppress_init {postinit = 1;};
         class suppress {};
+	};
+
+    class Teleport
+	{
+		file ="scripts\Reeveli_fnc\Rev_teleport";
+        class tp_addAction {};
+        class tp_addPoint {};
+        class tp_deletePoint {};
+        class tp_listCheck {};
+		class tp_onButtonClick {};
+		class tp_onLBSelChanged {};
+        class tp_onLoad {};
+        class tp_teleport {};
+        class tp_ZEN_dialog {};
 	};
 
     class Vehicles
