@@ -3,9 +3,24 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
-7.8.6
-    scripts\Reeveli_artillery\User_artillery\Missile\fn_missile_map_dialog_onUnload.sqf updated to 1.1.1
-
+7.9
+    Added Reeveli's teleportation system
+        Extendsed preinit EH added to scripts\SPG\CBApreinit.hpp
+        Idd list updated
+        Functions defined
+        Function files added
+        tp_dialog added to scripts\Dialogs
+        scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf upated to 1.4
+	
+	scripts\Reeveli_artillery\User_artillery\Missile\fn_missile_map_dialog_onUnload.sqf updated to 1.1.1
+	
+    Fixed issues with gunship
+        scripts\Reeveli_artillery\User_artillery\Gunship\fn_gunship_map_dialog.sqf updated to 1.3.2
+        scripts\Reeveli_artillery\User_artillery\Gunship\fn_gunship_loiter.sqf updated to 1.1.1
+	
+    Fixed collision issues with Resupply system
+        scripts\Reeveli_fnc\Rev_zeus_resupply\fn_resupply.sqf updated to 1.2
+        scripts\Reeveli_artillery\User_artillery\Resupply\fn_supply_transport.sqf updfated to 1.3.1
 
 7.8.5
     scripts\Dialogs\defines.hpp updated to 1.1 to fix some typo fixes

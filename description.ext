@@ -1,4 +1,4 @@
-scriptVersion 	= "7.8.6";
+scriptVersion 	= "7.9";
 //General
 loadScreen = "img\SPGlogo.paa";
 author = SPG;
@@ -51,6 +51,7 @@ class CfgSounds
 };
 
 #include "scripts\Dialogs\defines.hpp"															// Base defines
+#include "scripts\Dialogs\tp_dialog.hpp"														// Mission dialogd
 #include "scripts\Reeveli_artillery\User_artillery\Artillery_dialog\arty_dialog.hpp"			// Reeveli's artillery
 #include "scripts\Reeveli_artillery\User_artillery\Air_support\air_dialog.hpp"					// Reeveli's artillery
 #include "scripts\Reeveli_artillery\User_artillery\Resupply\supply_dialog.hpp"					// Reeveli's artillery
