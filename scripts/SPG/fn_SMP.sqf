@@ -1,5 +1,5 @@
 /*
-SPG squad checlist, run as a post init function
+SPG squad checklist, run as a post init function
 */
 
 if !(hasInterface) exitWith {};
