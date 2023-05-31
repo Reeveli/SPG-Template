@@ -11,6 +11,9 @@
  * Example:
  * [_newValue] call Rev_arty_fnc_gunship_loiter
  *
+ 1.1.1
+	Fixed wrong idd on ok button
+
  1.1
 	Added code for directional arrows
 	Added additional comments
@@ -36,7 +39,7 @@ if ((getMarkerPos 'Rev_arty_gun_dir') inArea 'Rev_arty_gun_area') exitWith {
 	playSound 'FD_Start_F';
 	'Rev_arty_gun_dir' setMarkerPosLocal [0,0,0];
 	"Rev_arty_gun_dir" setMarkerAlphaLocal 0;
-	ctrlEnable [6047, false];
+	ctrlEnable [6069, false];
 
 	//directional arrows alphas
 	'Rev_arty_gun_arrow_1' setMarkerAlphaLocal 0;

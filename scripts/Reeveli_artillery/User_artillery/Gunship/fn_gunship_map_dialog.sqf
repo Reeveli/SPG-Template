@@ -12,6 +12,8 @@
  * Example:
  * [_range,_angle,_pos] call Rev_arty_fnc_gunship_map_dialog
  *
+ 1.3.2
+	Fixed wrong idd on ok button
  1.3.1
 	Arrows and target markers updated
  1.3
@@ -90,9 +92,9 @@ createDialog "Rev_arty_gun_map_dialog";
 private _img = getText (configFile >> "CfgVehicles" >> "B_T_VTOL_01_armed_F" >> "editorPreview");
 ctrlSetText [6075, _img];
 
-//getting arguments to be passed into map EH
+//Getting arguments to be passed into map EH
 private _display = findDisplay 6040;
-private _ok = _display displayCtrl 6047;
+private _ok = _display displayCtrl 6069;
 private _underscore = _display displayCtrl 6071;
 private _warning = _display displayCtrl 6072;
 
@@ -109,7 +111,7 @@ private _id = addMissionEventHandler ["MapSingleClick", {
 	};
 	
 	//If position is outisde safety area
-	//disable warning, enable OK button and set plane marker alpha + pos, target area marker alpha
+	//Disable warning, enable OK button and set plane marker alpha + pos, target area marker alpha
 	ctrlSetText [6072,"Ready to send!"];
 	_warning ctrlSetTextColor [0,0,0,0.3];
     "Rev_arty_gun_dir" setMarkerPosLocal _pos;
