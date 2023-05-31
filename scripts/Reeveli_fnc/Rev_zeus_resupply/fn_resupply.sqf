@@ -11,6 +11,12 @@
  * Example:
  * [] spawn Rev_fnc_resupply;
  *
+ 1.2
+	Adjusted box attachment point to avoid collisions with some planes
+		Old [0,0,-5]
+		New [0,10,-10]
+ 1.1
+	BIS_fnc_dirTo replaced with getDir
  */
 
 //Generate params for plane
@@ -33,7 +39,7 @@ if ((_distance > 10000) OR (_distance < 1000)) then {_distance = 4000};
 
 //Setting up the starting pos for the plane
 private _startPos =  _pos getPos [_distance, _direction];
-private _fly_direction = [_startPos,_pos] call BIS_fnc_dirTo;
+private _fly_direction = _startPos getDir _pos;
 
 //End pos
 private _fin_pos = _pos getPos [_distance,_fly_direction];
@@ -56,7 +62,7 @@ _plane_vehicle setVelocity [
 
 //Getting the box
 private _box = (uiNamespace getVariable ["Rev_arty_supply_box",[]]) select 0;
-_box attachto [_plane_vehicle,[0,0,-5]];
+_box attachto [_plane_vehicle,[0,10,-10]];
 
 //Waypoints
 private _wp1 = _group addWaypoint [_pos, 0];
