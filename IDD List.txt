@@ -1,0 +1,20 @@
+Class						IDC	Range				IDD
+
+Reeveli_forward_observer	1201	-	1605		4120/4121
+Rev_marker_menu				4021	-	4051		4220
+Rev_halo					4061	-	4066		4060
+Rev_arty_air_map		    4081	-	4086		4080
+Rev_arty_supply_dialog		5014	-	2023		5013
+Reeveli_speed_control		5031	-	5040		5030
+Rev_RZ_group_attributes		5051	-	5078		5050
+Rev_RZ_vehicle_attributes	5081	-	5091		5080
+Rev_admin					6001						
+Hand map (default template)							6010
+Rev_arty_supply_map_dialog  6022    -   6027        6020
+Rev_arty_fnc_missile_map    6033    -   6037        6030
+Rev_arty_gun_map_dialog     6041    -   6049        6040
+Rev_arty_bomb_dialog        6051    -   6058        6050
+Rev_arty_diag               6061    -   6074        6060
+Rev_ping_list               6083    -   6085        6080
+Rev_map                     6091    -   7000        6090
+Rev_teleportation           7001    -   7004        7000
