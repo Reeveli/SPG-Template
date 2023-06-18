@@ -1,6 +1,6 @@
 /*
  * Author: Reeveli
- * Function to create a terminal for Reeveliäs custom Halo action. Terminal will have HALO useraction for all players.
+ * Function to create a terminal for Reeveli's custom Halo action. Terminal will have HALO useraction for all players.
  *
  * Arguments:
  * 0: Object <OBJECT>
