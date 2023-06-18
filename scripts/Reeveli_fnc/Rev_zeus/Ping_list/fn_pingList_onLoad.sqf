@@ -11,6 +11,8 @@
  * Example:
  * [_control] call Rev_fnc_pingList_onLoad
  *
+ 1.1
+	Added visibility check
  */
 
 params [
@@ -32,5 +34,5 @@ reverse _list;
 } forEach _list;
 
 
-
-
+//Visibility of text needs to defined here as well if set by the button
+_control ctrlShow (uiNamespace getVariable ['Rev_pinglist_visibility',true]) AND (ctrlShown (ctrlParentControlsGroup _control))

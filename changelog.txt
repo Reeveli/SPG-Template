@@ -3,6 +3,12 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+7.9.1
+	Fix for pinglist visibility bug for curator screenshot mode
+		scripts\Reeveli_fnc\Rev_zeus\Ping_list\fn_pingList_init.sqf updated to 1.2
+		scripts\Reeveli_fnc\Rev_zeus\Ping_list\fn_pingList_onLoad.sqf updated to 1.1
+		scripts\Reeveli_fnc\Rev_zeus\Ping_list\Rev_ping_list.hpp updated to 1.1
+
 7.9
     Added Reeveli's teleportation system
         Extendsed preinit EH added to scripts\SPG\CBApreinit.hpp
