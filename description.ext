@@ -51,7 +51,7 @@ class CfgSounds
 };
 
 #include "scripts\Dialogs\defines.hpp"															// Base defines
-#include "scripts\Dialogs\tp_dialog.hpp"														// Mission dialogd
+#include "scripts\Dialogs\tp_dialog.hpp"														// Reeveli's teleportation system
 #include "scripts\Reeveli_artillery\User_artillery\Artillery_dialog\arty_dialog.hpp"			// Reeveli's artillery
 #include "scripts\Reeveli_artillery\User_artillery\Air_support\air_dialog.hpp"					// Reeveli's artillery
 #include "scripts\Reeveli_artillery\User_artillery\Resupply\supply_dialog.hpp"					// Reeveli's artillery
