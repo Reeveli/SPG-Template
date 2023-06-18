@@ -16,6 +16,7 @@ TODO:
         Functions defined
         Function files added
         tp_dialog added to scripts\Dialogs
+		dialog added description.ext
         scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf upated to 1.4
 	
 	scripts\Reeveli_artillery\User_artillery\Missile\fn_missile_map_dialog_onUnload.sqf updated to 1.1.1
