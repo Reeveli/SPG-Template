@@ -1,7 +1,7 @@
 /*
  * Author: Reeveli & Killet
  * Part of SPG default scripts.
- * Includes all custom CBA extended preinit calls to keepd escription.ext clean.
+ * Includes all custom CBA extended preinit calls to keep description.ext clean.
 
 1.1
 	Added Reeveli's teleportation system settings
