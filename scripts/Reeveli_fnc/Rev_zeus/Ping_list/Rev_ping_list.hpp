@@ -2,6 +2,8 @@
  * Author: Reeveli
  * Controls for curator pinglist
  *
+1.1.1
+	Fixed a two missing semicolons
 1.1
 	Updated onLoad EHs for Ping_list_bg, Ping_list_frame, Ping_list
 		Gave varibale idents
@@ -47,14 +49,14 @@ class Rev_ping_list: ctrlControlsGroupNoScrollbars
 			y = "1 * 							(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "10.95 * 							(			((safezoneW / safezoneH) min 1.2)/ 40)";
 			h = "3 * 							(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-			onLoad = "params ['_control','_config']; uiNamespace setVariable ['Rev_Ping_list_bg', _control]; _control ctrlShow (uiNamespace getVariable ['Rev_pinglist_visibility',true]) AND (ctrlShown (ctrlParentControlsGroup _control))"
+			onLoad = "params ['_control','_config']; uiNamespace setVariable ['Rev_Ping_list_bg', _control]; _control ctrlShow (uiNamespace getVariable ['Rev_pinglist_visibility',true]) AND (ctrlShown (ctrlParentControlsGroup _control))";
 		};
 		class Ping_list_frame: Ping_list_title_frame
 		{
 			idc = 6083;
 			y = "1 * 							(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			h = "3 * 							(			(			((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-			onLoad = "params ['_control','_config']; uiNamespace setVariable ['Rev_Ping_list_frame', _control]; _control ctrlShow (uiNamespace getVariable ['Rev_pinglist_visibility',true]) AND (ctrlShown (ctrlParentControlsGroup _control))"
+			onLoad = "params ['_control','_config']; uiNamespace setVariable ['Rev_Ping_list_frame', _control]; _control ctrlShow (uiNamespace getVariable ['Rev_pinglist_visibility',true]) AND (ctrlShown (ctrlParentControlsGroup _control))";
 		};
 		class Ping_list_listbox: RscListBox
 		{
