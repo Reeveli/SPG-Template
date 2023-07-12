@@ -4,7 +4,7 @@ TODO:
 		Logisystem
 
 7.9.2
-	scripts\Reeveli_fnc\Rev_zeus\Ping_list\fn_pingList_init.sqf updated to 1.1.1
+	scripts\Reeveli_fnc\Rev_zeus\Ping_list\Rev_ping_list.hpp updated to 1.1.1
 
 7.9.1
 	Fix for pinglist visibility bug for curator screenshot mode
