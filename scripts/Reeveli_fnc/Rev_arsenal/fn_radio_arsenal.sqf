@@ -11,6 +11,9 @@
  * Example:
  * [true] call Rev_fnc_radio_arsenal;
  *
+ 1.2
+ 	Save radio settings event modified to deconflict with new standalone function
+	Restore Sw settings event removed to deconflict with new standalone function
  1.1
 	Added additional safety exit if TFAR is not loaded
  */
@@ -22,12 +25,11 @@ params ["_enable_fix"];
 if !(_enable_fix) exitWith {false};
 if ((isMultiplayer) AND !(isClass (configFile >> "CfgPatches" >> "tfar_handhelds"))) exitWith {false};
 
-//EHs for radio and freq retention at arsenal
+//EHs for radio retention at arsenal
 private _radio = missionNamespace setVariable ["MyRadio", ""];
 
-//Save radio settings
+//Save radio
 ["ace_arsenal_displayOpened", {	
-	missionNamespace setVariable ["SW_radio_settings",(call TFAR_fnc_activeSwRadio) call TFAR_fnc_getSwSettings];
 	missionNamespace setVariable ["MyRadio", (call TFAR_fnc_activeSwRadio)];
 }] call CBA_fnc_addEventHandler;
 
@@ -48,10 +50,5 @@ private _radio = missionNamespace setVariable ["MyRadio", ""];
 		player linkItem _pocket_radio;};
 }] call CBA_fnc_addEventHandler;
 
-//Restore Sw settings
-["Set_Frq","OnRadiosReceived",{
-    params ["_unit"];
-	[(call TFAR_fnc_activeSwRadio), missionNamespace getVariable "SW_radio_settings"] call TFAR_fnc_setSwSettings;
-},player] call TFAR_fnc_addEventHandler;
 
 true;

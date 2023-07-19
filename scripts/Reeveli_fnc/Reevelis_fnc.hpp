@@ -2,6 +2,9 @@
  * Author: Reeveli 
  * Reeveli's custom function definitions.
 
+1.2
+    Added new radio freq retention function
+
 1.1 SPG
     Added teleportation system functions
  */
@@ -33,7 +36,8 @@ class Rev
 	{
 		file="scripts\Reeveli_fnc\Rev_arsenal";
 		class ACE_arsenal {postInit=1;};		
-		class radio_arsenal {};		
+		class radio_arsenal {};	
+		class transferRadiosAcrossRespawn {postInit=1;};	
 	};
     class Editor
 	{
