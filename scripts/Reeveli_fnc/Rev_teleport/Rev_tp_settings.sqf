@@ -8,10 +8,12 @@
  *
  * Return Value: NONE
  *
+ 1.0.1
+    Category title capitalisation fixed
  */
 
 
-#define REV_TP_SETTINGS "Reeveli's teleportation system"
+#define REV_TP_SETTINGS "Reeveli's Teleportation system"
 
 //Action radius
 [
