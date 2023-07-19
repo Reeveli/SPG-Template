@@ -6,7 +6,7 @@
 	Fixed a two missing semicolons
 1.1
 	Updated onLoad EHs for Ping_list_bg, Ping_list_frame, Ping_list
-		Gave varibale idents
+		Gave variable ids
 		Added ctrlShow commands based on if they should be visible
  */
 class Rev_ping_list: ctrlControlsGroupNoScrollbars
