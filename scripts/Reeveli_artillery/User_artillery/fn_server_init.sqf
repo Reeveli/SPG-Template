@@ -9,6 +9,16 @@
  *
  * Example:
  * call Rev_arty_fnc_server_init
+1.8
+	Fixed wrong CBA_fnc_serverEvent call preventing ammo regen on following (was 0, should have been -1):
+		ILM
+		MIS
+		CLU
+		AIR
+		SUP
+		GUN
+		BOM
+
 1.7
 	CBA network function switched to publicvaribale command instead. When info is sent to clients was also taken out if the regen event for faster transmit
 	General event restructure to support faster updates to clients (server-side regen event now add ammo via the event itself)
@@ -99,7 +109,7 @@ Rev_arty_ILM_check =  (-1* Rev_arty_ILM_regen);
 		Rev_arty_ILM_check = cba_missiontime;
 		[
 			{
-				["Rev_arty_ILM_regen",[0]] call CBA_fnc_serverEvent;
+				["Rev_arty_ILM_regen",[-1]] call CBA_fnc_serverEvent;
 			},
 			[],
 			Rev_arty_ILM_regen
@@ -123,7 +133,7 @@ Rev_arty_MIS_check =  (-1* Rev_arty_MIS_regen);
 		Rev_arty_MIS_check = cba_missiontime;
 		[
 			{
-				["Rev_arty_MIS_regen",[0]] call CBA_fnc_serverEvent;
+				["Rev_arty_MIS_regen",[-1]] call CBA_fnc_serverEvent;
 			},
 			[],
 			Rev_arty_MIS_regen
@@ -147,7 +157,7 @@ Rev_arty_CLU_check =  (-1* Rev_arty_CLU_regen);
 		Rev_arty_CLU_check = cba_missiontime;
 		[
 			{
-				["Rev_arty_CLU_regen",[0]] call CBA_fnc_serverEvent;
+				["Rev_arty_CLU_regen",[-1]] call CBA_fnc_serverEvent;
 			},
 			[],
 			Rev_arty_CLU_regen
@@ -170,7 +180,7 @@ Rev_arty_AIR_check =  (-1* Rev_arty_AIR_regen);
 		Rev_arty_AIR_check = cba_missiontime;
 		[
 			{
-				["Rev_arty_AIR_regen",[0]] call CBA_fnc_serverEvent;
+				["Rev_arty_AIR_regen",[-1]] call CBA_fnc_serverEvent;
 			},
 			[],
 			Rev_arty_AIR_regen
@@ -199,7 +209,7 @@ Rev_arty_SUP_check =  (-1* Rev_arty_SUP_regen);
 		Rev_arty_SUP_check = cba_missiontime;
 		[
 			{
-				["Rev_arty_SUP_regen",[0]] call CBA_fnc_serverEvent;
+				["Rev_arty_SUP_regen",[-1]] call CBA_fnc_serverEvent;
 			},
 			[],
 			Rev_arty_SUP_regen
@@ -223,7 +233,7 @@ Rev_arty_GUN_check =  (-1* Rev_arty_GUN_regen);
 		Rev_arty_GUN_check = cba_missiontime;
 		[
 			{
-				["Rev_arty_GUN_regen",[0]] call CBA_fnc_serverEvent;
+				["Rev_arty_GUN_regen",[-1]] call CBA_fnc_serverEvent;
 			},
 			[],
 			Rev_arty_GUN_regen
@@ -247,7 +257,7 @@ Rev_arty_BOM_check =  (-1* Rev_arty_BOM_regen);
 		Rev_arty_BOM_check = cba_missiontime;
 		[
 			{
-				["Rev_arty_BOM_regen",[0]] call CBA_fnc_serverEvent;
+				["Rev_arty_BOM_regen",[-1]] call CBA_fnc_serverEvent;
 			},
 			[],
 			Rev_arty_BOM_regen
