@@ -3,6 +3,9 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.0.2
+	scripts\Reeveli_fnc\Rev_suppress\fn_suppress.sqf updated to 1.1.1
+
 8.0.1
     Major bugfix for user artillery regenation was not applied last version
         scripts\Reeveli_artillery\User_artillery\fn_server_init.sqf updated to 1.8
