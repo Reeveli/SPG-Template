@@ -11,6 +11,9 @@
  * [_objects select 0] call Rev_fnc_suppress;
  *
 
+1.1.1
+	Fixed one wrong comment
+
 1.1
 	Added 'empty' EH to group to delete target
 	Deleted unused _units varibale definition
@@ -40,10 +43,11 @@ private _line = addMissionEventHandler ["Draw3D", {
 		// Check 0.2 above the cursor to prevent a small object on the terrain blocking the view
 		private _posHigh = _pos vectorAdd [0, 0, 0.2];
 
+		//Check if LOS is unobstructed
 		private _eyePos = eyePos _unit;
 		if (lineIntersectsSurfaces [_eyePos, _pos, _unit, objNull] isEqualTo [] || {lineIntersectsSurfaces [_eyePos, _posHigh, _unit, objNull] isEqualTo []}) then {
 
-			// Draw a line from each player that can see the cursor
+			// Draw a line from group leader if no intersections
 			drawLine3D [ASLToAGL _eyePos, ASLToAGL _pos, [1,0,0,1]];
 		};
 
@@ -66,7 +70,7 @@ private _line = addMissionEventHandler ["Draw3D", {
 
 missionNameSpace setVariable ["Rev_suppress_line",_line,false];
 
-//Small delay since instant exedcution would fire immediatelyu when ZEN context menu was closed
+//Small delay since instant exedcution would fire immediately when ZEN context menu was closed
 [{
 	private _mouseC = (findDisplay 312) displayAddEventHandler ["MouseButtonUp", {
 		params ["_displayOrControl", "_button", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
