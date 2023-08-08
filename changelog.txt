@@ -5,6 +5,7 @@ TODO:
 
 8.0.2
 	scripts\Reeveli_fnc\Rev_suppress\fn_suppress.sqf updated to 1.1.1
+	scripts\Reeveli_fnc\Rev_medical\fn_heal.sqf updated to 1.1.1
 
 8.0.1
     Major bugfix for user artillery regenation was not applied last version

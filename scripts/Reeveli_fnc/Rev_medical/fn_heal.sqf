@@ -10,6 +10,8 @@
  * Example:
  * [_target] call Rev_fnc_heal
  *
+ 1.1.1
+	Removed some old code
  1.1
 	Added default param, safety exit
  */
@@ -41,7 +43,6 @@ if (_condition) then {
 	["Rev_heal"] remoteExec ["playsound", _unit];
 
 	["scripts\Reeveli_fnc\Rev_medical\heal.paa", [1.3,-0.23,0.4,0.5],[10,10],2] remoteExec ["BIS_fnc_textTiles", _unit];
-	//["scripts\Reeveli_fnc\Rev_medical\apothecarium4.paa", [0,0,1,1],5,2] spawn BIS_fnc_textTiles;
 	[true, 45] remoteExec ["ace_medical_feedback_fnc_effectPain",_unit];
 	};
 
