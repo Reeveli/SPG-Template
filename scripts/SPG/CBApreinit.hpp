@@ -3,6 +3,8 @@
  * Part of SPG default scripts.
  * Includes all custom CBA extended preinit calls to keep description.ext clean.
 
+1.2
+	Added Reeveli's Ace moaning settings
 1.1
 	Added Reeveli's teleportation system settings
 */
@@ -14,6 +16,7 @@ class Reeveli_Advanced_gestures {init = " call compile preprocessFileLineNumbers
 class Reveli_user_markers {init = " call compile preprocessFileLineNumbers 'scripts\Reeveli_fnc\Rev_markers_script\Rev_marker_settings.sqf'";};
 class Reeveli_Rectricted_Zeus {init = " call compile preprocessFileLineNumbers 'scripts\Reeveli_fnc\Rev_restricted_zeus\Rev_RZ_settings.sqf'";};
 class Rev_tp_settings {init = "call compile preprocessFileLineNumbers 'scripts\Reeveli_fnc\Rev_teleport\Rev_tp_settings.sqf'";};
+class Rev_moaning_settings {init = "call compile preprocessFileLineNumbers 'scripts\Reeveli_fnc\Rev_moaning\Rev_moaning_settings.sqf'";};
 
 
 

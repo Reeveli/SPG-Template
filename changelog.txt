@@ -3,6 +3,13 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.1
+	Reeveli's Ace moaning added from Rev_7_7 branch
+		New function folder
+		New functions
+		scripts\Reeveli_fnc\Reevelis_fnc.hpp updated to 1.3
+		scripts\SPG\CBApreinit.hpp updated to 1.2
+
 8.0.2
 	scripts\Reeveli_fnc\Rev_suppress\fn_suppress.sqf updated to 1.1.1
 	scripts\Reeveli_fnc\Rev_medical\fn_heal.sqf updated to 1.1.1

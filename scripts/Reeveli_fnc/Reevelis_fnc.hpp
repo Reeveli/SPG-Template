@@ -1,10 +1,10 @@
 /*
  * Author: Reeveli 
  * Reeveli's custom function definitions.
-
+1.3
+    Added Ace moaning function
 1.2
     Added new radio freq retention function
-
 1.1 SPG
     Added teleportation system functions
  */
@@ -89,6 +89,12 @@ class Rev
         class check_distance_players {};
         class check_los_players {};
         class info_panel {};
+	};
+
+    class Moaning
+	{
+		file="scripts\Reeveli_fnc\Rev_moaning";
+        class moaning_init {postInit = 1;};	 
 	};
 
     class Smokes
