@@ -2,6 +2,9 @@
  * Author: Reeveli 
  * Main function for Reeveli's ACE unconscious moaning.
  * Client side function to create all necessary events and variables. Run as a postinit.
+
+ 1.1
+	Added code to account for no voice during the initial check of each loop
  */
 
 if (!hasInterface) exitWith {};
@@ -17,7 +20,7 @@ if (isNil {missionNamespace getVariable ["Rev_moaning_profile",nil]}) then {
 ["ace_unconscious", {
 	params ["_unit"];
 	if !(_unit == player) exitWith {};
-	["Rev_moaning",[_unit]] call CBA_fnc_localEvent;
+	["Rev_moaning",[_unit,true]] call CBA_fnc_localEvent;
 
 }] call CBA_fnc_addEventHandler;
 
@@ -26,7 +29,8 @@ if (isNil {missionNamespace getVariable ["Rev_moaning_profile",nil]}) then {
 //Main EH
 ["Rev_moaning", {
 	params [
-		["_unit", objNull, [objNull]]
+		["_unit", objNull, [objNull]],
+		["_initial_call", false, [true]]
 	];
 
 	if !(_unit == player) exitWith {};
@@ -70,7 +74,7 @@ if (isNil {missionNamespace getVariable ["Rev_moaning_profile",nil]}) then {
 
 	private _N = selectRandom _array;
 
-	if (random 100 <= Rev_moaning_probability) then {
+	if ((random 100 <= Rev_moaning_probability) AND !(_initial_call)) then {
 		//Playing sound
 		playSound3D ["A3\Sounds_F\Characters\human-sfx\" + _randomVoice + "\" + _person + "_moan_" + _N, _unit, false, getPosASL _unit, 20, 1, Rev_moaning_range]; 
 	};
@@ -83,7 +87,7 @@ if (isNil {missionNamespace getVariable ["Rev_moaning_profile",nil]}) then {
 	[
 		{
 			params ["_unit"];
-			["Rev_moaning",[_unit]] call CBA_fnc_localEvent;
+			["Rev_moaning",[_unit,false]] call CBA_fnc_localEvent;
 		},
 		[_unit],
 		Rev_moaning_time
