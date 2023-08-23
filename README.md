@@ -9,6 +9,7 @@ By Killet & Reeveli. Default scripts for SPG Arma 3 missions. Drag and drop all 
  - Reeveli's Resticted Zeus framework: Experimental feature. No documentation as of yet, ask Reeveli for details if you are interested
  - [Reeveli's Advanced Gestures](https://steamcommunity.com/sharedfiles/filedetails/?id=2809634827): **Do NOT** use the standalone Workshop version in addition to these default scripts!
  - Reeveli's Teleportation system: See [standalone version readme](https://github.com/Reeveli/Reevelis-Teleportation#reevelis-teleportation-system) for instructions
+ - Reeveli's ACE Moaning: See [standalone version readme](https://github.com/Reeveli/Reevelis-ACE-moaning#reevelis-ace-moaning) for instructions
 
 ## SPG Addon Settings
 
