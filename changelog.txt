@@ -3,6 +3,11 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.1.1
+    scripts\Reeveli_fnc\Rev_editor\fn_module_preview.sqf updated to 1.0.1
+    scripts\Reeveli_fnc\Rev_editor\fn_module_preview2.sqf updated to 1.0.1
+    scripts\Reeveli_fnc\Rev_editor\fn_module_preview3.sqf updated to 1.0.1
+
 8.1
 	Reeveli's Ace moaning added from Rev_7_7 branch
 		New function folder

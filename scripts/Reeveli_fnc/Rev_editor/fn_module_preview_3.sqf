@@ -1,18 +1,21 @@
 /*
  * Author: Reeveli 
  * ZEN dynamic dialog showcase function.
- * These dynamic dialogs includes all possible control types and subtypes.
+ * These dynamic dialog functions includes all possible control types and subtypes.
  * This example module will COPY TO CLIPBOARD the return value that you can then refrence.
  * Documentation on each argument/section can be found here: https://zen-mod.github.io/ZEN/#/frameworks/dynamic_dialog?id=creating-a-dialog
- * Function is called from a custom zeus modile defines in Rev_fnc_zeus_init
+ * Function is called from a custom zeus module defined in Rev_fnc_zeus_init
  *
  * Arguments:
  * 0: Position <ARRAY>
  * 1: Unit <OBJECT>
  *
  * Example:
- * [_this select 0,_this select 1] call Rev_fnc_module_preview_3
+ * [_this select 0,_this select 1] call Rev_fnc_module_preview3
  *
+ 1.0.1
+ 	Fixed some typos
+	Fixed wrong function in header example
  */
 
 params [
@@ -22,13 +25,14 @@ params [
 
 if (!hasInterface) exitWith {false};
 
+
 [
 	"Toolbox and vector controls",
 	[
 		["TOOLBOX",["Example toolbox","Select any defined option"],[0,3,3,["Alpha","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel","India"]],false],
 		["TOOLBOX:WIDE",["Example toolbox wide","Select any defined option"],[0,3,3,["Alpha","Bravo","Charlie","Delta","Echo","Foxtrot","Golf","Hotel","India"]],false],
-		["TOOLBOX:YESNO",["Example toolbox yes/no","Select either option"],[1],true],
-		["TOOLBOX:ENABLED",["Example toolbox enable","Select either option"],[0],true],
+		["TOOLBOX:YESNO",["Example toolbox yes/no","Select either option"],[true],true],
+		["TOOLBOX:ENABLED",["Example toolbox enable","Select either option"],[false],true],
 		["VECTOR",["Example vector","Example tooltip"],[0,1,0],true]
 	],
 	{
