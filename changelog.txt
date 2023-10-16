@@ -3,6 +3,12 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.2
+	New function: Rev_fnc_replaceWithSimple
+
+    scripts\Reeveli_fnc\Rev_moaning\fn_moaning_init.sqf updated to 1.3		
+	scripts\Reeveli_fnc\Rev_zeus\fn_postProcessing.sqf updated to 1.1
+
 8.1.1
     scripts\Reeveli_fnc\Rev_editor\fn_module_preview.sqf updated to 1.0.1
     scripts\Reeveli_fnc\Rev_editor\fn_module_preview2.sqf updated to 1.0.1

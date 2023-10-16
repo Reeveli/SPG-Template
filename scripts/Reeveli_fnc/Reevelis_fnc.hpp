@@ -47,6 +47,7 @@ class Rev
         class module_preview_2 {};
         class module_preview_3 {};
         class replaceWithAgent {};
+        class replaceWithSimple {};
 	};
 
     class Gestures

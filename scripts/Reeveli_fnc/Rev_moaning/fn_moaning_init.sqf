@@ -3,7 +3,13 @@
  * Main function for Reeveli's ACE unconscious moaning.
  * Client side function to create all necessary events and variables. Run as a postinit.
 
- 1.1
+1.3
+	Added alive check to prevent loop while waiting for respawn
+1.2
+	_soundSource is now vehicle _unit
+	Fixed overly large volume value to 5
+
+1.1
 	Added code to account for no voice during the initial check of each loop
  */
 
@@ -34,6 +40,7 @@ if (isNil {missionNamespace getVariable ["Rev_moaning_profile",nil]}) then {
 	];
 
 	if !(_unit == player) exitWith {};
+	if !(alive player) exitWith {};
 	if !(_unit getVariable ["ACE_isUnconscious", false]) exitWith {};
 
 	//Check for incoming double loops
@@ -76,7 +83,7 @@ if (isNil {missionNamespace getVariable ["Rev_moaning_profile",nil]}) then {
 
 	if ((random 100 <= Rev_moaning_probability) AND !(_initial_call)) then {
 		//Playing sound
-		playSound3D ["A3\Sounds_F\Characters\human-sfx\" + _randomVoice + "\" + _person + "_moan_" + _N, _unit, false, getPosASL _unit, 20, 1, Rev_moaning_range]; 
+		playSound3D ["A3\Sounds_F\Characters\human-sfx\" + _randomVoice + "\" + _person + "_moan_" + _N, vehicle _unit, false, getPosASL _unit, 5, 1, Rev_moaning_range]; 
 	};
 	
 	//Setting safety variable to prevent double loops

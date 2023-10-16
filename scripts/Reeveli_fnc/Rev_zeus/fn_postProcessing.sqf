@@ -10,6 +10,9 @@
  * Example:
  * [] call Rev_fnc_postProcessing;
  *
+ 1.1
+	Added feeedback message on closure
+	Dialog is now reopened on use
  */
 
 if (!hasInterface) exitWith {false};
@@ -35,6 +38,8 @@ private _oldValue = KLT_enviro;
 		[_results # 0] remoteExecCall ["KLT_fnc_enviro",0,true];
 		KLT_enviro = _results # 0;
 		publicVariable "KLT_enviro";
+		[] call Rev_fnc_postProcessing;		
+		[objNull, "Postprocess effect added"] call BIS_fnc_showCuratorFeedbackMessage;
 	},
 	{
 		playSound "FD_Start_F";
@@ -45,11 +50,3 @@ private _oldValue = KLT_enviro;
 	]
 	
 ] call zen_dialog_fnc_create;
-
-/*
-private _display = uiNamespace getVariable ["zen_common_display",displayNull];
-private _controlGroup = _display displayCtrl 30;
-private _toolbox = _controlGroup controlsGroupCtrl 1006;
-
-Code for the toolbox left as legacy archive in case future need (I was unable to attach EHs to the toolbox for intanteneous postprocessing effects)
-*/
