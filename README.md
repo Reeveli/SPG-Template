@@ -61,7 +61,7 @@ Zeus Enhanced -mod is required
  - Blackout: Create power blackout around and area, partial restoration of power possible afterward
  - Promote/remove spectator: Available for players
  - ZEN showcase modules: Showcase modules for all ZEN dynamic dialog options, are only visible when in editor preview (so not during actual missions)
- - Change post processing effects for all players (effect as found in SPG addon options)
+ - Change post processing effects for all players (effects the same as found in SPG addon options)
  - Reeveli's Rectricted Zeus: Promote player to RZ. Part of the experimental RZ system. Do not use unless you know what you are doing
 
 
@@ -91,6 +91,8 @@ Zeus Enhanced -mod is required
  - Icon viewer function: Can be run from editor. Good for finding icons for scripts etc. `[] call Rev_fnc_icon_viewer`
  - Area heal function: `[_target] call Rev_fnc_heal_area`
  - Disable vehicle info panels: If you aim to disable vanilla GPS panel make sure to disable it both for the players themselves (individually) and to each vehicle. `[vehicle player,false,["MinimapDisplayComponent"]] call Rev_fnc_info_panel;`
+ - Replace editor objects with simple objects (with optional scaling). `[this] call Rev_fnc_replaceWithSimple`
+ - replace editor units wiht agents with optional ZEN looping animation. `[this] spawn Rev_fnc_replaceWithagent`
 
 
 
