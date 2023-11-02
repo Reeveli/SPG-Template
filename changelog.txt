@@ -3,6 +3,10 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.2.1
+	Hotfix to remove Rev_ACE_arsenal -function and definition
+		No longer needed after ACE 3.16.0 patch
+
 8.2
 	New function: Rev_fnc_replaceWithSimple
 
