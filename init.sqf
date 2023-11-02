@@ -8,6 +8,6 @@ if (isClass (configFile >> "CfgPatches" >> "JNS_CANS")) then
 	};
 */
 call compile preprocessFile "scripts\KLT\Sandstorm\Init_Sandstorm.sqf";		//Killets Sandstorm
-[] execVM "scripts\mwd\MWDInit.sqf";										//Military Working Dog
+//[] execVM "scripts\mwd\MWDInit.sqf";										//Military Working Dog
 
 
