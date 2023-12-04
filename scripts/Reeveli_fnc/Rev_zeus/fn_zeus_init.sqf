@@ -9,6 +9,8 @@
  * Example:
  * call Rev_fnc_zeus_init
  *
+ 1.5
+	Added map location modules
  1.4
 	Added teleportation system module
  1.3
@@ -64,6 +66,11 @@ if (isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) then
 
 	//Teleportation system
 	["Reeveli's Teleportation system","Add teleport point",{[_this select 1] call Rev_fnc_tp_ZEN_dialog},"a3\ui_f_curator\data\cfgwrapperui\cursors\curatormove_ca.paa"] call zen_custom_modules_fnc_register;
+
+	//Map location manipulation
+	
+	["Reeveli's Map locations", "Add map location", {[_this select 0] call Rev_fnc_locationDialogNew},"a3\ui_f\data\igui\cfg\simpletasks\types\map_ca.paa"] call zen_custom_modules_fnc_register;
+	["Reeveli's Map locations", "Remove map location", {[_this select 0] call Rev_fnc_locationDialogRemove},"a3\ui_f\data\igui\cfg\simpletasks\types\map_ca.paa"] call zen_custom_modules_fnc_register;
 };
 
 

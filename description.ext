@@ -1,4 +1,4 @@
-scriptVersion 	= "8.2.1";
+scriptVersion 	= "8.3";
 //General
 loadScreen = "img\SPGlogo.paa";
 author = SPG;

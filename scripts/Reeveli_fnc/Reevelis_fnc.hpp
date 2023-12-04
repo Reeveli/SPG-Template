@@ -1,6 +1,8 @@
 /*
  * Author: Reeveli 
  * Reeveli's custom function definitions.
+1.4
+    Added map location functions
 1.3
     Added Ace moaning function
 1.2
@@ -70,6 +72,16 @@ class Rev
 		class halo_plane {};
         class halo_start {};
 		class transport_check {};
+	};
+
+    class Locations
+	{
+		file="scripts\Reeveli_fnc\Rev_locations";
+        class locationDialogNew {};
+        class locationDialogRemove {};
+        class locationName {};
+        class locationNew {};
+        class locationRemove {};
 	};
 
     class Medical

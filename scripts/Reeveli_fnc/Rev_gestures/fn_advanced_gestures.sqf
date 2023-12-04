@@ -10,6 +10,8 @@
  * Example:
  * call Rev_fnc_advanced_gestures
  *
+ 2.0
+	Gesture notifications are now localised using the the ACE gesture -addon stringtable.
  */
 
 
@@ -37,21 +39,21 @@ private _code = {
 	
 	switch (_gesture) do
 	{
-		case 'gestureadvance' : {_hint = 'Advance!';};
-		case 'gesturego' : {_hint = 'Go!';};
-		case 'gesturegob' : {_hint = 'Go!';};
-		case 'gesturefollow' : {_hint = 'Follow!';};
-		case 'gestureup' : {_hint = 'Up!';};
-		case 'gestureceasefire' : {_hint = 'Cease Fire!';};
-		case 'gesturefreeze' : {_hint = 'Stop!';};
-		case 'ace_gestures_forward' : {_hint = 'Move Forward!';};
-		case 'ace_gestures_regroup' : {_hint = 'Rally Up!';};
-		case 'ace_gestures_freeze' : {_hint = 'Freeze!';};
-		case 'ace_gestures_cover' : {_hint = 'Cover!';};
-		case 'ace_gestures_point' : {_hint = 'Point';};
-		case 'ace_gestures_engage' : {_hint = 'Engage!';};
-		case 'ace_gestures_hold' : {_hint = 'Hold!';};
-		case 'ace_gestures_warning' : {_hint = 'Warning!';};
+		case 'gestureadvance' : {_hint = localize 'STR_ACE_Gestures_Advance';};
+		case 'gesturego' : {_hint = localize 'STR_ACE_Gestures_Go';};
+		case 'gesturegob' : {_hint = localize 'STR_ACE_Gestures_Go';};
+		case 'gesturefollow' : {_hint = localize 'STR_ACE_Gestures_Follow';};
+		case 'gestureup' : {_hint = localize 'STR_ACE_Gestures_Up';};
+		case 'gestureceasefire' : {_hint = localize 'STR_ACE_Gestures_CeaseFire';};
+		case 'gesturefreeze' : {_hint = localize 'STR_ACE_Gestures_Stop';};
+		case 'ace_gestures_forward' : {_hint = localize 'STR_ACE_Gestures_Forward';};
+		case 'ace_gestures_regroup' : {_hint = localize 'STR_ACE_Gestures_Regroup';};
+		case 'ace_gestures_freeze' : {_hint = localize 'STR_ACE_Gestures_Freeze';};
+		case 'ace_gestures_cover' : {_hint = localize 'STR_ACE_Gestures_Cover';};
+		case 'ace_gestures_point' : {_hint = localize 'STR_ACE_Gestures_Point';};
+		case 'ace_gestures_engage' : {_hint = localize 'STR_ACE_Gestures_Engage';};
+		case 'ace_gestures_hold' : {_hint = localize 'STR_ACE_Gestures_Hold';};
+		case 'ace_gestures_warning' : {_hint = localize 'STR_ACE_Gestures_Warning';};
 	};
 	diag_log format ["Rev_advanced_gestures, text shown: %1", _hint];
 	
