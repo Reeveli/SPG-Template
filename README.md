@@ -94,7 +94,7 @@ Zeus Enhanced -mod is required
  - Disable vehicle info panels: If you aim to disable vanilla GPS panel make sure to disable it both for the players themselves (individually) and to each vehicle. `[vehicle player,false,["MinimapDisplayComponent"]] call Rev_fnc_info_panel;`
  - Replace editor objects with simple objects (with optional scaling). `[this] call Rev_fnc_replaceWithSimple`
  - Replace editor units with agents with optional ZEN looping animation. `[this] spawn Rev_fnc_replaceWithagent`
- - Several new functions for manipulating map locations, can be used for scripting (icluding from editor). `scripts\Reeveli_fnc\Rev_locations`
+ - Several new functions for manipulating map locations, can be used for scripting (including from editor). `scripts\Reeveli_fnc\Rev_locations`
 
 
 
