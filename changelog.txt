@@ -10,7 +10,7 @@ TODO:
 	Added new functions for map location manipulation in scripts\Reeveli_fnc\Rev_locations
 		scripts\Reeveli_fnc\Reevelis_fnc.hpp updated to 1.4
 
-	Added new Zeus medules for map location manipulation (Reeveli's Map locations)
+	Added new Zeus modules for map location manipulation (Reeveli's Map locations)
 		scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf updated to 1.5
 
 8.2.1
