@@ -63,6 +63,7 @@ Zeus Enhanced -mod is required
  - ZEN showcase modules: Showcase modules for all ZEN dynamic dialog options, are only visible when in editor preview (so not during actual missions)
  - Change post processing effects for all players (effects the same as found in SPG addon options)
  - Reeveli's Rectricted Zeus: Promote player to RZ. Part of the experimental RZ system. Do not use unless you know what you are doing
+ - Reeveli's Maplocation modules: Modules for removing existing map locations and adding new ones. Note that new added locations are not visible in the curator view.
 
 
 ## Curator Context Actions
@@ -92,7 +93,8 @@ Zeus Enhanced -mod is required
  - Area heal function: `[_target] call Rev_fnc_heal_area`
  - Disable vehicle info panels: If you aim to disable vanilla GPS panel make sure to disable it both for the players themselves (individually) and to each vehicle. `[vehicle player,false,["MinimapDisplayComponent"]] call Rev_fnc_info_panel;`
  - Replace editor objects with simple objects (with optional scaling). `[this] call Rev_fnc_replaceWithSimple`
- - replace editor units with agents with optional ZEN looping animation. `[this] spawn Rev_fnc_replaceWithagent`
+ - Replace editor units with agents with optional ZEN looping animation. `[this] spawn Rev_fnc_replaceWithagent`
+ - Several new functions for manipulating map locations, can be used for scripting (icluding from editor). `scripts\Reeveli_fnc\Rev_locations`
 
 
 
