@@ -9,6 +9,8 @@
  * Example:
  * call Rev_fnc_zeus_init
  *
+ 1.5.1
+	Remove map location -module function updated
  1.5
 	Added map location modules
  1.4
@@ -70,7 +72,7 @@ if (isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) then
 	//Map location manipulation
 	
 	["Reeveli's Map locations", "Add map location", {[_this select 0] call Rev_fnc_locationDialogNew},"a3\ui_f\data\igui\cfg\simpletasks\types\map_ca.paa"] call zen_custom_modules_fnc_register;
-	["Reeveli's Map locations", "Remove map location", {[_this select 0] call Rev_fnc_locationDialogRemove},"a3\ui_f\data\igui\cfg\simpletasks\types\map_ca.paa"] call zen_custom_modules_fnc_register;
+	["Reeveli's Map locations", "Remove map location", {[_this select 0] call Rev_fnc_locationCuratorRemove},"a3\ui_f\data\igui\cfg\simpletasks\types\map_ca.paa"] call zen_custom_modules_fnc_register;
 };
 
 

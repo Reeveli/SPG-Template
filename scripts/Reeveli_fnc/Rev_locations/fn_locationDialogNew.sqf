@@ -13,6 +13,12 @@
  * Example:
  * [_this select 0] call Rev_fnc_locationDialogNew
  *
+ 1.1
+	Notification about label visiblity chnaged to curatorHint type.
+	Changed the default name string to empty
+		Empty name is also now forced as default
+	Added new location type options to dialog
+		Also cleaned up the array from leftover code for empty type
  */
 
 
@@ -25,30 +31,33 @@ params [
 [
 	"Create new map location",
 	[
-		["LIST",["Location types","Select the new location's type from the list"],[["NameCity","NameCityCapital","NameVillage","NameLocal","NameMarine"],[["NameCity"],["NameCityCapital"],["NameVillage"],["NameLocal"],["NameMarine"],["Do not cretae new location","this option will not create any new map locations"]],0,5],false],
-		["EDIT",["New location's name","The map name of the new location"],["New location"],false]
-
-
+		[
+			"LIST",
+			["Location types","Select the new location's type from the list"],
+			[
+				["City","Capital City","Village","Local","Marine","Safety Zone","Strategic","Rock Area","Hill","View Point"],
+				[["NameCity"],["NameCityCapital"],["NameVillage"],["NameLocal"],["NameMarine"],["SafetyZone"],["Strategic"],["RockArea"],["Hill"],["ViewPoint"]],
+				0,
+				5
+			],
+			false
+		],
+		["EDIT",["New location's name","The map name of the new location"],[""],true]
 	],
 	{
 		params ["_results","_passed_arguments"];
 
 		_results params [
 			["_type","NameCity",[""]],
-			["_name","New location",[""]]
+			["_name","",[""]]
 		];
 
 		private _position = _passed_arguments select 0;
 
 		if (_type isEqualTo "Empty") exitWith {};
 		[_type, _position,_name] remoteExec ["Rev_fnc_locationNew",0,true];
-
-		[] spawn
-		{
-			private _ok = ["I understand the new location IS NOT VISIBLE in curator mode.","",true,false,findDisplay 312] spawn BIS_fnc_guiMessage;
-		};
-	
-
+		playSound "FD_Finish_F";
+		[_name, "Location created, the label will NTO BE VISIBLE IN CURATOR VIEW. Only on 'normal' map", 8] call BIS_fnc_curatorHint;
 	},
 	{
 		playSound "FD_Start_F";

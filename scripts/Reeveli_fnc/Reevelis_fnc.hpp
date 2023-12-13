@@ -1,6 +1,9 @@
 /*
  * Author: Reeveli 
  * Reeveli's custom function definitions.
+1.5
+    Rev_fnc_locationDialogRemove removed
+    Rev_fnc_locationCuratorRemove added
 1.4
     Added map location functions
 1.3
@@ -77,8 +80,8 @@ class Rev
     class Locations
 	{
 		file="scripts\Reeveli_fnc\Rev_locations";
+        class locationCuratorRemove {};
         class locationDialogNew {};
-        class locationDialogRemove {};
         class locationName {};
         class locationNew {};
         class locationRemove {};

@@ -22,6 +22,8 @@
  * Example:
  * ["NameCity",_pos,"My New City"] call Rev_fnc_locationNew;
  *
+ 1.1
+	Added rpt printout
  */
 
 
@@ -35,5 +37,7 @@ params
 
 private _location = createLocation [_type, _pos, 30, 30];
 _location setText _name;
+
+diag_log format ["Rev_fnc_locationNew: %1", _name];
 
 _location;

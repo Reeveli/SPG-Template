@@ -11,6 +11,8 @@
  * Example:
  * [_pos] call Rev_fnc_locationRemove;
  *
+ 1.1
+	Function re-written to match mod version 1.1
  */
 
 params
@@ -18,10 +20,15 @@ params
 	["_pos",nil,[[]],[2,3]]
 ];
 
+private _location = nearestLocation [_pos,"",75];
 
+if (isNull _location) exitWith {
+	diag_log "Rev_fnc_locationRemove: No location found";
+	false;
+};
 
-private _location = nearestLocation [_pos, ["NameCity","NameCityCapital","NameLocal","NameMarine","NameVillage"]];	
-_location setType "Invisible";								
+diag_log format ["Rev_fnc_locationRemove: %1", _location];
+							
 private _invisible = createLocation [_location];		
 _invisible setType "Invisible";	
 

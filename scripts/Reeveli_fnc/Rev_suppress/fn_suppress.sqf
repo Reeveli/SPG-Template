@@ -10,6 +10,8 @@
  * Example:
  * [_objects select 0] call Rev_fnc_suppress;
  *
+1.1.2
+	Fixed some typos
 
 1.1.1
 	Fixed one wrong comment
@@ -51,7 +53,7 @@ private _line = addMissionEventHandler ["Draw3D", {
 			drawLine3D [ASLToAGL _eyePos, ASLToAGL _pos, [1,0,0,1]];
 		};
 
-		// Marker to indicate final position, could be made confditional of LOS but I decided against
+		// Marker to indicate final position, could be made conditional of LOS but I decided against
 		drawIcon3D [
 			"\A3\ui_f\data\map\groupicons\selector_selectedMission_ca.paa",
 			[1, 0, 0, 1],
@@ -70,7 +72,7 @@ private _line = addMissionEventHandler ["Draw3D", {
 
 missionNameSpace setVariable ["Rev_suppress_line",_line,false];
 
-//Small delay since instant exedcution would fire immediately when ZEN context menu was closed
+//Small delay since instant execution would fire immediately when ZEN context menu was closed
 [{
 	private _mouseC = (findDisplay 312) displayAddEventHandler ["MouseButtonUp", {
 		params ["_displayOrControl", "_button", "_xPos", "_yPos", "_shift", "_ctrl", "_alt"];
