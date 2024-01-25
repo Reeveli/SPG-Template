@@ -3,8 +3,12 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.3.2	
+    scripts\Reeveli_fnc\Rev_misc\fn_camofaces.sqf upated to 1.7.1
+	scripts\Reeveli_fnc\Rev_locations\fn_locationDialogNew.sqf updated to 1.1.1
+
 8.3.1 (from Rev_7.8.1 branch)
-	Update to map location functions and modules (to correspond wiht standalone 1.1 update)
+	Update to map location functions and modules (to correspond with standalone 1.1 update)
 	    scripts\Reeveli_fnc\Rev_locations\fn_LocationRemove.sqf updated to 1.1
 		scripts\Reeveli_fnc\Rev_locations\fn_locationNew.sqf updated to 1.1
 		scripts\Reeveli_fnc\Rev_locations\fn_locationName.sqf updated to 1.1

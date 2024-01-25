@@ -2,7 +2,8 @@
 By Reeveli 
 This function forces a face from the selected list onto the player. No more Europeans playing as Asian dudes.
 Called by [2] call Rev_fnc_camofaces, with the param being the list of faces.
-Function must be called both when joining the server (handled by CBA addon settings) and after respawn (onPlayerRespawn)!
+Function must be called both when joining the server (handled by CBA addon settings) and after respawn (handeled by included respawn eventhandlers).
+If automatic facewear removal is desired use 'AllowProfileGlasses' command in mission config file.
 
 Params: 0 - Face type (list below)
 
@@ -21,8 +22,10 @@ Params: 0 - Face type (list below)
 12: Russian fenotype
 13: Young Caucasian faces - Requires BabyFaces mod to be present
 
+1.7.1
+    Updated function header concerning facewear removal and respawn EHs
 1.7
-    Added code for respawn eventhandler, system is now self contained in this function
+    Added code for respawn eventhandler, syste is now self contained in this function
     Function description fixed
 1.6
     Added Russian fenotype

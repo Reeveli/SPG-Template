@@ -13,6 +13,8 @@
  * Example:
  * [_this select 0] call Rev_fnc_locationDialogNew
  *
+ 1.1.1
+	Fixed type in curatorHint
  1.1
 	Notification about label visiblity chnaged to curatorHint type.
 	Changed the default name string to empty
@@ -57,7 +59,7 @@ params [
 		if (_type isEqualTo "Empty") exitWith {};
 		[_type, _position,_name] remoteExec ["Rev_fnc_locationNew",0,true];
 		playSound "FD_Finish_F";
-		[_name, "Location created, the label will NTO BE VISIBLE IN CURATOR VIEW. Only on 'normal' map", 8] call BIS_fnc_curatorHint;
+		[_name, "Location created, the label will NOT BE VISIBLE IN CURATOR VIEW. Only on 'normal' map", 8] call BIS_fnc_curatorHint;
 	},
 	{
 		playSound "FD_Start_F";
