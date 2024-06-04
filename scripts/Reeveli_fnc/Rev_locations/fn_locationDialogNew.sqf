@@ -13,10 +13,12 @@
  * Example:
  * [_this select 0] call Rev_fnc_locationDialogNew
  *
+ 1.1.2
+	Fixed typos in header
  1.1.1
 	Fixed type in curatorHint
  1.1
-	Notification about label visiblity chnaged to curatorHint type.
+	Notification about label visiblity changed to curatorHint type.
 	Changed the default name string to empty
 		Empty name is also now forced as default
 	Added new location type options to dialog

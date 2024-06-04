@@ -2,6 +2,7 @@
  * Author: Reeveli
  * Part of restricted zeus framework.
  * Configures restricted zeus interface for player. 
+ * Called from Rev_RZ_fnc_init_player
  *
  * Arguments:
  * 0: Unit <OBJECT>
@@ -11,6 +12,9 @@
  *
  * Example:
  * [_unit,_module] remoteExec ["Rev_RZ_fnc_post_player",_unit];}, [_unit,_module];
+ *
+ * 1.7.1
+ *	Updated header
  *
  * 1.7
  * 	Removed call Rev_RZ_fnc_state_machine fom RZ reconnect ACE action (function doesn't exists, was a legacy feature)

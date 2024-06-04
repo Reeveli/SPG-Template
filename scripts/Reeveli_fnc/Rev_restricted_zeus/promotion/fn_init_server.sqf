@@ -2,6 +2,7 @@
  * Author: Reeveli
  * Part of restricted zeus framework.
  * Configures curator module for restricted zeus. 
+ * Called from Rev_RZ_fnc_init_player
  *
  * Arguments:
  * 0: Unit <OBJECT>
@@ -12,6 +13,9 @@
  * Example:
  * [_unit] remoteExecCall ["Rev_RZ_fnc_init_server",2];
  *
+ * 1.7.1
+ *	Updated header
+ *	Fixed typo in header
  * 1.7
  *	Disabled camera editing area to enable RZ camera placement on map
  * 1.6
@@ -32,7 +36,7 @@
  * 	Made setvariable global
  *
  * 1.1
- *	Moved systemchat "initialized" to isnil case fro debugging clarity
+ *	Moved systemchat "initialized" to isnil case for debugging clarity
  */
 
 params [

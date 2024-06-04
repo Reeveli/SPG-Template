@@ -2,6 +2,7 @@
  * Author: Reeveli
  * Part of restricted zeus framework.
  * Client side function that initializes the restricted zeus interface.
+ * Called via remote execute from a custom ZEN module defined in Rev_RZ_fnc_module_init
  *
  * Arguments:
  * 0: Unit <OBJECT>
@@ -12,6 +13,10 @@
  * Example:
  * [player] call Rev_RZ_fnc_init_player;
  *
+ * 2.3.1
+ *	Updated header
+ *	Fixed some typoes and updated comments
+ * 
  * 2.3
  *	CBA_state_machines are now integral part, not called as a function
  *	New safety check is player is already RZ (in case of douple promotions)
@@ -42,7 +47,7 @@ if (player getVariable ["Rev_restricted_curator",false]) exitWith {
 	false;
 };
 
-//Warning if ACE of ZEN is missing
+//Warning if ACE or ZEN is missing
 if !(isClass (configFile >> "CfgPatches" >> "zen_context_menu")) exitWith {
 	playSound "FD_Start_F";
 	hintSilent "ZEN -mod not detected, Restricted Zeus unavailable!";
@@ -68,6 +73,6 @@ Resticted_Zeus_Machine = [[player]] call CBA_statemachine_fnc_create;
 [Resticted_Zeus_Machine, "NumEnterView", "CuratorView", {cameraOn == vehicle player && {!isNull findDisplay 312}}, {}] call CBA_statemachine_fnc_addTransition;
 [Resticted_Zeus_Machine, "NumEnterView", "NormalView", {isNull findDisplay 312}, {}] call CBA_statemachine_fnc_addTransition;
 
-//start server side
+//Start server side process for promotion
 [_unit] remoteExecCall ["Rev_RZ_fnc_init_server",2];
 true;
