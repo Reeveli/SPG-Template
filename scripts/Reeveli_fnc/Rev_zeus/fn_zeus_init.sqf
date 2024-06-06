@@ -9,6 +9,9 @@
  * Example:
  * call Rev_fnc_zeus_init
  *
+ 1.5.2S
+	Removed mission code module	(probably copied over by accident from Rev branch)
+	Removed old legacy code for Achilles smoke launcher module
  1.5.1
 	Remove map location -module function updated
  1.5
@@ -32,9 +35,6 @@
 
 if !(hasInterface) exitWith {};
 
-//Achilles modules, left as legacy in-case I forget this was a thing
-// ["Reeveli's Modules", "Smoke Launcher", {[_this select 1] call Rev_fnc_smoke_launcher}] call Ares_fnc_RegisterCustomModule;
-
 //ZEN modules
 if (isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) then
 {
@@ -45,8 +45,7 @@ if (isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) then
 		["Reeveli's ZEN Showcase", "Toolbox and vector controls", {[_this select 0,_this select 1] call Rev_fnc_module_preview_3},"\a3\Ui_f\data\GUI\Cfg\Hints\ActionMenu_ca.paa"] call zen_custom_modules_fnc_register;
 		["Reeveli's Editor Modules", "Icon viewer", {[] call Rev_fnc_icon_viewer}] call zen_custom_modules_fnc_register;
 	};	
-	//Misc modules	
-	["Reeveli's ZEN Modules", "Mission code module", {call Rev_fnc_mission_code_module},""] call zen_custom_modules_fnc_register;
+	//Misc modules
 	["Reeveli's ZEN Modules", "AI Surrender Squad", {
 			params ["_pos","_unit"];
 			if (isNull _unit) exitwith

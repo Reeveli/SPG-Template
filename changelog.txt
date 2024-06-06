@@ -2,6 +2,13 @@ TODO:
 	Ask Killet if UTXG compass code could be removed. Currently not listed in Git readme
 	Killets arsenal system Git readme
 		Logisystem
+8.4
+	scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf to 1.5.2S
+		Removed mission code module	(probably copied over by accident from Rev branch)
+		Removed old legacy code for Achilles smoke launcher module
+	
+	scripts\Reeveli_fnc\Reevelis_fnc.hpp to 1.6S
+		Removed Rev_smokes functions as unnecessary legacy
 
 8.3.2	
     scripts\Reeveli_fnc\Rev_misc\fn_camofaces.sqf upated to 1.7.1

@@ -1,6 +1,8 @@
 /*
  * Author: Reeveli 
  * Reeveli's custom function definitions.
+1.6S
+    Removed Rev_smokes functions
 1.5
     Rev_fnc_locationDialogRemove removed
     Rev_fnc_locationCuratorRemove added
@@ -110,13 +112,6 @@ class Rev
 	{
 		file="scripts\Reeveli_fnc\Rev_moaning";
         class moaning_init {postInit = 1;};	 
-	};
-
-    class Smokes
-	{
-		file="scripts\Reeveli_fnc\Rev_smokes";
-        class vehicle_weapons {};
-        class smoke_launcher {};
 	};
 
     class Supperssion
