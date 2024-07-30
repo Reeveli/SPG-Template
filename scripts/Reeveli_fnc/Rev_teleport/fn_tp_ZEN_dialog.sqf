@@ -12,6 +12,8 @@
  * Example:
  * [_object] call Rev_fnc_tp_ZEN_dialog
  *
+ 1.0.1
+	Fixed typo
  */
 
 params [
@@ -34,7 +36,7 @@ if (([_object] call Rev_fnc_tp_listCheck) > -1) exitWith {
 [
 	"Add teleportation point to object",
 	[
-		["EDIT",["Display name","WHat is the display name of this teleport point"],["Teleportation point"],true],
+		["EDIT",["Display name","What is the display name of this teleport point"],["Teleportation point"],true],
 		["SIDES",["Side selection","Select which side can use this teleport point"],[west],true]
 	],
 	{

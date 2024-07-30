@@ -11,13 +11,15 @@
  * Example:
  * [this,7] call Rev_fnc_replaceWithSimple;
  *
+ 1.1
+	Changed default scale value to 1
  */
 
 if !(isServer) exitWith {false};
 params
 [
 	["_object", objNull, [objNull]],
-	["_scale", 0, [0]]
+	["_scale", 1, [0]]
 ];
 
 
