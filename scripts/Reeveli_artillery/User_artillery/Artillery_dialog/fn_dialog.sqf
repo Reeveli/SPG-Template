@@ -12,6 +12,8 @@
  * Example:
  * [] call Rev_arty_fnc_dialog
  *
+ 2.0.1
+	Fixed wrong value used for area bombing
  2.0
 	Complete rewrite to support new UI
  */
@@ -109,7 +111,7 @@ if (Rev_arty_GUN_enable) then {
 	};
 
 if (Rev_arty_BOM_enable) then {
-		_ordnance_control lnbAddRow ["Area bombing",str Rev_arty_SUP_amount];
+		_ordnance_control lnbAddRow ["Area bombing",str Rev_arty_BOM_amount];
 	};
 
 

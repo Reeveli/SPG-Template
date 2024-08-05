@@ -3,6 +3,8 @@
  * Part of Reeveli's User Artillery system, area bombing.
  * Main ddialog for area bombing ordnance option.
  *
+ 1.2
+	Removed marker resize on target marker (not needed and was set to wrong marker)
  1.1
 	Pattern list neutered
  */
@@ -138,7 +140,7 @@ class Rev_arty_bomb_dialog
 			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 18 * pixelGridNoUIScale * pixelW";
 			w = 11.5 * pixelGridNoUIScale * pixelW;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 40.5 * pixelGridNoUIScale * pixelH";
-			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6053, format ['Ordnance amount: %1',round _newValue]]; 'Rev_arty_bom_tgt' setMarkerSizeLocal [20, 12.5 * (round _newValue)];";
+			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6053, format ['Ordnance amount: %1',round _newValue]];";
 			tooltip = "How many bombs will be delivered";
 		};	
 
