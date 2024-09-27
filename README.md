@@ -60,7 +60,7 @@ Zeus Enhanced -mod is required
  - End mission: End mission, custom endings from `\scripts\KLT\Endings\Endings.hpp` supported
  - Blackout: Create power blackout around and area, partial restoration of power possible afterward
  - Promote/remove spectator: Available for players
- - Toggle Rock Thrower: Makes/removes AI units as rock throwers
+ - Toggle Rock Thrower: Makes/removes AI units as rock throwers. CANS -mod required!
  - ZEN showcase modules: Showcase modules for all ZEN dynamic dialog options, are only visible when in editor preview (so not during actual missions)
  - Change post processing effects for all players (effects the same as found in SPG addon options)
  - Reeveli's Rectricted Zeus: Promote player to RZ. Part of the experimental RZ system. Do not use unless you know what you are doing
