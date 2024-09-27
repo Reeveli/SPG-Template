@@ -11,9 +11,11 @@
  *	False: Curator module not created
  *
  * Example:
- * call Rev_fnc_client_init
+ * call Rev_fnc_admin_client_init
  *
- 1.1.1
+ 1.1.2S
+	Fixed wrong function name in comments/header
+ 1.1.1S
 	Whitelist condition changed to use SPG option one
  1.1
 	Added EH to make all units editable when entering the interface
@@ -23,14 +25,14 @@
 //Exit if not whitelisted
 if !(getPlayerUID player in KLT_allowed_curators) exitWith {
 
-	diag_log "Rev_fnc_client_init: Player not whitelisted, curator module not created";
+	diag_log "Rev_fnc_admin_client_init: Player not whitelisted, curator module not created";
 	false;
 };
 
 //Exit if module exists
 if (((entities "ModuleCurator_F") findIf {_x getVariable ["Rev_curator",""] isEqualTo name player}) > -1) exitWith {
 	
-	diag_log "Rev_fnc_client_init: Player curator module already exists";
+	diag_log "Rev_fnc_admin_client_init: Player curator module already exists";
 	false;
 };
 
@@ -50,5 +52,5 @@ _module addEventHandler ["CuratorObjectRegistered", {
 }];
 
 
-diag_log "Rev_fnc_client_init: Player whitelisted, curator module created";
+diag_log "Rev_fnc_admin_client_init: Player whitelisted, curator module created";
 true;

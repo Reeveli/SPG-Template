@@ -1,6 +1,8 @@
 /*
  * Author: Reeveli 
  * Reeveli's custom function definitions.
+1.7S
+    Added function for rock throwers
 1.6S
     Removed Rev_smokes functions
 1.5
@@ -133,6 +135,15 @@ class Rev
         class tp_onLoad {};
         class tp_teleport {};
         class tp_ZEN_dialog {};
+	};
+
+    class Throwers
+	{
+		file ="scripts\Reeveli_fnc\Rev_throwers";
+        class initThrowers {preinit = 1;};
+        class makeThrower {};
+        class throwerStatus {};
+        class throwRock {};
 	};
 
     class Vehicles

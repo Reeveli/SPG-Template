@@ -9,6 +9,9 @@
  * Example:
  * [ctrlText 6062,ctrlText 6063,ctrlText 6064,lbData [6065, lbCurSel 6065],lbCurSel 6065,ctrlText 6066,ctrlText 6067,((findDisplay 6060) displayCtrl 6068) lnbText [lnbCurSelRow 6068,0],lnbCurSelRow 6068,_control] call Rev_arty_fnc_dialog_update;
  *
+1.1
+	Fixed wrong variable in bomb ammo check
+	Fixed wrong variable on bomb plane check
 
 1.0
 	Initial version
@@ -373,7 +376,7 @@ if !(isNil {player getvariable ['Rev_arty_gun_call',nil]}) exitWith {
 
 //Area bombing checks
 //Check bombing availability
-if ((Rev_arty_GUN_amount == 0) AND (_round_type isEqualTo "AREA BOMBING")) exitWith {
+if ((Rev_arty_BOM_amount == 0) AND (_round_type isEqualTo "AREA BOMBING")) exitWith {
 	_ok ctrlEnable false;
 	ctrlSetText [6072,"No bombing runs available."];
 	_underscore ctrlShow false;		
@@ -387,7 +390,7 @@ if ((_number > 1) AND (_round_type isEqualTo "AREA BOMBING")) exitWith {
 	false;
 };
 //Check if a previous bomber is being called to avoid duplicate varibales being used
-if !(isNil {player getvariable ['Rev_arty_gun_call',nil]}) exitWith {
+if !(isNil {player getvariable ['Rev_arty_bom_call',nil]}) exitWith {
 	_ok ctrlEnable false;
 	ctrlSetText [6072,"Previous bombing run is still processing."];
 	_underscore ctrlShow false;		

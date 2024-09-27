@@ -3,11 +3,29 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.5	
+	New system for rock throwers scripts\Reeveli_fnc\Rev_throwers
+		REQUIRES CANS -MOD!
+		scripts\Reeveli_fnc\Reevelis_fnc.hpp to 1.7S
+		ZEN moduel defined in scripts\Reeveli_fnc\Rev_throwers\fn_initThrowers.sqf
+
+	init.sqf Removed code for throwers (handeled by new system)
+	scripts\KLT\Killets_modules.hpp removed old code for throwers
+	Deleted scripts\KLT\throwers -folder
+
+    scripts\Reeveli_fnc\Rev_editor\fn_replaceWithSimple.sqf to 1.1.1
+	    Changed argument in header example
+
 8.4.1
 	scripts\Reeveli_artillery\User_artillery\Area_bombing\bomb_map_dialog.hpp to 1.2
         Fixed issues with target marker resizing
     scripts\Reeveli_artillery\User_artillery\Artillery_dialog\fn_dialog.sqf to 2.0.1
         Fixed wrong value used for area bombing
+    scripts\Reeveli_artillery\User_artillery\Artillery_dialog\fn_dialog_update.sqf to 1.1
+	    Fixed wrong variable in bomb ammo check
+	    Fixed wrong variable in bomb plane check
+	scripts\Reeveli_fnc\Rev_admin\fn_admin_client_init.sqf to 1.1.2S
+		Fixed wrong function name in comments/header
 
 8.4
 	scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf to 1.5.2S
@@ -19,7 +37,6 @@ TODO:
 	
 	scripts\Reeveli_fnc\Rev_editor\fn_replaceWithSimple.sqf to 1.1
 		Changed default scale value to 1
-	
 	
 	scripts\Reeveli_fnc\Rev_teleport\fn_tp_ZEN_dialog.sqf to 1.0.1
 		Fixed typo

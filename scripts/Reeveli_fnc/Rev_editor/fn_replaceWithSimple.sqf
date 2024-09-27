@@ -9,8 +9,11 @@
  * Return Value NONE
  *
  * Example:
- * [this,7] call Rev_fnc_replaceWithSimple;
+ * [this,1] call Rev_fnc_replaceWithSimple;
  *
+ 1.1.1
+	Changed argument in header example
+	
  1.1
 	Changed default scale value to 1
  */
