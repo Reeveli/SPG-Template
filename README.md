@@ -49,6 +49,7 @@ Zeus Enhanced -mod is required
  
  - Killet´s dust storm: You can now enable a small or a global sandstorm
  - Icon viewer: In-game browser for .paa files. Good for finding icons for scripts etc.
+ - Sound browser: In-game browser sampling sound files from all active mods.
  
  - Reeveli's fire support
 	 - Available on position, access to all Zeus fire support features (missiles, artillery, airstrike)
