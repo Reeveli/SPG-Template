@@ -18,3 +18,7 @@ Rev_arty_diag               6061    -   6074        6060
 Rev_ping_list               6083    -   6085        6080
 Rev_map                     6091    -   7000        6090
 Rev_teleportation           7001    -   7004        7000
+Rev_locations_remove_dialog 7011    -   7012        7010
+Rev_custom_radio            8000    -   
+MSSLFR                      8051    -   8052        8050
+RscSoundBrowser                                     8080

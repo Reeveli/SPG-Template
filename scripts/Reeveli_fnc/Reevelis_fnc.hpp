@@ -1,6 +1,9 @@
 /*
  * Author: Reeveli 
  * Reeveli's custom function definitions.
+
+1.8S
+    Added Sound_browser 
 1.7S
     Added function for rock throwers
 1.6S
@@ -16,7 +19,8 @@
     Added new radio freq retention function
 1.1 SPG
     Added teleportation system functions
- */
+
+*/
 
 
 
@@ -114,6 +118,14 @@ class Rev
 	{
 		file="scripts\Reeveli_fnc\Rev_moaning";
         class moaning_init {postInit = 1;};	 
+	};
+
+    class Sound_browser
+	{
+		file="scripts\Reeveli_fnc\Rev_soundBrowser"; 
+        class soundB_filter {};
+        class soundB_init {};
+        class soundB_lbSelect {};	
 	};
 
     class Supperssion

@@ -10,6 +10,11 @@
  * Example:
  * [_target] call Rev_fnc_heal_area
  *
+ 1.2
+	New condition for if is on fire
+	Heal function is now remoteExecuted locally for players
+ 1.1.1
+	Adjusted blood pressure check values
  1.1
 	Added default param, safety exit
  */
@@ -27,19 +32,21 @@ private _inArea = _allPlayers select {(_x distance _unit) < 12};
 fnc_condition_check = {
 	private _bleeding = _this select 0 call ace_medical_blood_fnc_isBleeding;
 	private _blood_pressure = _this select 0 call ace_medical_status_fnc_getBloodPressure;
-	private _diastolic = (_blood_pressure select 0 !=80) OR (_blood_pressure select 1 !=120);
+	private _diastolic = (_blood_pressure select 0 < 75) OR (_blood_pressure select 1 < 115);
 	private _fractures = _this select 0 call ACE_medical_ai_fnc_isInjured;
+	private _onFire = ((["ace_fire"] call ace_common_fnc_isModLoaded) && ([_this select 0] call ace_fire_fnc_isBurning));
 
-	if (_bleeding OR _diastolic OR _fractures) then {true} else {false};
+	if (_bleeding OR _diastolic OR _fractures OR _onFire) then {true} else {false};
 };
 
 private _patients = _inArea select {[_x] call fnc_condition_check;};
 
 if ((count _patients) == 0 ) exitWith {hintSilent "No patients to treat in radius"};
 
+//New heal function to be run locally on players
 private _success = {		
-  params ["_patients"];
-  {[_x] call Rev_fnc_heal;} forEach _patients;
+	params ["_patients"];
+	{[_x] remoteExecCall ["Rev_fnc_heal",_x]} forEach _patients;
 };
 
 private _time = 3 * (count _patients);

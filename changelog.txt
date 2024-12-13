@@ -3,6 +3,32 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.6 (from Rev_7.9 branch)
+    Medical rewrite
+        scripts\Reeveli_fnc\Rev_medical\fn_heal_area.sqf 1.2
+            New condition for if is on fire
+            Heal function is now remoteExecuted locally for players
+        scripts\Reeveli_fnc\Rev_medical\fn_heal.sqf 2.0
+            Local execution
+
+	Removed RZ, see older versions if code is needed
+        Deleted folder and files
+		scripts\SPG\CBApreinit.hpp 1.3
+        description
+            dialog include
+            cfgFunctions
+	
+	scripts\Reeveli_fnc\Rev_zeus\fn_postProcessing.sqf 1.2
+        Added EH for instantaneous preview (this feature took 2 years of dev time to be implemented successfully, sometimes SQF can be a cruel mistress)
+        Dialog is now closed and not reopened on exit, as the new preview makes this unnecessary
+
+	New Sound Browser functionality
+        New folder, files and functions
+        Added dilaog include to description.ext
+        IDD list updated
+        scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf 1.6S
+		scripts\Reeveli_fnc\Reevelis_fnc.hpp 1.8S
+
 8.5	
 	New system for rock throwers scripts\Reeveli_fnc\Rev_throwers
 		REQUIRES CANS -MOD!

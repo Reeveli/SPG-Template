@@ -1,4 +1,4 @@
-scriptVersion 	= "8.5";
+scriptVersion 	= "8.6";
 //General
 loadScreen = "img\SPGlogo.paa";
 author = SPG;
@@ -63,7 +63,7 @@ class CfgSounds
 #include "scripts\Reeveli_fnc\Rev_halo\halo_rsc.hpp"											// Reeveli's HALO mask
 #include "scripts\Reeveli_fnc\Rev_halo\halo_dialogs.hpp"										// Reeveli's HALO menu
 #include "scripts\Reeveli_fnc\Rev_admin\Rev_admin_controls.hpp"									// SPG admin panel
-#include "scripts\Reeveli_fnc\Rev_restricted_zeus\RZ_dialogs.hpp"								// Restricted Zeus
+#include "scripts\Reeveli_fnc\Rev_soundBrowser\soundBrowser.hpp"								// Sound browser
 #include "scripts\Reeveli_fnc\Rev_zeus\Ping_list\Rev_ping_list.hpp"								// Player ping list
 #include "sound\initmusic.hpp"                                									// Custom Music
 #include "taw_vd\GUI.h"										    								// TAW_VD
@@ -80,7 +80,6 @@ class CfgFunctions
 	#include "scripts\Reeveli_fnc\Reevelis_fnc.hpp"	                							// Reeveli's stuff
 	#include "scripts\Reeveli_artillery\Rev_arty_fnc.hpp"										// Artillery system
 	#include "scripts\Reeveli_fnc\Rev_markers_script\Rev_markers_functions.hpp"					// Marker system
-	#include "scripts\Reeveli_fnc\Rev_restricted_zeus\Rev_restricted_functions.hpp"				// Restricted Zeus
 	#include "scripts\KLT\Killets_fnc.hpp"														// Killets Functions
 	#include "scripts\SPG\SPG_fnc.hpp" 															// SPG
 };
