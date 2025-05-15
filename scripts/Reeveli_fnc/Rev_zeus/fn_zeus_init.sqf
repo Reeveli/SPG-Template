@@ -9,7 +9,9 @@
  * Example:
  * call Rev_fnc_zeus_init
  *
-  1.6S
+ 1.7s
+    Added Aperture control module
+ 1.6S
 	Added Sound Browser module
  1.5.2S
 	Removed mission code module	(probably copied over by accident from Rev branch)
@@ -67,6 +69,7 @@ if (isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) then
 	["Reeveli's ZEN Modules", "Add HALO Terminal", {[_this select 1] call Rev_fnc_halo_module},"scripts\Reeveli_fnc\Rev_halo\images\plp_icon_parachute.pac"] call zen_custom_modules_fnc_register;
 	["Reeveli's ZEN Modules", "Supply Drop", {[_this select 0] call Rev_fnc_resupply_dialog},"\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\supplydrop_ca.paa"] call zen_custom_modules_fnc_register;
 	["Reeveli's ZEN Modules", "Post Processing", {[] call Rev_fnc_postProcessing},"a3\modules_f_curator\data\portraitpostprocess_ca.paa"] call zen_custom_modules_fnc_register;
+	["Reeveli's ZEN Modules", "Aperture control", {[] call Rev_fnc_aperture_dialog},"a3\weapons_f_orange\reticle\data\camera_ca.paa"] call zen_custom_modules_fnc_register;
 
 	//Teleportation system
 	["Reeveli's Teleportation system","Add teleport point",{[_this select 1] call Rev_fnc_tp_ZEN_dialog},"a3\ui_f_curator\data\cfgwrapperui\cursors\curatormove_ca.paa"] call zen_custom_modules_fnc_register;

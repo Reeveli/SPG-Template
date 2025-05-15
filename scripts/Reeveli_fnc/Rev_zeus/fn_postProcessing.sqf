@@ -10,6 +10,8 @@
  * Example:
  * [] call Rev_fnc_postProcessing;
  *
+ 1.2.1
+	Fixed wrong control title and tooltip
  1.2
 	Added EH for instantaneous preview
 	Dialog is now closed and not reopened on exit, as the new preview makes this unnecessary
@@ -27,7 +29,7 @@ private _oldValue = KLT_enviro;
 	[
 		[
 			"TOOLBOX:WIDE",
-			["Example toolbox wide","Select any defined option"],
+			"Select any option",
 			[
 				_oldValue,
 				4,

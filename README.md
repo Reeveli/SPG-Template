@@ -65,7 +65,8 @@ Zeus Enhanced -mod is required
  - ZEN showcase modules: Showcase modules for all ZEN dynamic dialog options, are only visible when in editor preview (so not during actual missions)
  - Change post processing effects for all players (effects the same as found in SPG addon options)
  - Reeveli's Rectricted Zeus: Promote player to RZ. Part of the experimental RZ system. Do not use unless you know what you are doing
- - Reeveli's Maplocation modules: Modules for removing existing map locations and adding new ones. Note that new added locations are not visible in the curator view.
+ - Reeveli's Maplocation modules: Modules for removing existing map locations and adding new ones. Note that new added locations are not visible in the curator view
+ - Aperure control: Set player aperture intake during the game (respawn and JIP compatible). Intended usage is value between 0-3 to facilita saaing during night time wihtout NVGs
 
 
 ## Curator Context Actions

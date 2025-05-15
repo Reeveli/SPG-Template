@@ -2,6 +2,9 @@
  * Author: Reeveli 
  * Reeveli's custom function definitions.
 
+1.9S
+    Added aperture_dialog
+    Added aperture_init
 1.8S
     Added Sound_browser 
 1.7S
@@ -168,6 +171,8 @@ class Rev
     class Zeus
     {
         file="scripts\Reeveli_fnc\Rev_zeus";
+        class aperture_dialog {};
+        class aperture_init {postinit = 1;};
         class blackout_dialog {};
         class blackout {};
         class gui_suppressive_fire {};

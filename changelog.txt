@@ -3,6 +3,30 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+
+8.7	
+    New aperture module
+        scripts\Reeveli_fnc\Reevelis_fnc.hpp S1.9
+			Added aperture_dialog
+			Added aperture_init
+        scripts\Reeveli_fnc\Rev_zeus\fn_zeus_init.sqf 1.7S
+	        Added Aperture control module
+        New functions:
+            scripts\Reeveli_fnc\Rev_zeus\fn_aperture_init.sqf
+            scripts\Reeveli_fnc\Rev_zeus\fn_aperture_dialog.sqf
+
+	initPlayerlocal.sqf
+		Removed depracedted Ace function call ace_hearing_fnc_hasEarPlugsIn
+
+	scripts\Reeveli_fnc\Rev_teleport\fn_tp_onLoad.sqf 1.1
+		Sorting for UI list
+	
+    scripts\Reeveli_fnc\Rev_zeus\fn_postProcessing.sqf 1.2.1
+		Fixed wrong control title and tooltip
+		
+	scripts\Reeveli_fnc\Rev_teleport\fn_tp_teleport.sqf 1.2
+		Increased text size
+
 8.6 (from Rev_7.9 branch)
     Medical rewrite
         scripts\Reeveli_fnc\Rev_medical\fn_heal_area.sqf 1.2
@@ -33,7 +57,7 @@ TODO:
 	New system for rock throwers scripts\Reeveli_fnc\Rev_throwers
 		REQUIRES CANS -MOD!
 		scripts\Reeveli_fnc\Reevelis_fnc.hpp to 1.7S
-		ZEN moduel defined in scripts\Reeveli_fnc\Rev_throwers\fn_initThrowers.sqf
+		ZEN module defined in scripts\Reeveli_fnc\Rev_throwers\fn_initThrowers.sqf
 
 	init.sqf Removed code for throwers (handeled by new system)
 	scripts\KLT\Killets_modules.hpp removed old code for throwers
@@ -126,7 +150,7 @@ TODO:
 	scripts\Reeveli_fnc\Rev_medical\fn_heal.sqf updated to 1.1.1
 
 8.0.1
-    Major bugfix for user artillery regenation was not applied last version
+    Major bugfix for user artillery regeneration was not applied last version
         scripts\Reeveli_artillery\User_artillery\fn_server_init.sqf updated to 1.8
 
 8.0
@@ -141,7 +165,7 @@ TODO:
 
 7.9.2
 	scripts\Reeveli_fnc\Rev_zeus\Ping_list\Rev_ping_list.hpp updated to 1.1.1
-	scripts\Reeveli_fnc\Rev_teleport\Rev_tp_settings.sqf upfated tro 1.0.1
+	scripts\Reeveli_fnc\Rev_teleport\Rev_tp_settings.sqf updated to 1.0.1
 
 7.9.1
 	Fix for pinglist visibility bug for curator screenshot mode

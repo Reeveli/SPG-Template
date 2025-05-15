@@ -13,6 +13,8 @@
  * Example:
  * [player, _object] call Rev_fnc_tp_teleport
  *
+ 1.2
+	Increased text size
  1.1
 	Player placement radius increased to 12 meters
  */
@@ -29,7 +31,7 @@ if !(player isEqualTo _unit) exitWith {
 };
 
 //Into
-cutText ["You are being moved","BLACK",1];
+cutText ["<t size='2'>You are being moved.</t>","BLACK",1,true,true];
 player enableSimulation false;
 
 [

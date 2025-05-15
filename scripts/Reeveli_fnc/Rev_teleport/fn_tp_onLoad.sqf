@@ -12,6 +12,8 @@
  * Example:
  * [_control] call Rev_fnc_tp_onLoad
  *
+ 1.1
+	Added Alphabethical sorting to UI list
  */
 
 params [
@@ -31,6 +33,7 @@ private ["_object", "_name","_side","_index"];
 	_control lbSetData [_forEachindex,_name];
 
 } forEach _list;
+_control lbSortBy ["TEXT", false, false];
 
 //Target marker
 private _target_pos = createMarkerLocal ["Rev_tp_marker",[0,0,0]];

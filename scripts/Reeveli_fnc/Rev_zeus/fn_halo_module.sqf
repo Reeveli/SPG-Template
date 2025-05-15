@@ -1,6 +1,6 @@
 /*
  * Author: Reeveli
- * Function to create a terminal for Reeveli's custom Halo action. Terminal will have HALO useraction for all players.
+ * Function to create terminal for Reeveli's custom Halo action. Terminal will have HALO useraction for all players.
  *
  * Arguments:
  * 0: Object <OBJECT>
@@ -10,6 +10,8 @@
  * Example:
  * [_this select 1] call Rev_fnc_halo_module
  *
+ 1.0.1
+	Cleaned typos in header
  */
 
 params [
