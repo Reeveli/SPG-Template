@@ -12,6 +12,8 @@
  * Example:
  * [_object] call Rev_fnc_tp_ZEN_dialog
  *
+ 1.1
+	Added option to specify if user action is to be added
  1.0.1
 	Fixed typo
  */
@@ -37,15 +39,16 @@ if (([_object] call Rev_fnc_tp_listCheck) > -1) exitWith {
 	"Add teleportation point to object",
 	[
 		["EDIT",["Display name","What is the display name of this teleport point"],["Teleportation point"],true],
-		["SIDES",["Side selection","Select which side can use this teleport point"],[west],true]
+		["SIDES",["Side selection","Select which side can use this teleport point"],[west],true],
+		["CHECKBOX",["User action","If enabled point has user action on it"],[true],true]
 	],
 	{
 		params ["_results","_passed_arguments"];
-		_results params ["_name","_side"];
+		_results params ["_name","_side","_action"];
 		_passed_arguments params ["_object"];
 
 		_side = _side # 0;
-		[_object,_name,_side] remoteExec ["Rev_fnc_tp_addPoint",2];
+		[_object,_name,_side,_action] remoteExec ["Rev_fnc_tp_addPoint",2];
 		[objNull, "Teleport point created"] call BIS_fnc_showCuratorFeedbackMessage;
 
 	},

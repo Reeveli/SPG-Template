@@ -3,6 +3,21 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.7.1 (from Rev_8.2 branch)    
+    scripts\Reeveli_artillery\User_artillery\Artillery_dialog\fn_dialog_onUnload.sqf 1.0.1
+	    Comment typo fixes
+    scripts\Reeveli_artillery\User_artillery\Missile\fn_missile_guidance.sqf 1.2.1
+	    Comment typo fixes
+	
+	Teleportation system update
+		Option to specify if point has ac tion attached to it
+			scripts\Reeveli_fnc\Rev_teleport\fn_tp_addPoint.sqf 1.1
+			scripts\Reeveli_fnc\Rev_teleport\fn_tp_ZEN_dialog.sqf
+
+		scripts\Reeveli_fnc\Rev_teleport\fn_tp_onLBSelChanged.sqf 1.1
+			Map zoom stays now constant
+
+		
 
 8.7	
     New aperture module

@@ -8,18 +8,22 @@
  * 0: Object <OBJECT>
  * 1: Display name <STRING>
  * 2: Side <SIDE>
+ * 3: Enable action on point, if false then point acts only as destination <BOOLEAN> (default: true)
  *
  * Return Value: NONE
  *
  * Example:
  * [this,"My teleportation point",west] call Rev_fnc_tp_addPoint;
  *
+ 1.1
+	Added parameter and check if point is two-way
  */
 
 params [
 	["_object", objNull, [objNull]],
 	["_name","",[""]],
-	["_side",west,[civilian]]
+	["_side",west,[civilian]],
+	["_action", true, [true]]
 ];
 
 //Safetychecks
@@ -49,4 +53,5 @@ _object addEventHandler ["Deleted", {
 }];
 
 //Adding action to players
+if !(_action) exitWith {};
 [_object,_side] remoteExecCall ["Rev_fnc_tp_addAction",0,true];

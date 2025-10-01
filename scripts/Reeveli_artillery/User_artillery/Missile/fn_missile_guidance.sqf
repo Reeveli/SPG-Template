@@ -17,6 +17,9 @@
  * Example:
  * [_missile,_tgt,_pos,_altitude,_testing,_actual_pos,_type] call Rev_arty_fnc_missile_guidance;
  *
+ 1.2.1
+	Comment typo fixes
+
  1.2
 	Removed _pitchMis as unused variable
 	Duplicate _pitchOne definition removed. Is now only defined if in terminal mode
@@ -60,7 +63,7 @@ if (_distance > _altitude) then
 	private _mode = "ATL";
 	if (surfaceIsWater (getpos _missile)) then {_mode = "ASL"};
 	
-	//Keeping the missile at a costant altitude
+	//Keeping the missile at a constant altitude
 	[_missile,_altitude,nil,_mode] call BIS_fnc_setHeight;
 } else
 {

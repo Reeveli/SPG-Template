@@ -13,6 +13,8 @@
  * Example:
  * [_control, _lbCurSel] call Rev_fnc_tp_onLBSelChanged
  *
+ 1.1
+	Map zoom stays now constant
  */
 
 params [
@@ -32,7 +34,7 @@ private _index = _list findIf {(_x # 1) isEqualTo _name};
 private _object = (_list # _index) # 0;
 
 private _map = uiNamespace getVariable ['Rev_tp_map', controlNull];
-_map ctrlMapAnimAdd [0, 0.3, (getPos _object)];
+_map ctrlMapAnimAdd [0, ctrlMapScale _map, (getPos _object)];
 ctrlMapAnimCommit _map;
 
 "Rev_tp_marker" setMarkerPosLocal (getpos _object);

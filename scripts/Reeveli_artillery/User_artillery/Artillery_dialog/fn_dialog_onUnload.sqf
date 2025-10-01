@@ -18,6 +18,8 @@
  * Example:
  * [_display,_exitCode] call Rev_arty_fnc_dialog_onUnload
  *
+ 1.0.1
+	Comment typo fixes
  */
 
 
@@ -81,7 +83,7 @@ if (_exitCode == 3) exitWith {};
 
 private _corrected_location = _location;
 
-//TRP Lisr
+//TRP List
 private _list_trp = [""];
 //Get list of pre placed markers
 {
