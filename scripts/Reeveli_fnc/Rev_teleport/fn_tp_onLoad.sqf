@@ -12,6 +12,8 @@
  * Example:
  * [_control] call Rev_fnc_tp_onLoad
  *
+ 1.2
+	No more lbSetData, since UI is open all the time raw index can be used
  1.1
 	Added Alphabethical sorting to UI list
  */
@@ -30,7 +32,6 @@ private ["_object", "_name","_side","_index"];
 	_side = _x # 2;
 		
 	_index = _control lbAdd _name;
-	_control lbSetData [_forEachindex,_name];
 
 } forEach _list;
 _control lbSortBy ["TEXT", false, false];

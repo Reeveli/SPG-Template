@@ -3,6 +3,16 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+
+8.7.2
+	Teleportation system logic improvements ands bug fixing
+		Duplicate point display naming should no longer confuse system
+
+		scripts\Reeveli_fnc\Rev_teleport\fn_tp_onLoad.sqf 1.2
+		scripts\Reeveli_fnc\Rev_teleport\fn_tp_onLBSelChanged.sqf 1.2
+		scripts\Reeveli_fnc\Rev_teleport\fn_tp_onButtonClick.sqf 1.1
+
+
 8.7.1 (from Rev_8.2 branch)    
     scripts\Reeveli_artillery\User_artillery\Artillery_dialog\fn_dialog_onUnload.sqf 1.0.1
 	    Comment typo fixes

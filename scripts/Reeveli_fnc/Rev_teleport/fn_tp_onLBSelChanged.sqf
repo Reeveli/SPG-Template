@@ -13,6 +13,8 @@
  * Example:
  * [_control, _lbCurSel] call Rev_fnc_tp_onLBSelChanged
  *
+ 1.2
+	Eliminated ldData, _lbCurSel now used instead
  1.1
 	Map zoom stays now constant
  */
@@ -27,11 +29,8 @@ if (_lbCurSel < 0) exitWith {
 	[objNull, "No teleportation point was selected!"] call BIS_fnc_showCuratorFeedbackMessage;
 };
 
-private _name = _control lbData _lbCurSel;
-
 private _list = missionNamespace getVariable ["Rev_tp_list",[]];
-private _index = _list findIf {(_x # 1) isEqualTo _name};
-private _object = (_list # _index) # 0;
+private _object = (_list # _lbCurSel) # 0;
 
 private _map = uiNamespace getVariable ['Rev_tp_map', controlNull];
 _map ctrlMapAnimAdd [0, ctrlMapScale _map, (getPos _object)];
