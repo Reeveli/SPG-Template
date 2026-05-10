@@ -4,6 +4,10 @@ TODO:
 		Logisystem
 
 
+8.7.3 (from Rev_8.2.1 branch)
+	scripts\Reeveli_fnc\Rev_zeus\fn_aperture_dialog.sqf 1.1
+        Reduced slider max value to 10 for finer control
+
 8.7.2
 	Teleportation system logic improvements ands bug fixing
 		Duplicate point display naming should no longer confuse system
@@ -20,7 +24,7 @@ TODO:
 	    Comment typo fixes
 	
 	Teleportation system update
-		Option to specify if point has ac tion attached to it
+		Option to specify if point has action attached to it
 			scripts\Reeveli_fnc\Rev_teleport\fn_tp_addPoint.sqf 1.1
 			scripts\Reeveli_fnc\Rev_teleport\fn_tp_ZEN_dialog.sqf
 

@@ -9,6 +9,8 @@
  * Example:
  * [] call Rev_fnc_aperture_dialog
  *
+ 1.1
+	Reduced slider max value to 10 for finer control
  */
 
 if (!hasInterface) exitWith {false};
@@ -21,7 +23,7 @@ missionNamespace setVariable ["Rev_zeus_aperture",_current];
 	"Set aperture",
 	[
 		["CHECKBOX","Restore default",[false],true],
-		["SLIDER","Set aperture",[0,100,_current,2],true]
+		["SLIDER","Set aperture",[0,10,_current,2],true]
 	],
 	{
 		params ["_results","_passed_arguments"];
