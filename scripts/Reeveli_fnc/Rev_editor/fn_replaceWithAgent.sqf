@@ -10,9 +10,10 @@
  * Return Value <BOOL>
  *
  * Example:
- * [this,7] spawn Rev_fnc_replaceWithagent;
+ * [this,7] call Rev_fnc_replaceWithagent;
  *
  * Animation list:
+ * 0: Cancel animation / Nothing
  * 1: SIT_LOW_1, SIT_LOW_2, SIT_LOW_3, SIT_LOW_4, SIT_LOW_5, SIT_LOW_6
  * 2: SIT_ARMED_1, SIT_ARMED_2, SIT_ARMED_3, SIT_ARMED_4
  * 3: SQUAT
@@ -54,6 +55,10 @@
  * 40: BINOCS
  * 41: SALUTE
 
+1.1
+	Updated scheduled spawn to CBA next frame call
+	Properly documented cancel/no animation
+
  */
 if !(isServer) exitWith {false};
 params
@@ -80,10 +85,13 @@ if (_animation > 0) then {
 		diag_log "Rev_fnc_replaceWithagent: Unable to use ZEN anmation, ZEN is not loaded!"
 	};
 
-	[_agent,_animation, _combatReady] spawn { 
-		params ["_unit","_animation","_combatReady"];
-		sleep 0.1; 
-		[_unit, _animation, _combatReady] call zen_modules_fnc_moduleAmbientAnimStart; 
-	};
+	[
+		{
+			params ["_unit","_animation","_combatReady"];
+			[_unit,_animation, _combatReady] call zen_modules_fnc_moduleAmbientAnimStart; 
+		},
+		[_agent,_animation, _combatReady]
+	] call CBA_fnc_execNextFrame;
+	
 	true;
 };

@@ -7,6 +7,10 @@ TODO:
 8.7.3 (from Rev_8.2.1 branch)
 	scripts\Reeveli_fnc\Rev_zeus\fn_aperture_dialog.sqf 1.1
         Reduced slider max value to 10 for finer control
+	
+	scripts\Reeveli_fnc\Rev_editor\fn_replaceWithAgent.sqf 1.1   
+        Updated scheduled spawn to CBA next frame call
+        Properly documented cancel/no animation
 
 8.7.2
 	Teleportation system logic improvements ands bug fixing
