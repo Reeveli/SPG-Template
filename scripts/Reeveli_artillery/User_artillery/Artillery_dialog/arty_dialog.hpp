@@ -118,6 +118,7 @@ class Rev_arty_dialog
 		class List_trp: RscCombo
 		{
 			idc = IDC_ARTY_DIAG_TRP;
+			onLBSelChanged = "params ['_control', '_lbCurSel', '_lbSelection']; [_control, _lbCurSel, _lbSelection] call Rev_arty_fnc_dialog_onLBSelChanged";
 			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 19 * pixelGridNoUIScale * pixelW";
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 20 * pixelGridNoUIScale * pixelH";
 			w = 11 * pixelGridNoUIScale * pixelW;

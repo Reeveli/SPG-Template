@@ -1,4 +1,8 @@
+/*
+ * Author: Reeveli 
+ * Functions for artillery system
 
+*/
 class Rev_arty
 {  
 
@@ -37,6 +41,7 @@ class Rev_arty
         class dialog {};
         class dialog_gps {};
         class dialog_light {};
+        class dialog_onLBSelChanged {};
         class dialog_onUnload {};
         class dialog_pen {};
         class dialog_update {};

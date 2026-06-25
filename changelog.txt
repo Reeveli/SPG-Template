@@ -4,6 +4,9 @@ TODO:
 		Logisystem
 
 8.8.0 (from Rev_8.3.0 branch)
+    Artillery system main dialog update
+        Map now centers on selected TRP
+
     Mass conversion of CBA_fnc_waitAndExecute calls to CBA_fnc_execNextFrame
 
 
