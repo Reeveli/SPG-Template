@@ -46,10 +46,10 @@ params [
 
 //Check ammunition amount
 private _unmodified_number = _number;
-if (_number < 0) exitWith {[{playSound "FD_Start_F"; hint "Invalid round count specified!";}, [], 0.001] call CBA_fnc_waitAndExecute;};
-if (_number > 12) exitWith {[{playSound "FD_Start_F"; hint "Safety limit exceeded, reduce barrage to max 12 rounds!";}, [], 0.001] call CBA_fnc_waitAndExecute;};
-if (_number > Rev_arty_SMK_amount) then {_number = Rev_arty_SMK_amount; [{playSound "FD_Start_F"; params ["_ammo_amount"];hint format ["Maximum available ordance of %1 used!",_ammo_amount];}, [Rev_arty_SMK_amount], 0.001] call CBA_fnc_waitAndExecute;};
-if (_number == 0) exitWith {[{playSound "FD_Start_F"; hint "No rounds selected!";}, [], 0.001] call CBA_fnc_waitAndExecute;};
+if (_number < 0) exitWith {[{playSound "FD_Start_F"; hint "Invalid round count specified!";}, []] call CBA_fnc_execNextFrame;};
+if (_number > 12) exitWith {[{playSound "FD_Start_F"; hint "Safety limit exceeded, reduce barrage to max 12 rounds!";}, []] call CBA_fnc_execNextFrame;};
+if (_number > Rev_arty_SMK_amount) then {_number = Rev_arty_SMK_amount; [{playSound "FD_Start_F"; params ["_ammo_amount"];hint format ["Maximum available ordance of %1 used!",_ammo_amount];}, [Rev_arty_SMK_amount]] call CBA_fnc_execNextFrame;};
+if (_number == 0) exitWith {[{playSound "FD_Start_F"; hint "No rounds selected!";}, []] call CBA_fnc_execNextFrame;};
 if ((_number <= Rev_arty_SMK_amount) && (_number != 0) && (_number == _unmodified_number)) then {hintSilent "";};
 
 //Remove ordance counter
@@ -59,7 +59,7 @@ hintSilent "";
 private _start_pos = [_location, true] call CBA_fnc_mapGridToPos;
 private _pos = _start_pos getPos [_range,_angle];
 if (typeName _target isEqualTo "STRING") then {_pos = getMarkerPos _target};
-if ((_caller_pos distance _pos) > Rev_arty_safety_dis) exitWith {[{playSound "FD_Start_F"; hintSilent format ["You must call the air support to within %1m of your position!",round Rev_arty_safety_dis];}, [], 0.001] call CBA_fnc_waitAndExecute;};
+if ((_caller_pos distance _pos) > Rev_arty_safety_dis) exitWith {[{playSound "FD_Start_F"; hintSilent format ["You must call the air support to within %1m of your position!",round Rev_arty_safety_dis];}, []] call CBA_fnc_execNextFrame;};
 
 //Update ammo amount to server
 ["Rev_arty_SMK_regen",[_number]] call CBA_fnc_serverEvent;
@@ -69,7 +69,7 @@ if (isMultiplayer) then
 {
 	Rev_arty_radio_dialog = [_location,_angle,_range,_target,_round_type,_pos,_number,_delay] execVM "scripts\Reeveli_artillery\User_artillery\Radio_dialog\radio_dialog.sqf";
 } else {
-	[{hint "Radio dialog only works in multiplayer";}, [], 0.001] call CBA_fnc_waitAndExecute;
+	[{hint "Radio dialog only works in multiplayer";}, []] call CBA_fnc_execNextFrame;
 	[{
 		params ["_angle","_range","_pos","_number","_delay"];
 		[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_SMK;

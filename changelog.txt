@@ -3,6 +3,9 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+8.8.0 (from Rev_8.3.0 branch)
+    Mass conversion of CBA_fnc_waitAndExecute calls to CBA_fnc_execNextFrame
+
 
 8.7.3 (from Rev_8.2.1 branch)
 	scripts\Reeveli_fnc\Rev_zeus\fn_aperture_dialog.sqf 1.1

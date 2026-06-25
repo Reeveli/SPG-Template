@@ -99,59 +99,59 @@ private _list_trp = [""];
 
 //Check if TRP is used
 if (_list_trp find _target == -1) exitWith {
-		[{playSound "FD_Start_F"; hint "Invalid designated target!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid designated target!";}, []] call CBA_fnc_execNextFrame;
 	};
 if !(count _target == 0) then {_corrected_location  = "000000";} else {_target = 0};
 
 //Check position
 if (((count _corrected_location ) % 2 != 0) OR (count _corrected_location  < 6) OR (count _corrected_location  > 10))
 exitWith {		
-		[{playSound "FD_Start_F"; hint "Invalid observer location specified, provide 6, 8 or 10 grid reference!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid observer location specified, provide 6, 8 or 10 grid reference!";}, []] call CBA_fnc_execNextFrame;
 	};	
 //Check if position is valid numbers
 if (count (_corrected_location  splitString "0123456789") > 0) exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid observer location specified, use numbers only!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid observer location specified, use numbers only!";}, []] call CBA_fnc_execNextFrame;
 	};
 
 
 //Check if range is valid numbers
 if (count (_distance splitString "0123456789") > 0 && _corrected_location  != "000000") exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid target distance specified, use numbers only!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid target distance specified, use numbers only!";}, []] call CBA_fnc_execNextFrame;
 	};
 //Check if range is not empty
 if (count _distance == 0 && _corrected_location  != "000000") exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid target distance specified!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid target distance specified!";}, []] call CBA_fnc_execNextFrame;
 	};
 
 
 
 //Check if angle is valid numbers
 if (count (_bearing splitString "0123456789.") > 0 && _corrected_location  != "000000") exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid target direction specified, use numbers only!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid target direction specified, use numbers only!";}, []] call CBA_fnc_execNextFrame;
 	};
 //Check if angle is not empty
 if (count _bearing == 0 && _corrected_location  != "000000" ) exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid target direction specified!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid target direction specified!";}, []] call CBA_fnc_execNextFrame;
 	};
 
 
 //Check if delay is valid numbers
 if (count (_delay splitString "0123456789.") > 0) exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid rounds delay specified!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid rounds delay specified!";}, []] call CBA_fnc_execNextFrame;
 	};
 //Check if delay is not empty
 if (count _delay == 0) exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid rounds delay specified!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid rounds delay specified!";}, []] call CBA_fnc_execNextFrame;
 	};
 
 
 //Check if amount is valid numbers
 if (count (_rounds_selected splitString "0123456789.") > 0) exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid round count specified!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid round count specified!";}, []] call CBA_fnc_execNextFrame;
 	};
 //Check if amount is not empty
 if (count _rounds_selected == 0) exitWith {	
-		[{playSound "FD_Start_F"; hint "Invalid round count specified!";}, [], 0.001] call CBA_fnc_waitAndExecute;
+		[{playSound "FD_Start_F"; hint "Invalid round count specified!";}, []] call CBA_fnc_execNextFrame;
 	};
 
 
@@ -181,5 +181,5 @@ switch _round_type do {
 	case ("SUPPLY DROP"): {[_location,_target,_range,_angle,_number,_caller_pos,"Supply",_delay] call Rev_arty_fnc_type_SUP};
 	case ("GUNSHIP SUPPORT"): {[_location,_target,_range,_angle,_number,_caller_pos,"Gunship",_delay] call Rev_arty_fnc_type_GUN};
 	case ("AREA BOMBING"): {[_location,_target,_range,_angle,_number,_caller_pos,"Bombing",_delay] call Rev_arty_fnc_type_BOM};
-	default {playSound "FD_Start_F"; [{playSound "FD_Start_F"; hint "Invalid ordance request!";}, [], 0.001] call CBA_fnc_waitAndExecute;};
+	default {playSound "FD_Start_F"; [{playSound "FD_Start_F"; hint "Invalid ordance request!";}, []] call CBA_fnc_execNextFrame;};
 };

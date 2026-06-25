@@ -43,17 +43,17 @@ private _start_pos = [_location, true] call CBA_fnc_mapGridToPos;
 
 //Check ammunition amount
 private _unmodified_number = _number;
-if (Rev_arty_SUP_amount == 0) exitWith {[{playSound "FD_Start_F"; hint "No supply drops available!";}, [], 0.001] call CBA_fnc_waitAndExecute;};
-if !(_number == 1) exitWith {[{playSound "FD_Start_F"; hint "Select 1 as the round amount!";}, [], 0.001] call CBA_fnc_waitAndExecute;};
+if (Rev_arty_SUP_amount == 0) exitWith {[{playSound "FD_Start_F"; hint "No supply drops available!";}, []] call CBA_fnc_execNextFrame;};
+if !(_number == 1) exitWith {[{playSound "FD_Start_F"; hint "Select 1 as the round amount!";}, []] call CBA_fnc_execNextFrame;};
 if ((_number <= Rev_arty_SUP_amount) && (_number != 0) && (_number == _unmodified_number)) then {hintSilent "";};
 
 //Check if provided position is reasonable
 private _pos = _start_pos getPos [_range,_angle];
 if (typeName _target isEqualTo "STRING") then {_pos = getMarkerPos _target};
-if ((_caller_pos distance _pos) > Rev_arty_safety_dis) exitWith {[{playSound "FD_Start_F"; hintSilent format ["You must call the air support to within %1m of your position!",round Rev_arty_safety_dis];}, [], 0.001] call CBA_fnc_waitAndExecute;};
+if ((_caller_pos distance _pos) > Rev_arty_safety_dis) exitWith {[{playSound "FD_Start_F"; hintSilent format ["You must call the air support to within %1m of your position!",round Rev_arty_safety_dis];}, []] call CBA_fnc_execNextFrame;};
 
 //Check if a previous supply request is being called to avoid duplicate varibales being used
-if !(isNil {player getvariable ['Rev_arty_sup_call',nil]}) exitWith {[{playSound "FD_Start_F"; hint "Previous supply request is still processing!";}, [], 0.001] call CBA_fnc_waitAndExecute;};
+if !(isNil {player getvariable ['Rev_arty_sup_call',nil]}) exitWith {[{playSound "FD_Start_F"; hint "Previous supply request is still processing!";}, []] call CBA_fnc_execNextFrame;};
 
-[{[] call Rev_arty_fnc_supply_dialog},[], 0.001] call CBA_fnc_waitAndExecute;
+[{[] call Rev_arty_fnc_supply_dialog},[]] call CBA_fnc_execNextFrame;
 missionNamespace setVariable ["Rev_artillery_call",[_location,_angle,_range,_target,_round_type,_pos,_number,_delay]];
