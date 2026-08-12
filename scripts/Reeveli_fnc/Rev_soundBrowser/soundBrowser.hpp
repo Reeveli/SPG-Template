@@ -2,6 +2,8 @@
  * Arma 3 Simple Sound Browser orogonal config by Rydygier.
  * Modified by Reeveli.
  * Created from Rev_fnc_soundB_init
+ 1.1
+	Removed unnecessary _key passed param on Rev_fnc_soundB_filter
  */
 
 #define UI_GRID_W (pixelW * pixelGrid) // One grid width
@@ -62,7 +64,7 @@ class RscSoundBrowser: ctrlControlsGroupNoScrollbars {
 			text = "";
 			sizeEx = 3 * UI_GRID_H;
 			autocomplete = "";	
-			onKeyUp = "params ['_control', '_key', '_shift', '_ctrl', '_alt']; [_control,_key] call Rev_fnc_soundB_filter";		
+			onKeyUp = "params ['_control', '_key', '_shift', '_ctrl', '_alt']; [_control] call Rev_fnc_soundB_filter";		
 		};
 
 		class RscButton_SB_COPY: RscButton {

@@ -6,18 +6,18 @@
  *
  * Arguments:
  * 0: Filter control <CONTROL>
- * 1: Current filter string <STRING> (default: "")
  *
  * Return Value: NONE
  *
  * Example:
  * [_control,_key] call Rev_fnc_soundB_filter
  *
+ 1.1
+	Removed unnecessary _key param
  */
 	
 params [
-	["_control",controlNull,[controlNull]],
-	["_key","",[""]]	
+	["_control",controlNull,[controlNull]]
 ];
 
 private _txt = toLower (ctrlText _control);
