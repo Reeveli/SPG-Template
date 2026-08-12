@@ -2,6 +2,9 @@
  * Author: Reeveli 
  * Part of Reeveli's ACE unconscious moaning.
  * File containing CBA addon option settings for ACE moaning.
+ 
+ 1.1
+  Added settings for side specific languages
  */
 
 [
@@ -17,16 +20,48 @@
 
 
 [
-  "Rev_moaning_speech"
-  ,"CHECKBOX"
-  ,["Enable English callouts","If enbaled English medic callouts are added to the sound pool"]
+  "Rev_moaning_speech_WEST"
+  ,"LIST"
+  ,["BLUFOR medic callouts","If enabled selected language medic callouts are added to the random sound pool"]
   ,"Reeveli's ACE Moaning"
-  ,true
+  ,[["none","english","greek","farsi","french","chinese","russian","polish"], ["None","American English","Greek English","Farsi","French","Chinese","Russian","Polish"], 0]
   ,1
   ,{}
   ,false
 ] call CBA_fnc_addSetting;
 
+[
+  "Rev_moaning_speech_EAST"
+  ,"LIST"
+  ,["REDFOR medic callouts","If enabled selected language medic callouts are added to the random sound pool"]
+  ,"Reeveli's ACE Moaning"
+  ,[["none","english","greek","farsi","french","chinese","russian","polish"], ["None","American English","Greek English","Farsi","French","Chinese","Russian","Polish"], 0]
+  ,1
+  ,{}
+  ,false
+] call CBA_fnc_addSetting;
+
+[
+  "Rev_moaning_speech_IND"
+  ,"LIST"
+  ,["INDFOR medic callouts","If enabled selected language medic callouts are added to the random sound pool"]
+  ,"Reeveli's ACE Moaning"
+  ,[["none","english","greek","farsi","french","chinese","russian","polish"], ["None","American English","Greek English","Farsi","French","Chinese","Russian","Polish"], 0]
+  ,1
+  ,{}
+  ,false
+] call CBA_fnc_addSetting;
+
+[
+  "Rev_moaning_speech_CIV"
+  ,"LIST"
+  ,["Civilian medic callouts","If enabled selected language medic callouts are added to the random sound pool"]
+  ,"Reeveli's ACE Moaning"
+  ,[["none","english","greek","farsi","french","chinese","russian","polish"], ["None","American English","Greek English","Farsi","French","Chinese","Russian","Polish"], 0]
+  ,1
+  ,{}
+  ,false
+] call CBA_fnc_addSetting;
 
 [
   "Rev_moaning_range"

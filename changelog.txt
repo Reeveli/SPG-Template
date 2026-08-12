@@ -16,6 +16,8 @@ TODO:
 			New sound effects for shells and flares
 			Curator module to adjusta ammo amounts live during game
 
+	Ace moaning updated to new mod standard
+
 
 8.8.0 (from Rev_8.3.0 branch)
     Artillery system main dialog update
