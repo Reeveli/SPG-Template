@@ -16,7 +16,7 @@ TODO:
 			New sound effects for shells and flares
 			Curator module to adjust ammo amounts live during game
 			Curator module to remove existing TRPs
-			Mortars now available in corator arty strikes as new low(ish) lethality option
+			Mortars now available in curator arty strikes as new low(ish) lethality option
 
 	Ace moaning updated to new mod standard
         scripts\Reeveli_fnc\Rev_moaning\Rev_moaning_settings.sqf 1.1
