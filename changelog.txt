@@ -14,7 +14,9 @@ TODO:
 			Massive improvements to air strike code, better bomb accuracy and performance
 			Zeus can now call rocket strikes/gun runs
 			New sound effects for shells and flares
-			Curator module to adjusta ammo amounts live during game
+			Curator module to adjust ammo amounts live during game
+			Curator module to remove existing TRPs
+			Mortars now available in corator arty strikes as new low(ish) lethality option
 
 	Ace moaning updated to new mod standard
         scripts\Reeveli_fnc\Rev_moaning\Rev_moaning_settings.sqf 1.1
@@ -23,6 +25,11 @@ TODO:
     Fixed soundbrowser error
         scripts\Reeveli_fnc\Rev_soundBrowser\fn_soundB_filter.sqf 1.1
         scripts\Reeveli_fnc\Rev_soundBrowser\soundBrowser.hpp 1.1
+
+	Beginning of converting diag_log prints to new format
+        scripts\Reeveli_fnc\Rev_admin\fn_admin_client_init.sqf 1.2S
+        scripts\KLT\KilletsEnviro\fn_enviro.sqf 1.2
+        scripts\Reeveli_fnc\Rev_admin\fn_admin_preinit.sqf 1.3
 
 
 8.8.0 (from Rev_8.3.0 branch)

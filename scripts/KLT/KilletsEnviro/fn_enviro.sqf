@@ -28,6 +28,8 @@
 	14. Mediterranean theme
 
 Changelog:
+1.2
+	New diag_log print format
 1.1
 	Added proper function header
 	Added default param
@@ -40,7 +42,7 @@ Changelog:
 if !(hasInterface) exitWith {false};
 
 params ["_value"];
-diag_log format ["KLT_fnc_enviro: Value changed to %1",_value];
+diag_log text (format ["KLT_fnc_enviro INFO: Value changed to %1",_value]);
 
 switch (_value) do {
 

@@ -13,6 +13,8 @@
  * Example:
  * call Rev_fnc_admin_preinit
  *
+ 1.3
+	New diag_log print format
  1.2
 	Added EH to make all units editable when entering the interface
  1.1
@@ -28,7 +30,7 @@ _group deleteGroupWhenEmpty true;
 private _module = _group createUnit ["ModuleCurator_F",[0,0,0] , [], 0, ""];
 _module setVariable ["Rev_curator","admin",true];
 [_module,"Rev_curator_admin"] remoteExecCall ["setVehicleVarName", 0];
-diag_log "Rev_fnc_admin_preinit: Serverside admin module created";
+diag_log text "Rev_fnc_admin_preinit INFO: Serverside admin module created";
 
 _module setVariable ["Addons", 3, true];
 _module setVariable ["BIS_fnc_initModules_disableAutoActivation", false];

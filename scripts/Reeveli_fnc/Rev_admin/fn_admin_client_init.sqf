@@ -13,6 +13,8 @@
  * Example:
  * call Rev_fnc_admin_client_init
  *
+ 1.2S
+	New format for diag_log prints	
  1.1.2S
 	Fixed wrong function name in comments/header
  1.1.1S
@@ -25,14 +27,14 @@
 //Exit if not whitelisted
 if !(getPlayerUID player in KLT_allowed_curators) exitWith {
 
-	diag_log "Rev_fnc_admin_client_init: Player not whitelisted, curator module not created";
+	diag_log text "Rev_fnc_admin_client_init INFO: Player not whitelisted, curator module not created";
 	false;
 };
 
 //Exit if module exists
 if (((entities "ModuleCurator_F") findIf {_x getVariable ["Rev_curator",""] isEqualTo name player}) > -1) exitWith {
 	
-	diag_log "Rev_fnc_admin_client_init: Player curator module already exists";
+	diag_log text "Rev_fnc_admin_client_init INFO: Player curator module already exists";
 	false;
 };
 
@@ -52,5 +54,5 @@ _module addEventHandler ["CuratorObjectRegistered", {
 }];
 
 
-diag_log "Rev_fnc_admin_client_init: Player whitelisted, curator module created";
+diag_log text "Rev_fnc_admin_client_init INFO: Player whitelisted, curator module created";
 true;
