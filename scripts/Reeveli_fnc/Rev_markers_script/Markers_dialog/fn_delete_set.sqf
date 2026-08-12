@@ -8,7 +8,7 @@
  * Return Value: NONE
  *
  * Example:
- * call Rev_markers2_fnc_delete
+ * call Rev_markers_fnc_delete_set
  *
  */
 
@@ -24,4 +24,4 @@ systemChat "Marker set deleted from profile";
 _ctrl lbDelete _index;
 profileNamespace setVariable [_var, nil];
 saveProfileNamespace;
-call Rev_markers2_fnc_worlds;
+call Rev_markers_fnc_worlds;

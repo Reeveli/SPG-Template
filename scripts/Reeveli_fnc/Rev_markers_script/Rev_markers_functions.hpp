@@ -3,7 +3,7 @@ class Rev_markers2
     class Markers
 	{
 		file="scripts\Reeveli_fnc\Rev_markers_script";
-        class control {};
+		class channels {};
         class diary {postinit = 1;};
 		class removal {postinit = 1;};
 	};
@@ -14,8 +14,8 @@ class Rev_markers2
 		class Array_create {};
 		class Array_load {};
 		class clear {};
-        class delete_all {};
-        class delete {};
+		class delete_all {};
+		class delete_set {};
         class get_saved {};
         class load {};
         class menu_channels {};

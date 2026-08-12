@@ -31,6 +31,9 @@ TODO:
         scripts\KLT\KilletsEnviro\fn_enviro.sqf 1.2
         scripts\Reeveli_fnc\Rev_admin\fn_admin_preinit.sqf 1.3
 
+	Marker system update to new mod standards
+		More control options and code simplicity post 2.22 game update
+
 
 8.8.0 (from Rev_8.3.0 branch)
     Artillery system main dialog update
