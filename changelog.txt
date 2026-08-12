@@ -3,6 +3,8 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+9.1
+	Automatic notification to all curatorsd when a player dies (onPlayerKilled)
 
 9.0 (from Rev_9.3 branch)
 	Artillery system 2026 overhaul
