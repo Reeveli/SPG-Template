@@ -3,6 +3,20 @@ TODO:
 	Killets arsenal system Git readme
 		Logisystem
 
+
+9.0 (from Rev_9.3 branch)
+	Artillery system 2026 overhaul
+		Almost complete code refactoring, nearly every file touched in some way
+		Some new features:
+			Cluster missiles replaced by cluster artillery
+			TFAR no longer a required mod
+			TRPs are now alternative indicated observer positions, i.e. direction and range can be taken from them
+			Massive improvements to air strike code, better bomb accuracy and performance
+			Zeus can now call rocket strikes/gun runs
+			New sound effects for shells and flares
+			Curator module to adjusta ammo amounts live during game
+
+
 8.8.0 (from Rev_8.3.0 branch)
     Artillery system main dialog update
         Map now centers on selected TRP

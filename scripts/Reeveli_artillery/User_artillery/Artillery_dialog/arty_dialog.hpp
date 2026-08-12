@@ -9,7 +9,12 @@
 #define IDC_ARTY_DIAG_COUNT				6067
 #define IDC_ARTY_DIAG_ORDNANCE			6068
 
-
+/*
+3.0
+	TRP list location is now second after observer pos
+	Default distance is now 0
+	Added static text to help differentiate input fields
+*/
 class Rev_arty_dialog
 {
 	idd= IDD_REV_ARTY_DIAG;
@@ -71,6 +76,7 @@ class Rev_arty_dialog
 			font = "Caveat";			
 			SizeEx = 2 * pixelGridNoUIScale * pixelH;
 			colorText[] = {0,0,0,1};
+			colorDisabled[] = {0,0,0,0.3};
 			colorBackground[] = {0.98,0.95,0.98,0};
 			forceDrawCaret = 0;
 			maxChars = 10;
@@ -78,41 +84,9 @@ class Rev_arty_dialog
 			shadow = 0;
 			tooltip = "Observer Location (6/8/10 Grid)";
 		};
-		class Frame_distance: Frame_observer
+		class Text_trp: Text_observer
 		{
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 16 * pixelGridNoUIScale * pixelH";
-		};
-		class Text_distance: Text_observer
-		{
-			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 16 * pixelGridNoUIScale * pixelH";
-			text = "Target distance:";
-		};
-		class Field_distance: Field_observer
-		{
-			idc = IDC_ARTY_DIAG_DISTNACE;
-			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 16 * pixelGridNoUIScale * pixelH";
-			text = "500";
-			tooltip = "Target Distance (Meters)";
-		};
-		class Frame_bearing: Frame_observer
-		{
-			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 18 * pixelGridNoUIScale * pixelH";
-		};
-		class Text_bearing: Text_distance
-		{
-			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 18 * pixelGridNoUIScale * pixelH";
-			text = "Target bearing:";
-		};
-		class Field_bearing: Field_distance
-		{
-			idc = IDC_ARTY_DIAG_BEARING;
-			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 18 * pixelGridNoUIScale * pixelH";
-			text = "0";
-			tooltip = "Target Direction (Degrees)";
-		};
-		class Text_trp: Text_distance
-		{
-			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 20 * pixelGridNoUIScale * pixelH";
 			text = "Target reference point:";
 		};
 		class List_trp: RscCombo
@@ -120,7 +94,7 @@ class Rev_arty_dialog
 			idc = IDC_ARTY_DIAG_TRP;
 			onLBSelChanged = "params ['_control', '_lbCurSel', '_lbSelection']; [_control, _lbCurSel, _lbSelection] call Rev_arty_fnc_dialog_onLBSelChanged";
 			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 19 * pixelGridNoUIScale * pixelW";
-			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 20 * pixelGridNoUIScale * pixelH";
+			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 16 * pixelGridNoUIScale * pixelH";
 			w = 11 * pixelGridNoUIScale * pixelW;
 			h = 1.5 * pixelGridNoUIScale * pixelH;
 			font = "Caveat";			
@@ -145,7 +119,52 @@ class Rev_arty_dialog
 		//Placement on top of list to make sure selection arrow is not clipping over it
 		class Frame_trp: Frame_observer
 		{
+			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 16 * pixelGridNoUIScale * pixelH";
+		};		
+		class Frame_distance: Frame_observer
+		{
+			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 18 * pixelGridNoUIScale * pixelH";
+		};
+		class Text_distance: Text_observer
+		{
+			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 18 * pixelGridNoUIScale * pixelH";
+			text = "Target distance:";
+		};
+		class Field_distance: Field_observer
+		{
+			idc = IDC_ARTY_DIAG_DISTNACE;
+			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 18 * pixelGridNoUIScale * pixelH";
+			w = 6 * pixelGridNoUIScale * pixelW;
+			text = "0";
+			tooltip = "Target Distance (Meters)";
+		};
+		class Text_meter: Text_distance
+		{
+			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 25 * pixelGridNoUIScale * pixelW";
+			w = 5 * pixelGridNoUIScale * pixelW;
+			text = "meters";
+		};
+		class Frame_bearing: Frame_observer
+		{
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 20 * pixelGridNoUIScale * pixelH";
+		};
+		class Text_bearing: Text_distance
+		{
+			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 20 * pixelGridNoUIScale * pixelH";
+			text = "Target bearing:";
+		};
+		class Field_bearing: Field_distance
+		{
+			idc = IDC_ARTY_DIAG_BEARING;
+			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 20 * pixelGridNoUIScale * pixelH";
+			text = "0";
+			tooltip = "Target Direction (Degrees)";
+		};
+		class Text_degrees: Text_bearing
+		{
+			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 25 * pixelGridNoUIScale * pixelW";
+			w = 5 * pixelGridNoUIScale * pixelW;
+			text = "degrees";
 		};
 		class Frame_delay: Frame_observer
 		{
@@ -162,6 +181,12 @@ class Rev_arty_dialog
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 22 * pixelGridNoUIScale * pixelH";
 			text = "0";
 			tooltip = "Delay between rounds (seconds)";
+		};
+		class Text_sec: Text_delay
+		{
+			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 25 * pixelGridNoUIScale * pixelW";
+			w = 5 * pixelGridNoUIScale * pixelW;
+			text = "seconds";
 		};
 		class Frame_count: Frame_observer
 		{
@@ -222,7 +247,7 @@ class Rev_arty_dialog
 			wholeHeight = 10 * pixelGridNoUIScale * pixelH;
 			tooltip = "Selected ordance type";
 			tooltipPerColumn = false;
-			onLBSelChanged = "params ['_control', '_selectedIndex'];[_control,_selectedIndex] call Rev_arty_fnc_dialog_pen";
+			onLBSelChanged = "params ['_control', '_selectedIndex'];[_control,_selectedIndex] call Rev_arty_fnc_dialog_pen;[_control,_selectedIndex] call Rev_arty_fnc_dialog_ordnanceSelect";
 		};
 		//ordnanace selection frames		
 		class Frame_slot1: Frame_observer

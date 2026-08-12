@@ -12,6 +12,10 @@
  * Example:
  * [_range,_angle,_pos] call Rev_arty_fnc_gunship_map_dialog
  *
+ 1.4
+	Target marker is now deleted if <50m from TRP to prevent marker overlap
+	Approach arrows are now mil triangles and not drawn arrows
+	Some pretty text capitalisation consistency fixes
  1.3.2
 	Fixed wrong idd on ok button
  1.3.1
@@ -33,10 +37,11 @@ params [
 //Variables for artillery call later
 player setVariable ["Rev_arty_gun_call",[_pos]];
 
-
-
 private _alpha = 1;
-if (typeName _target isEqualTo "STRING") then {_alpha = 0};
+if (typeName _target isEqualTo "STRING") then {
+	private _markerPos = getMarkerPos _target;
+	if ((_pos distance _markerPos) < 50) then {_alpha = 0;};	
+};
 
 //Target marker
 private _target_pos = createMarkerLocal ["Rev_arty_gun_tgt",_pos];
@@ -54,7 +59,6 @@ private _target_area = createMarkerLocal ["Rev_arty_gun_area",_pos];
 "Rev_arty_gun_area" setMarkerSizeLocal [2000, 2000];
 
 
-
 //Plane marker
 private _plane_dir = createMarkerLocal ["Rev_arty_gun_dir",[0,0,0]];
 "Rev_arty_gun_dir" setMarkerShapeLocal "ICON";
@@ -67,24 +71,27 @@ private _name = getText (configFile >> "CfgVehicles" >> "B_T_VTOL_01_armed_F" >>
 //Direction arrow markers
 private _arrow1 = createMarkerLocal ["Rev_arty_gun_arrow_1",_pos getpos [2000,180]];
 "Rev_arty_gun_arrow_1" setMarkerShapeLocal "ICON";
-"Rev_arty_gun_arrow_1" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_gun_arrow_1" setMarkerColorLocal "ColorBlack";
+"Rev_arty_gun_arrow_1" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_gun_arrow_1" setMarkerColorLocal "ColorWEST";
+"Rev_arty_gun_arrow_1" setMarkerSizeLocal [1,2];
 "Rev_arty_gun_arrow_1" setMarkerAlphaLocal 0;
-"Rev_arty_gun_arrow_1" setMarkerDirLocal 98; //Added +8 to account for hand drawn weirdness
+"Rev_arty_gun_arrow_1" setMarkerDirLocal 90;
 
 private _arrow2 = createMarkerLocal ["Rev_arty_gun_arrow_2",_pos getpos [2000,300]];
 "Rev_arty_gun_arrow_2" setMarkerShapeLocal "ICON";
-"Rev_arty_gun_arrow_2" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_gun_arrow_2" setMarkerColorLocal "ColorBlack";
+"Rev_arty_gun_arrow_2" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_gun_arrow_2" setMarkerColorLocal "ColorWEST";
+"Rev_arty_gun_arrow_2" setMarkerSizeLocal [1,2];
 "Rev_arty_gun_arrow_2" setMarkerAlphaLocal 0;
-"Rev_arty_gun_arrow_2" setMarkerDirLocal 218;
+"Rev_arty_gun_arrow_2" setMarkerDirLocal 210;
 
 private _arrow3 = createMarkerLocal ["Rev_arty_gun_arrow_3",_pos getpos [2000,60]];
 "Rev_arty_gun_arrow_3" setMarkerShapeLocal "ICON";
-"Rev_arty_gun_arrow_3" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_gun_arrow_3" setMarkerColorLocal "ColorBlack";
+"Rev_arty_gun_arrow_3" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_gun_arrow_3" setMarkerColorLocal "ColorWEST";
+"Rev_arty_gun_arrow_3" setMarkerSizeLocal [1,2];
 "Rev_arty_gun_arrow_3" setMarkerAlphaLocal 0;
-"Rev_arty_gun_arrow_3" setMarkerDirLocal 338;
+"Rev_arty_gun_arrow_3" setMarkerDirLocal 330;
 
 //Creating and populating dialog
 if (visibleMap) then {openMap false;};
@@ -146,16 +153,16 @@ if (((([player] call ACE_map_fnc_determineMapLight) select 1) select 3) > 0.55) 
 sliderSetRange [6043, 1000, 3000];
 sliderSetPosition [6043, 2000];
 sliderSetSpeed [6043, 100, 100];
-ctrlSetText [6042, format ['Loiterin Radius: %1M',round (sliderPosition 6043)]];
+ctrlSetText [6042, format ['Loiterin radius: %1M',round (sliderPosition 6043)]];
 
 //Alt slider
 sliderSetRange [6045, 500, 1500];
 sliderSetPosition [6045, 1000];
 sliderSetSpeed [6045, 100, 100];
-ctrlSetText [6044, format ['Loiterin Altitude: %1M',round (sliderPosition 6045)]];
+ctrlSetText [6044, format ['Loiterin altitude: %1M',round (sliderPosition 6045)]];
 
 //View slider
 sliderSetRange [6049, 2000, 8000];
 sliderSetPosition [6049, 5000];
 sliderSetSpeed [6049, 100, 100];
-ctrlSetText [6048, format ['View Distance: %1M',round (sliderPosition 6049)]];
+ctrlSetText [6048, format ['View distance: %1M',round (sliderPosition 6049)]];

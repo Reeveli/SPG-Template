@@ -31,4 +31,4 @@ params [
 sliderSetRange [6035, 100, 800];
 sliderSetPosition [6035, 500];
 //Updating text
-ctrlSetText [6034, format ['Flying Altitude: %1M',500]];
+ctrlSetText [6034, format ['Flying altitude: %1M',500]];

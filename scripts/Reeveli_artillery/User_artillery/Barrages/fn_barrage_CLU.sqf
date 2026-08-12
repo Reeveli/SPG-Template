@@ -13,9 +13,9 @@
  * Return Value <BOOL>
  *
  * Example:
- * [_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_SMK;
+ * [_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_CLU;
  *
-1.2.2 
+1.2.2
 	Reverted changes to number calcs to correctly NOT apply delay on first round
 1.2.1
 	Fixed wrong calc never sending correct param for final call
@@ -39,7 +39,7 @@ for "_i" from 0 to (_number -1) do {
 			params ["_pos","_radius","_index","_number"];
 			private _final = false;
 			if (_index == (_number - 1)) then {_final = true};	
-			[_pos, _radius,_final] call Rev_arty_fnc_shell_SMK;
+			[_pos, _radius,_final] call Rev_arty_fnc_shell_CLU;
 		},
 		[_pos, _radius,_i,_number],
 		((_i * _delay) + (random 2))

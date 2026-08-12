@@ -9,6 +9,11 @@
  * Example:
  * [ctrlText 6062,ctrlText 6063,ctrlText 6064,lbData [6065, lbCurSel 6065],lbCurSel 6065,ctrlText 6066,ctrlText 6067,((findDisplay 6060) displayCtrl 6068) lnbText [lnbCurSelRow 6068,0],lnbCurSelRow 6068,_control] call Rev_arty_fnc_dialog_update;
  *
+1.3
+	Added code for cluster artillery and removed cluster missiles
+1.2
+	Rewrote max distance checks, TRPs and observer positions calculated separately
+	Updated over max distance text
 1.1
 	Fixed wrong variable in bomb ammo check
 	Fixed wrong variable on bomb plane check
@@ -27,9 +32,10 @@ Range
 Angle
 Safety distance
 HE
+CLU
 SMK
 ILM
-MIS + CLU
+MIS
 AIR
 SUP
 GUN
@@ -201,19 +207,25 @@ round _delay;
 
 
 //Distance checks
-private _start_pos = [_location, true] call CBA_fnc_mapControlGridToPos;
+private _start_pos = [_location, true] call CBA_fnc_mapGridToPos;
 private _pos = _start_pos getPos [_range,_angle];
 
-
-if !(_target isEqualTo "") then {_pos = getMarkerPos _target};
-if (((getpos player) distance _pos) > Rev_arty_safety_dis) exitWith {
+if ((((getpos player) distance _pos) > Rev_arty_safety_dis) AND (_target isEqualTo "")) exitWith {
 	_ok ctrlEnable false;
-	ctrlSetText [6072,format ["You must call the fire mission to within %1m of your position.",round Rev_arty_safety_dis]];
+	ctrlSetText [6072,format ["You must call fire mission to within %1m of your position.",round Rev_arty_safety_dis]];
 	_underscore ctrlShow false;		
 	false;
 };
 
+//Distance check TRP
+if !(_target isEqualTo "") then {_pos = (getMarkerPos _target) getPos [_range,_angle]};
 
+if (!(_target isEqualTo "") AND (((getMarkerPos _target) distance _pos) > Rev_arty_trp_dis)) exitWith {
+	_ok ctrlEnable false;
+	ctrlSetText [6072,format ["You must call fire mission to within %1m of TRP.",round Rev_arty_trp_dis]];
+	_underscore ctrlShow false;		
+	false;
+};
 
 
 //Converting round type to uppercase since all legacy functions use them
@@ -235,6 +247,23 @@ if ((_number > Rev_arty_HE_amount) AND (_round_type isEqualTo "HIGH EXPLOSIVE"))
 	_underscore ctrlShow false;		
 	false;
 };
+
+//Cluster checks
+//Safe distance of 100m relative to reported position in case of HE
+if (((_start_pos distance _pos) < 100) AND (_round_type isEqualTo "CLUSTER")) exitWith {
+	_ok ctrlEnable false;
+	ctrlSetText [6072,"You cannot call cluster fire mission to within 100m of observer position."];
+	_underscore ctrlShow false;		
+	false;
+};
+//Check Cluster ammo availability
+if ((_number > Rev_arty_CLU_amount) AND (_round_type isEqualTo "CLUSTER")) exitWith {
+	_ok ctrlEnable false;
+	ctrlSetText [6072,"Selected ammunition usage exeeced availbale ordnanace of that type."];
+	_underscore ctrlShow false;		
+	false;
+};
+
 
 //Smoke checks
 //Safety check for max expenditure amount
@@ -288,13 +317,6 @@ if !(isNil {player getvariable ['Rev_arty_mis_call',nil]}) exitWith {
 if ((count (_pos nearEntities ['LaserTarget', 100]) == 0) AND (_round_type in ["TACTICAL MISSILE","CLUSTER MISSILE"])) exitWith {
 	_ok ctrlEnable false;
 	ctrlSetText [6072,"No targeting laser found near the target position. Check your coordinates."];
-	_underscore ctrlShow false;		
-	false;
-};
-//Check cluster ammo availability
-if ((Rev_arty_CLU_amount == 0) AND (_round_type isEqualTo "CLUSTER MISSILE")) exitWith {
-	_ok ctrlEnable false;
-	ctrlSetText [6072,"No cluster missiles availbale."];
 	_underscore ctrlShow false;		
 	false;
 };

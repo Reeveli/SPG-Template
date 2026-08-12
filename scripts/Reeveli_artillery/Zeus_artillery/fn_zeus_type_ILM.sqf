@@ -14,6 +14,8 @@
  * Example:
  * [_position select 0, _radius,_number,_delay] spawn Rev_arty_fnc_zeus_type_ILM
  *
+ 1.2
+	Code re-written for simplified params
  1.1
 	Added header, default params
 	Added safety exit
@@ -29,9 +31,15 @@ params [
 ];
 
 //Start bombarment
-for "_i" from 0 to (_number - 1) do {
-	[{
-		params ["_pos", "_range","_angle","_dispersion"];[_pos, _range,_angle,_dispersion] call Rev_arty_fnc_shell_ILM;}, [_pos,0,0,_radius], _i * _delay] call CBA_fnc_waitAndExecute;
+for "_i" from 1 to _number do {
+	[
+		{
+			params ["_pos","_radius"];
+			[_pos,_radius,false] call Rev_arty_fnc_shell_ILM;
+		},
+		[_pos,_radius],
+		_i * _delay
+	] call CBA_fnc_waitAndExecute;
 };
 
 true;

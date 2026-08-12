@@ -13,6 +13,12 @@
  * Example:
  * [_target,_tgt,_pos] call Rev_arty_fnc_missile_map_dialog
  *
+ 1.5
+	Removed code for cluster missiles
+ 1.4
+	Target marker is now deleted if <50m from TRP to prevent marker overlap
+	Approach arrows are now spaced more evenly on flight path
+	Approach arrows are now mil triangles and not drawn arrows	
  1.3.2
 	Arrows and target markers updated
 	Rev_arty_mis_laser maker creation removed
@@ -42,7 +48,10 @@ player setVariable ["Rev_arty_mis_call",[_pos,_tgt]];
 
 
 private _alpha = 1;
-if (typeName _target isEqualTo "STRING") then {_alpha = 0};
+if (typeName _target isEqualTo "STRING") then {
+	private _markerPos = getMarkerPos _target;
+	if ((_pos distance _markerPos) < 50) then {_alpha = 0;};	
+};
 
 //Target marker
 private _target_pos = createMarkerLocal ["Rev_arty_mis_tgt",_pos];
@@ -68,20 +77,24 @@ private _plane_dir = createMarkerLocal ["Rev_arty_mis_dir",_pos];
 //Direction arrow markers
 private _arrow1 = createMarkerLocal ["Rev_arty_mis_arrow_1",_pos];
 "Rev_arty_mis_arrow_1" setMarkerShapeLocal "ICON";
-"Rev_arty_mis_arrow_1" setMarkerTypeLocal "hd_arrow";
+"Rev_arty_mis_arrow_1" setMarkerTypeLocal "mil_triangle";
 "Rev_arty_mis_arrow_1" setMarkerColorLocal "ColorBlack";
+"Rev_arty_mis_arrow_1" setMarkerColorLocal "ColorWEST";
+"Rev_arty_mis_arrow_1" setMarkerSizeLocal [1,2];
 "Rev_arty_mis_arrow_1" setMarkerAlphaLocal 0;
 
 private _arrow2 = createMarkerLocal ["Rev_arty_mis_arrow_2",_pos];
 "Rev_arty_mis_arrow_2" setMarkerShapeLocal "ICON";
-"Rev_arty_mis_arrow_2" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_mis_arrow_2" setMarkerColorLocal "ColorBlack";
+"Rev_arty_mis_arrow_2" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_mis_arrow_2" setMarkerColorLocal "ColorWEST";
+"Rev_arty_mis_arrow_2" setMarkerSizeLocal [1,2];
 "Rev_arty_mis_arrow_2" setMarkerAlphaLocal 0;
 
 private _arrow3 = createMarkerLocal ["Rev_arty_mis_arrow_3",_pos];
 "Rev_arty_mis_arrow_3" setMarkerShapeLocal "ICON";
-"Rev_arty_mis_arrow_3" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_mis_arrow_3" setMarkerColorLocal "ColorBlack";
+"Rev_arty_mis_arrow_3" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_mis_arrow_3" setMarkerColorLocal "ColorWEST";
+"Rev_arty_mis_arrow_3" setMarkerSizeLocal [1,2];
 "Rev_arty_mis_arrow_3" setMarkerAlphaLocal 0;
 
 
@@ -98,16 +111,10 @@ if (Rev_arty_MIS_enable) then {
 	_count = _count + 1;
 };
 
-if (Rev_arty_CLU_enable) then {
-	lnbAddRow [6033,["Cluster Missile",str Rev_arty_MIS_amount]];
-	lnbSetData [6033,[_count, 1], "ammo_Missile_Cruise_01_Cluster"];
-	_count = _count + 1;
-};
-
 lnbSetCurSelRow [6033, 0];
 
 sliderSetSpeed [6035, 100, 100];
-ctrlSetText [6034, format ['Flying Altitude: %1M',round (sliderPosition 6035)]];
+ctrlSetText [6034, format ['Flying altitude: %1M',round (sliderPosition 6035)]];
 
 //getting arguments to be passed into map EH
 private _display = findDisplay 6030;
@@ -138,18 +145,22 @@ private _id = addMissionEventHandler ["MapSingleClick", {
 
 
 	//Set direction arrow facing and position
+	
 	private _relDir = (markerPos "Rev_arty_mis_dir") getDir (markerPos "Rev_arty_mis_tgt");
+	private _relDistance = (markerPos "Rev_arty_mis_dir") distance (markerPos "Rev_arty_mis_tgt");
 
-	"Rev_arty_mis_arrow_1" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_mis_arrow_1" setMarkerPosLocal ((markerPos "Rev_arty_mis_tgt") getpos [1000,_relDir - 180]);
+	
+
+	"Rev_arty_mis_arrow_1" setMarkerDirLocal (_relDir);
+	"Rev_arty_mis_arrow_1" setMarkerPosLocal ((markerPos "Rev_arty_mis_dir") getpos [(_relDistance / 6),_relDir]);
 	"Rev_arty_mis_arrow_1" setMarkerAlphaLocal 1;
 
-	"Rev_arty_mis_arrow_2" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_mis_arrow_2" setMarkerPosLocal ((markerPos "Rev_arty_mis_tgt") getpos [2000,_relDir - 180]);
+	"Rev_arty_mis_arrow_2" setMarkerDirLocal (_relDir);
+	"Rev_arty_mis_arrow_2" setMarkerPosLocal ((markerPos "Rev_arty_mis_dir") getpos [(_relDistance / 6) * 3,_relDir]);
 	"Rev_arty_mis_arrow_2" setMarkerAlphaLocal 1;
 
-	"Rev_arty_mis_arrow_3" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_mis_arrow_3" setMarkerPosLocal ((markerPos "Rev_arty_mis_tgt") getpos [3000,_relDir - 180]);
+	"Rev_arty_mis_arrow_3" setMarkerDirLocal (_relDir);
+	"Rev_arty_mis_arrow_3" setMarkerPosLocal ((markerPos "Rev_arty_mis_dir") getpos [(_relDistance / 6) * 5,_relDir]);;
 	"Rev_arty_mis_arrow_3" setMarkerAlphaLocal 1;
 
 },[_warning,_ok,_underscore]];

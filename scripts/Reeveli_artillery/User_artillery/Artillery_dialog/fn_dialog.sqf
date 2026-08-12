@@ -12,6 +12,10 @@
  * Example:
  * [] call Rev_arty_fnc_dialog
  *
+ 2.1.1
+	Game map is no longer closed on dialog creation
+ 2.1
+	Rerolled cluster missiles into cluster arty
  2.0.1
 	Fixed wrong value used for area bombing
  2.0
@@ -27,7 +31,6 @@ if (((([player] call ACE_map_fnc_determineMapLight) select 1) select 3) > 0.55) 
 } else {missionNamespace setvariable ['Rev_arty_n_alpha',[1,0,0.98,0.95,1,1],false];};
 
 //Create main dialog
-if (visibleMap) then {openMap false;};
 createdialog "Rev_arty_dialog";
 
 //Set night time image if needed
@@ -82,6 +85,10 @@ if (Rev_arty_HE_enabled) then {
 		_ordnance_control lnbAddRow ["High explosive",str Rev_arty_HE_amount];
 	};
 
+if (Rev_arty_CLU_enable) then {
+		_ordnance_control lnbAddRow ["Cluster artillery",str Rev_arty_CLU_amount];
+	};
+
 if (Rev_arty_SMK_enable) then {
 		_ordnance_control lnbAddRow ["White smoke",str Rev_arty_SMK_amount];
 	};
@@ -92,10 +99,6 @@ if (Rev_arty_ILM_enable) then {
 
 if (Rev_arty_MIS_enable) then {
 		_ordnance_control lnbAddRow ["Tactical missile",str Rev_arty_MIS_amount];
-	};
-
-if (Rev_arty_CLU_enable) then {
-		_ordnance_control lnbAddRow ["Cluster missile",str Rev_arty_CLU_amount];
 	};
 
 if (Rev_arty_AIR_enable) then {

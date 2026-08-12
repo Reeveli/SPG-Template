@@ -62,7 +62,7 @@ private _colors = [
 		["Rev_zeus_trp", [_position select 0,_index,_text,_type,_color,_sides]] call CBA_fnc_globalEventJIP;
 		private _group = createGroup [sideLogic,true];
 		private _vehicle = _group createUnit ["Logic",_position select 0, [], 0, ""];
-		//Not added to all curators because of RZ. Solution would be to add a non-plyare specific varaible to each RZ module that could be used to fillter those curator logic from normal ones. Perhaps in the future if additional need for this arises.
+		//Not added to all curators because of RZ. Solution would be to add a non-playre specific variable to each RZ module that could be used to fillter those curator logic from normal ones. Perhaps in the future if additional need for this arises.
 		[getAssignedCuratorLogic player,[[_vehicle],true]] remoteExecCall ["addCuratorEditableObjects",2];
 
 
@@ -73,8 +73,8 @@ private _colors = [
 			params ["_entity"];
 			private _index = _entity getVariable ["TRP_idx",-1];
 			["Rev_zeus_trp_delete", [_index]] call CBA_fnc_globalEventJIP;
-		}];
-		
+		}];		
+		[objNull, "TRP created"] call BIS_fnc_showCuratorFeedbackMessage;
 	},
 	{
 		playSound "FD_Start_F";

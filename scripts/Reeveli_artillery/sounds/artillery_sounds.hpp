@@ -96,3 +96,9 @@ class bombix_echo
 	sound[] = {"scripts\Reeveli_artillery\sounds\bombix_echo.ogg", db+5, 1};
 	titles[] = {1, ""};
 };
+class sound_flare
+{
+	name = "sound_flare";
+	sound[] = {"scripts\Reeveli_artillery\sounds\sound_flare.ogg", db+5, 1};
+	titles[] = {1, ""};
+};

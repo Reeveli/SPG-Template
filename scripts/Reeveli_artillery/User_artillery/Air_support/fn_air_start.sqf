@@ -18,6 +18,7 @@
  *
  2.2
 	BIS_fnc_dirTo replaced with getDir
+	Updated _timer saving method
  2.1
 	Waypoint switched to loitering to enbale usage of two seat aircraft
 	Additional variable saved on Rev_air_pilot for waypoint management on fn_air_disconnect 
@@ -49,7 +50,7 @@ player setVariable ['Rev_arty_air_call',nil];
 //Update ammo amount to server
 ["Rev_arty_AIR_regen",[1]] call CBA_fnc_serverEvent;
 
-//viewDistance varibales to keep commonality with gunship system, not used here
+//viewDistance variables to keep commonality with gunship system, not used here
 Rev_arty_gun_view = viewDistance;
 Rev_arty_gun_viewO = getObjectViewDistance;
 
@@ -130,7 +131,7 @@ Rev_air_machine = [[player]] call CBA_statemachine_fnc_create;
 [Rev_air_machine, "NotControlled", "Controlled", {cameraOn isEqualTo Rev_air_pilot}] call CBA_statemachine_fnc_addTransition;
 
 
-timer = [{
+private _timer = [{
 	params ["_args","_handel"];
 	_args params ["_start","_time","_plane","_stateMachine"];
 	if (cba_missiontime >= (_start + _time)) then {
@@ -139,7 +140,7 @@ timer = [{
 		[_plane,_stateMachine,false] call Rev_arty_fnc_air_disconnect;
 	} else {hintSilent format ["Remaining time %1", round (_time - (cba_missiontime - _start))];};
 }, 0, [_start,Rev_arty_AIR_duration,Rev_air_pilot,Rev_air_machine]] call CBA_fnc_addPerFrameHandler;
-
+missionNamespace setVariable ["Rev_arty_timer_air",_timer];
 
 
 //EHs pilot

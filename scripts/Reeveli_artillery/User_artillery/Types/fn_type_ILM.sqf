@@ -18,6 +18,10 @@
  * Example:
  * [_location,_target,_range,_angle,_number,_caller_pos,"Flare",_delay] call Rev_arty_fnc_type_ILM
  *
+1.7
+	TRPs can now be used as relative positions with angle + distance
+	Removed max distance check as that is now done in main dialog
+	Since radio is no longer needed separate multiplayer exit removed
 1.6
 	Ammo regen server event moved here
 1.5
@@ -55,23 +59,16 @@ if ((_number <= Rev_arty_ILM_amount) && (_number != 0) && (_number == _unmodifie
 //Remove ordance counter
 hintSilent "";
 
-//Check if provided position is reasonable
 private _start_pos = [_location, true] call CBA_fnc_mapGridToPos;
-private _pos = _start_pos getPos [_range,_angle];
-if (typeName _target isEqualTo "STRING") then {_pos = getMarkerPos _target};
-if ((_caller_pos distance _pos) > Rev_arty_safety_dis) exitWith {[{playSound "FD_Start_F"; hintSilent format ["You must call the air support to within %1m of your position!",round Rev_arty_safety_dis];}, []] call CBA_fnc_execNextFrame;};
+if (typeName _target isEqualTo "STRING") then {
+	_start_pos = getMarkerPos _target;
+	_location = mapGridPosition _start_pos;
+};
+private _finalPos = _start_pos getPos [_range,_angle];
 
 //Update ammo amount to server
 ["Rev_arty_ILM_regen",[_number]] call CBA_fnc_serverEvent;
 
 //Radio dialog
-if (isMultiplayer) then
-{
-	Rev_arty_radio_dialog = [_location,_angle,_range,_target,_round_type,_pos,_number,_delay] execVM "scripts\Reeveli_artillery\User_artillery\Radio_dialog\radio_dialog.sqf";
-} else {
-	[{hint "Radio dialog only works in multiplayer";}, []] call CBA_fnc_execNextFrame;
-	[{
-		params ["_angle","_range","_pos","_number","_delay"];
-		[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_ILM;
-	}, [_angle,_range,_pos,_number,_delay],5] call CBA_fnc_waitAndExecute;
-};
+Rev_arty_radio_dialog = [_location,_angle,_range,_target,_round_type,_finalPos,_number,_delay] execVM "scripts\Reeveli_artillery\User_artillery\Radio_dialog\radio_dialog.sqf";
+

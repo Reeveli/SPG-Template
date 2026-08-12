@@ -1,6 +1,8 @@
 /*
  * Author: Reeveli
- * Create bombs relative to plane position, bomb type defined by global variable Rev_air_bomb_type
+ * Part of Reeveli's Artillery system, area bombing.
+ * Server side function to handle actual bomb creation.
+ * Called from waypoint created in Rev_arty_fnc_zeus_bomber
  *
  * Arguments:
  * 0: Group leader <OBJECT>
@@ -9,23 +11,10 @@
  * Return Value <BOOL>
  *
  * Example:
- * [_groupLeader] remoteExecCall ['Rev_arty_fnc_bomb_ordance',2]
+ * [this] spawn Rev_arty_fnc_bomb_ordance
  *
- 1.5
-	Linear pattren is now neutered, left as legacy
- 1.4.1
-	New param and code to add completion radio callout if from user artillery system
- 1.4
-	(Re)added code for napalm
- 1.3
-	Removed randomness from bomb dispersal sleep for consistency
-	Pattern spread added
- 1.2
-	Code cleanup
-	Some varibales are now extracted from objectNameSpace
- 1.1
-	_bank removed as unnecessary
-	Added alternative code for bomb velocity, legacy left as backup
+2.0
+	Compeltely new code for linear pattern
  */
 
 
@@ -39,145 +28,70 @@ params [
 if (isNull _groupLeader) exitWith {diag_log "Rev_arty_fnc_bomb_ordance: objNull as param";false;};
 
 private _plane = vehicle _groupLeader;
+private _caller = _plane getVariable ["Rev_air_bomb_caller",objNull];
+private _targetPos = _plane getVariable ["Rev_air_bomb_target",nil];
 private _class = _plane getVariable ["Rev_air_bomb_type","Bo_Mk82"];
 private _amount = _plane getVariable ["Rev_air_bomb_amount",2];
-//private _pattern = _plane getVariable ["Rev_air_bomb_pattern","Linear"];
+private _direction = _plane getVariable ["Rev_air_bomb_direction",0];
 
+if (_plane isNil "Rev_air_bomb_target") exitWith {diag_log "Rev_arty_fnc_bomb_ordance: No target!";false;};
 
-
-////////Radio////////
-if ((isMultiplayer) AND (isClass (configFile >> "CfgPatches" >> "tfar_handhelds")) AND _radio) then 
-{
-	//Check if user has radio (needed for sideradio command)
-	private _condition = {getNumber (configfile >> "CfgWeapons" >> _x >> "tf_radio") != 0};
-	private _initial_radio = true;
-	if (_condition count assignedItems player == 0) then {
-		_initial_radio = false;
-		player linkItem "tf_anprc148jem";
-		[{params ["_condition","_initial_radio","_killed"];_condition count assignedItems player > 0}, {[_this select 1,"Bombing",_this select 2] call Rev_arty_fnc_user_completed}, [_condition,_initial_radio,false],5] call CBA_fnc_waitUntilAndExecute;
-	} else {[_initial_radio,"Bombing",false] call Rev_arty_fnc_user_completed};
+//Radio call on exit for player
+if !(isNull _caller) then {
+	["Bombing",false] remoteExec ["Rev_arty_fnc_user_completed",_caller];
 };
-/////////////////////
+
+private _group = createGroup [sideLogic, true];
+private _logic = _group createUnit ["Logic", [_targetPos # 0,_targetPos # 1], [], 0, "NONE"];
+_logic setdir _direction;
+_plane setVariable ["Rev_air_bomb_logic",_logic,false];
 
 
-
-
-
-//Master value for napalm duration
-private _duration = 255;
-
-
-//Case horizontal pattern
-//Old condition (_pattern isEqualTo "Horizontal")
-if (false) then
-{
-	//Spread, add some randomness to bomb bank for horizontal spread
-	private _spread = 20;
-	private ["_bomb","_dir"];
-	for "_i" from 0 to (_amount - 1) do
-	{
-		//Setting bomb class
-		_bomb = (["Bo_Mk82","BombCluster_01_Ammo_F"] select (_class isEqualTo "BombCluster_01_Ammo_F")) createvehicle ([getPosATL _plane select 0,getPosATL _plane select 1,(getPosATL _plane select 2)-5]);
-		//if even nuber of bombs
-		if (_amount % 2 == 0) then {
-			_dir = ((_amount - 1 ) * (_spread/2)) - (_i * _spread);
-			_bomb setdir ((getDir _plane) + _dir);
-		} else
-		//if odd number of bombs
-		{
-			_dir = ((floor (_amount/2)) * _spread) - (_i * _spread);
-			_bomb setdir ((getDir _plane) + _dir);
-		};		
-		[_bomb, random [-40, -45, -50], 0] call BIS_fnc_setPitchBank;
-		_bomb setVelocity [10, 0, -150];
-
-		//Case napalm
-		if (_class == "napalm") then 
-		{			
-			[
-				{((getposATL (_this select 1)) select 2) < 15},
-				{
-					params [
-						["_groupLeader",objNull,[objNull]],
-						["_bomb",objNull,[objNull]],
-						["_duration",300,[0]]
-					];
-					//create impact object
-					private _impact = [(getPos _bomb) select 0, (getPos _bomb) select 1];
-					private _spot = "Land_HelipadEmpty_F" createVehicle [_impact select 0,_impact select 1,0];
-					private _flow = (getposasl _spot vectorFromTo getposasl _groupLeader) vectorMultiply 5;
-					private _dir_x = 5*(_flow select 0);
-					private _dir_y = 5*(_flow select 1);
-
-					//delete bomb model
-					deletevehicle _bomb;
-
-					//effect and SFX scripts
-					[_spot,_duration,60,10,0.5,true,10] remoteExec ["Rev_arty_fnc_napalm_hit",2,false];
-					[_spot,_dir_x,_dir_y] remoteExec ["Rev_arty_fnc_napalm_effect",0,true];
-					
-					//delete helipad in the future to remove fire effects
-					[{deletevehicle (_this select 0)}, [_spot], _duration+(random 120)] call CBA_fnc_waitAndExecute;
-
-				},
-				[_groupLeader,_bomb,_duration],
-				10
-			] call CBA_fnc_waitUntilAndExecute;
-		};
-	};
-} else
 //case linear pattern
+private ["_bomb"];
+for "_i" from 0 to _amount -1 do
 {
-	private ["_bomb"];
-	for "_i" from 0 to _amount -1 do
-	{
-		[
-			{
-				params ["_plane","_class","_groupLeader","_duration"];
-				//Setting bomb class
-				_bomb = (["Bo_Mk82","BombCluster_01_Ammo_F"] select (_class isEqualTo "BombCluster_01_Ammo_F")) createvehicle ([getPosATL _plane select 0,getPosATL _plane select 1,(getPosATL _plane select 2)-5]);
-				_bomb setdir getDir _plane;
-				[_bomb, -45, 0] call BIS_fnc_setPitchBank;
-				_bomb setVelocity [10, 0, -150];
-				
-				//Case napalm
-				if (_class == "napalm") then 
-				{
-					[
-						{((getposATL (_this select 1)) select 2) < 15},
-						{
-							params [
-								["_groupLeader",objNull,[objNull]],
-								["_bomb",objNull,[objNull]],
-								["_duration",300,[0]]
-							];
-							//create impact object
-							private _impact = [(getPos _bomb) select 0, (getPos _bomb) select 1];
-							private _spot = "Land_HelipadEmpty_F" createVehicle [_impact select 0,_impact select 1,0];
-							private _flow = (getposasl _spot vectorFromTo getposasl _groupLeader) vectorMultiply 5;
-							private _dir_x = 5*(_flow select 0);
-							private _dir_y = 5*(_flow select 1);
+	[
+		{
+			params ["_plane","_class","_caller","_groupLeader","_targetPos","_direction","_index","_amount","_logic"];
 
-							//delete bomb model
-							deletevehicle _bomb;
-							
-							//effect and SFX scripts
-							[_spot,_duration,60,10,0.5,true,10] remoteExec ["Rev_arty_fnc_napalm_hit",2,false];
-							[_spot,_dir_x,_dir_y] remoteExec ["Rev_arty_fnc_napalm_effect",0,true];
-							
-							//delete helipad in the future
-							[{deletevehicle (_this select 0)}, [_spot], _duration+(random 120)] call CBA_fnc_waitAndExecute;
+			private _code = "";
+			//Case napalm
+			if (_class == "napalm") then {
+				_class = "Bo_Mk82";
+				_code = "_this # 1 spawn Rev_arty_fnc_bomb_incendiary";
+			};
 
-						},
-						[_groupLeader,_bomb,_duration],
-						10
-					] call CBA_fnc_waitUntilAndExecute;
-				};
-			},
-			[_plane,_class,_groupLeader,_duration],
-			0.35 * _i
-		] call CBA_fnc_waitAndExecute;
-	};
+			//Spread pattern
+			private _spacing = 50;
+			private _offSet = (_index * _spacing) + -1 * (((_amount - 1)* _spacing) / 2);
+		
+			// Spawn the bomb
+			private _bomb = createVehicle [_class, _plane modelToWorld [0, 0, -3], [], 0, "FLY"];		
+			// Align the bomb with the plane and give it the plane's exact forward momentum
+			_bomb setVectorDirAndUp [vectorDir _plane, vectorUp _plane];
+			_bomb setVelocity (velocity _plane);
+			_bomb setShotParents [_caller, _caller];
+
+			//Guidance
+			private _pos = _plane modelToWorld [0, 0, -3];
+			[
+				_pos,
+				_bomb,
+				_logic,
+				(3.6 * ((velocityModelSpace _plane select 1) / 4)),
+				false,
+				[0,_offSet,0],
+				50,
+				_code,
+				false
+			] spawn BIS_fnc_exp_camp_guidedProjectile;
+
+		},
+		[_plane,_class,_caller,_groupLeader,_targetPos,_direction,_i,_amount,_logic],
+		0.35 * _i
+	] call CBA_fnc_waitAndExecute;
 };
+
 
 true;

@@ -18,6 +18,8 @@
  * Example:
  * [_display,_exitCode] call Rev_arty_fnc_dialog_onUnload
  *
+ 1.1
+	Rerolled cluster missile code into cluster arty
  1.0.1
 	Comment typo fixes
  */
@@ -173,10 +175,10 @@ private _caller_pos = getpos player;
 switch _round_type do {
 			
 	case ("HIGH EXPLOSIVE"): {[_location,_target,_range,_angle,_number,_caller_pos,"HE",_delay] call Rev_arty_fnc_type_HE};
+	case ("CLUSTER ARTILLERY"): {[_location,_target,_range,_angle,_number,_caller_pos,"Cluster",_delay] call Rev_arty_fnc_type_CLU};
 	case ("WHITE SMOKE"): {[_location,_target,_range,_angle,_number,_caller_pos,"Smoke",_delay] call Rev_arty_fnc_type_SMK};
 	case ("ILLUMINATION"): {[_location,_target,_range,_angle,_number,_caller_pos,"Flare",_delay] call Rev_arty_fnc_type_ILM};
 	case ("TACTICAL MISSILE"): {[_location,_target,_range,_angle,_number,_caller_pos,"Missile",_delay] call Rev_arty_fnc_type_MIS};
-	case ("CLUSTER MISSILE"): {[_location,_target,_range,_angle,_number,_caller_pos,"Missile",_delay] call Rev_arty_fnc_type_MIS};
 	case ("AIR SUPPORT"): {[_location,_target,_range,_angle,_number,_caller_pos,"Air",_delay] call Rev_arty_fnc_type_AIR};
 	case ("SUPPLY DROP"): {[_location,_target,_range,_angle,_number,_caller_pos,"Supply",_delay] call Rev_arty_fnc_type_SUP};
 	case ("GUNSHIP SUPPORT"): {[_location,_target,_range,_angle,_number,_caller_pos,"Gunship",_delay] call Rev_arty_fnc_type_GUN};

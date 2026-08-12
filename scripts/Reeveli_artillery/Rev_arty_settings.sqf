@@ -4,6 +4,12 @@
  * Client side function to set up CBA options. Run on each client. Called as extended preinit eventhandler.
  *
  * Return Value: NONE
+ 1.3
+  Bunch of edit boxes changed to sliders to force correct data type, eliminating need for safety checks
+ 1.2
+  Cluster missile setting re-rolled into cluster artillery
+ 1.1
+  Added setting for max distance from TRP
  */
 
 
@@ -59,13 +65,22 @@
   ,[[0,1,2,3,4,5,6], ["American English","Greek English","Farsi","French","Chinese","Russian","Polish"], 0]
   ,1
 ] call CBA_fnc_addSetting;
-//Safety distance
+//Safety distances
 [
   "Rev_arty_safety_dis"
   ,"SLIDER"
-  ,["Maximum range","What is the max range from target artillery can be called from"]
+  ,["Maximum range","What is the max range from observer artillery can be called from"]
   ,CBA_SETTINGS_REV_ARTY
   ,[0, 10000,1500,0,false]
+  ,1
+] call CBA_fnc_addSetting;
+
+[
+  "Rev_arty_trp_dis"
+  ,"SLIDER"
+  ,["Maximum range from TRP","What is the max range from TRP artillery can be called from"]
+  ,CBA_SETTINGS_REV_ARTY
+  ,[0, 10000,300,0,false]
   ,1
 ] call CBA_fnc_addSetting;
 
@@ -79,10 +94,7 @@
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - HE"]
   ,true
   ,1
-  ,{}
-  ,false
 ] call CBA_fnc_addSetting;
-
 [
   "Rev_arty_HE_type"
   ,"LIST"
@@ -90,34 +102,28 @@
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - HE"]
   ,[["Sh_155mm_AMOS","Sh_82mm_AMOS"], ["155mm Howitzer","82mm Mortar"], 0]
   ,1
-  ,{}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_HE_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum HE ordnance amount","This is the size of the ammunition pool for HE"]
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - HE"]
-  ,"12"
+  ,[0,300,12,0,false]
   ,1
-  ,{
-      Rev_arty_HE_amount_sys = parsenumber Rev_arty_HE_amount_sys;
-      Rev_arty_HE_amount = Rev_arty_HE_amount_sys;
-  }
+  ,{Rev_arty_HE_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_HE_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["HE regeneration speed","How fast (in secods) will a new round of HE regenerate into the ammo pool. 0 to disable ammo regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - HE"]
-  ,"60"
+  ,[0,3600,60,0,false]
   ,1
-  ,{Rev_arty_HE_regen = parsenumber Rev_arty_HE_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
+
 
 [
   "Rev_arty_HE_crater"
@@ -125,6 +131,36 @@
   ,["Enable craters on HE rounds","Allow player called artillery to make permanent craters on the map"]
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - HE"]
   ,false
+  ,1
+] call CBA_fnc_addSetting;
+
+//Cluster shells
+[
+  "Rev_arty_CLU_enable"
+  ,"CHECKBOX"
+  ,["Allow cluster rounds","Allow/prevent players to call in cluster artillery strikes"]
+  ,[CBA_SETTINGS_REV_ARTY,"Artillery - Cluster"]
+  ,false
+  ,1
+] call CBA_fnc_addSetting;
+
+[
+  "Rev_arty_CLU_amount_sys"
+  ,"SLIDER"
+  ,["Maximum cluster amount","This is the size of the ammunition pool for clusters"]
+  ,[CBA_SETTINGS_REV_ARTY,"Artillery - Cluster"]
+  ,[0,300,12,0,false]
+  ,1
+  ,{Rev_arty_CLU_amount = _this}
+  ,false
+] call CBA_fnc_addSetting;
+
+[
+  "Rev_arty_CLU_regen"
+  ,"SLIDER"
+  ,["Cluster regeneration speed","How fast (in secods) will a new cluster round regenerate into the ammo pool. 0 to disable cluster regeneration."]
+  ,[CBA_SETTINGS_REV_ARTY,"Artillery - Cluster"]
+  ,[0,3600,60,0,false]
   ,1
 ] call CBA_fnc_addSetting;
 
@@ -140,27 +176,22 @@
 
 [
   "Rev_arty_SMK_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum smoke ordnance amount","This is the size of the ammunition pool for smoke"]
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - Smoke"]
-  ,"20"
+  ,[0,300,20,0,false]
   ,1
-  ,{
-    Rev_arty_SMK_amount_sys = parsenumber Rev_arty_SMK_amount_sys;
-    Rev_arty_SMK_amount = Rev_arty_SMK_amount_sys;
-  }
+  ,{Rev_arty_SMK_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_SMK_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Smoke regeneration speed","How fast (in secods) will a new round of smoke regenerate into the ammo pool. 0 to disable smoke regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - Smoke"]
-  ,"60"
+  ,[0,3600,60,0,false]
   ,1
-  ,{Rev_arty_SMK_regen = parsenumber Rev_arty_SMK_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 //Flares
@@ -175,31 +206,23 @@
 
 [
   "Rev_arty_ILM_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum illumination ordnance amount","This is the size of the ammunition pool for flares"]
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - Illumination"]
-  ,"20"
+  ,[0,300,20,0,false]
   ,1
-  ,{
-    Rev_arty_ILM_amount_sys = parsenumber Rev_arty_ILM_amount_sys;
-    Rev_arty_ILM_amount = Rev_arty_ILM_amount_sys;
-  }
+  ,{Rev_arty_ILM_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_ILM_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Illumination regeneration speed","How fast (in secods) will a new round of illumination regenerate into the ammo pool. 0 to disable flare regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Artillery - Illumination"]
-  ,"60"
+  ,[0,3600,60,0,false]
   ,1
-  ,{Rev_arty_ILM_regen = parsenumber Rev_arty_ILM_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
-
-
-
 
 
 
@@ -218,27 +241,22 @@
 
 [
   "Rev_arty_MIS_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum missile amount","This is the size of the ammunition pool for missiles"]
   ,[CBA_SETTINGS_REV_ARTY,"Support- Missile"]
-  ,"2"
+  ,[0,30,2,0,false]
   ,1
-  ,{
-    Rev_arty_MIS_amount_sys = parsenumber Rev_arty_MIS_amount_sys;
-    Rev_arty_MIS_amount = Rev_arty_MIS_amount_sys;
-  }
+  ,{Rev_arty_MIS_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_MIS_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Missile regeneration speed","How fast (in secods) will a new missile be regenerate into the ammo pool. 0 to disable missile regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Support- Missile"]
-  ,"0"
+  ,[0,3600,0,0,false]
   ,1
-  ,{Rev_arty_MIS_regen = parsenumber Rev_arty_MIS_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [
@@ -257,41 +275,6 @@
   ,[CBA_SETTINGS_REV_ARTY,"Support- Missile"]
   ,false
   ,1
-] call CBA_fnc_addSetting;
-
-//Cluster missiles
-[
-  "Rev_arty_CLU_enable"
-  ,"CHECKBOX"
-  ,["Allow cluster missiles","Allow/prevent players to call in cluster missile strikes"]
-  ,[CBA_SETTINGS_REV_ARTY,"Support- Missile"]
-  ,false
-  ,1
-] call CBA_fnc_addSetting;
-
-[
-  "Rev_arty_CLU_amount_sys"
-  ,"EDITBOX"
-  ,["Maximum cluster amount","This is the size of the ammunition pool for clusters"]
-  ,[CBA_SETTINGS_REV_ARTY,"Support- Missile"]
-  ,"2"
-  ,1
-  ,{
-    Rev_arty_CLU_amount_sys = parsenumber Rev_arty_CLU_amount_sys;
-    Rev_arty_CLU_amount = Rev_arty_CLU_amount_sys;
-  }
-  ,false
-] call CBA_fnc_addSetting;
-
-[
-  "Rev_arty_CLU_regen"
-  ,"EDITBOX"
-  ,["Cluster regeneration speed","How fast (in secods) will a new missile be regenerate into the ammo pool. 0 to disable missile regeneration."]
-  ,[CBA_SETTINGS_REV_ARTY,"Support- Missile"]
-  ,"0"
-  ,1
-  ,{Rev_arty_CLU_regen = parsenumber Rev_arty_CLU_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 
@@ -313,37 +296,32 @@
 
 [
   "Rev_arty_AIR_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum air support amount","This is the amount of availbale air strikes"]
   ,[CBA_SETTINGS_REV_ARTY,"Support - CAS"]
-  ,"2"
+  ,[0,30,2,0,false]
   ,1
-  ,{
-    Rev_arty_AIR_amount_sys = parsenumber Rev_arty_AIR_amount_sys;
-    Rev_arty_AIR_amount = Rev_arty_AIR_amount_sys;
-  }
+  ,{Rev_arty_AIR_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_AIR_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Air support regeneration speed","How fast (in secods) will a new air strike be available. 0 to disable regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Support - CAS"]
-  ,"0"
+  ,[0,3600,0,0,false]
   ,1
-  ,{Rev_arty_AIR_regen = parsenumber Rev_arty_AIR_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_AIR_duration"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Air support duration","How long does the player have to pilot the plane"]
   ,[CBA_SETTINGS_REV_ARTY,"Support - CAS"]
-  ,"180"
+  ,[0,1800,180,0,false]
   ,1
-  ,{Rev_arty_AIR_duration = parsenumber Rev_arty_AIR_duration;}
+  ,{}
   ,false
 ] call CBA_fnc_addSetting;
 
@@ -360,16 +338,12 @@
 
 [
   "Rev_arty_AIR_penalty"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Penalty for plane shot down","How much extra time does losing a plane add to the current cooldown"]
   ,[CBA_SETTINGS_REV_ARTY,"Support - CAS"]
-  ,"300"
+  ,[0,1800,300,0,false]
   ,1
-  ,{Rev_arty_AIR_penalty = parsenumber Rev_arty_AIR_penalty;}
-  ,false
 ] call CBA_fnc_addSetting;
-
-
 
 
 
@@ -390,27 +364,22 @@
 
 [
   "Rev_arty_SUP_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum resupply amount","This is the amount of availbale supply drops"]
   ,[CBA_SETTINGS_REV_ARTY,"Support - Resupply"]
-  ,"2"
+  ,[0,30,2,0,false]
   ,1
-  ,{
-    Rev_arty_SUP_amount_sys = parsenumber Rev_arty_SUP_amount_sys;
-    Rev_arty_SUP_amount = Rev_arty_SUP_amount_sys;
-  }
+  ,{Rev_arty_SUP_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_SUP_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Resupply regeneration speed","How fast (in secods) will a new supply drop be available. 0 to disable regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Support - Resupply"]
-  ,"0"
+  ,[0,3600,0,0,false]
   ,1
-  ,{Rev_arty_SUP_regen = parsenumber Rev_arty_SUP_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [
@@ -453,11 +422,6 @@
 
 
 
-
-
-
-
-
 //Gunship
 [
   "Rev_arty_GUN_enable"
@@ -470,38 +434,31 @@
 
 [
   "Rev_arty_GUN_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum gunship amount","This is the amount of availbale gunship calls."]
   ,[CBA_SETTINGS_REV_ARTY,"Support - Gunship"]
-  ,"2"
+  ,[0,30,2,0,false]
   ,1
-  ,{
-    Rev_arty_GUN_amount_sys = parsenumber Rev_arty_GUN_amount_sys;
-    Rev_arty_GUN_amount = Rev_arty_GUN_amount_sys;
-  }
+  ,{Rev_arty_GUN_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_GUN_duration"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Gunship support duration","How long does the player have to control the gunship"]
   ,[CBA_SETTINGS_REV_ARTY,"Support - Gunship"]
-  ,"180"
+  ,[0,1800,180,0,false]
   ,1
-  ,{Rev_arty_GUN_duration = parsenumber Rev_arty_GUN_duration;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_GUN_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Gunship regeneration speed","How fast (in secods) will a new gunship be available. 0 to disable regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Support - Gunship"]
-  ,"0"
+  ,[0,3600,0,0,false]
   ,1
-  ,{Rev_arty_GUN_regen = parsenumber Rev_arty_GUN_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [
@@ -526,27 +483,22 @@
 
 [
   "Rev_arty_BOM_amount_sys"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Maximum area bombing amount","This is the amount of availbale bombing strikes"]
   ,[CBA_SETTINGS_REV_ARTY,"Support - Bombing"]
-  ,"2"
+  ,[0,30,2,0,false]
   ,1
-  ,{
-    Rev_arty_BOM_amount_sys = parsenumber Rev_arty_BOM_amount_sys;
-    Rev_arty_BOM_amount = Rev_arty_BOM_amount_sys;
-  }
+  ,{Rev_arty_BOM_amount = _this}
   ,false
 ] call CBA_fnc_addSetting;
 
 [
   "Rev_arty_BOM_regen"
-  ,"EDITBOX"
+  ,"SLIDER"
   ,["Area bombing regeneration speed","How fast (in secods) will a new air strike be available. 0 to disable regeneration."]
   ,[CBA_SETTINGS_REV_ARTY,"Support - Bombing"]
-  ,"0"
+  ,[0,3600,0,0,false]
   ,1
-  ,{Rev_arty_BOM_regen = parsenumber Rev_arty_BOM_regen;}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [
@@ -556,8 +508,6 @@
   ,[CBA_SETTINGS_REV_ARTY,"Support - Bombing"]
   ,"B_Plane_Fighter_01_F"
   ,1
-  ,{}
-  ,false
 ] call CBA_fnc_addSetting;
 
 [

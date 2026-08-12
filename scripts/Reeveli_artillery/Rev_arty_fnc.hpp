@@ -20,6 +20,7 @@ class Rev_arty
     class Area_bombing
     {
         file="scripts\Reeveli_artillery\User_artillery\Area_bombing";
+        class bomb_incendiary {};
         class bomb_map_dialog_onUnload {};
         class bomb_map_dialog {};
         class bomb_ordance {};
@@ -43,6 +44,7 @@ class Rev_arty
         class dialog_light {};
         class dialog_onLBSelChanged {};
         class dialog_onUnload {};
+        class dialog_ordnanceSelect {};
         class dialog_pen {};
         class dialog_update {};
     };
@@ -50,6 +52,7 @@ class Rev_arty
     class Barrages
     {
         file="scripts\Reeveli_artillery\User_artillery\Barrages";
+        class barrage_CLU {};
         class barrage_HE {};
         class barrage_ILM {};
         class barrage_SMK {};
@@ -118,6 +121,7 @@ class Rev_arty
     class Shell_drops
     {
         file="scripts\Reeveli_artillery\User_artillery\Shell_drops";
+        class shell_CLU {};
         class shell_HE {};
         class shell_ILM {};
         class shell_SMK {};
@@ -128,6 +132,7 @@ class Rev_arty
         file="scripts\Reeveli_artillery\User_artillery\Types";
         class type_AIR {};
         class type_BOM {};
+        class type_CLU {};
         class type_GUN {};
         class type_HE {};
         class type_ILM {};
@@ -160,9 +165,12 @@ class Rev_arty
     {
         file="scripts\Reeveli_artillery\Zeus_artillery";
         class zeus_air_strike {};
+        class zeus_ammoDialog {};
         class zeus_artillery {};
         class zeus_bomber {};
+        class zeus_gunRun {};
         class zeus_missile {};
+        class zeus_removeTRP_dialog {};
         class zeus_trp_dialog {};
         class zeus_type_CLU {};
         class zeus_type_HE {};

@@ -18,10 +18,13 @@
  * Example:
  * [_display,_exitCode] call Rev_arty_fnc_missile_map_dialog_onUnload
  *
+ 1.2
+	Since radio is no longer needed separate multiplayer exit removed
  1.1.1
 	Deleted leftover systemchat at function end
  1.1
 	Removed code for Rev_arty_mis_laser as it no longer exists
+	Replaced waitAndExecute with execNextFrame
  */
 
 params [
@@ -82,10 +85,7 @@ private _map_scale = ctrlMapScale _map;
 
 
 //If cancel reopen previous dialog
-if (_exitCode == 3) exitWith {	
-	[{[] call Rev_arty_fnc_dialog}, [],0.01] call CBA_fnc_waitAndExecute;	
-};
-
+if (_exitCode == 3) exitWith {[{call Rev_arty_fnc_dialog}, []] call CBA_fnc_execNextFrame};
 
 private _args = player getVariable "Rev_arty_mis_call";
 
@@ -93,12 +93,7 @@ _args pushBack _class;
 _args pushBack _altitude;
 _args pushBack _start_pos;
 
-//MP or SP script path
+
 private _radio_args = missionNamespace getVariable ['Rev_artillery_call',nil];
-if !(isMultiplayer) exitWith {
-	hint 'Radio dialog only works in multiplayer';
-	[] spawn Rev_arty_fnc_missile_launch;
-	missionNamespace setVariable ['Rev_artillery_call',nil];
-};
 Rev_arty_radio_dialog = _radio_args execVM 'scripts\Reeveli_artillery\User_artillery\Radio_dialog\radio_dialog.sqf';
 missionNamespace setVariable ['Rev_artillery_call',nil];

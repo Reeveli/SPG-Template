@@ -14,6 +14,10 @@
  * Example:
  * [_position select 0, _radius,_number,_delay] spawn Rev_arty_fnc_zeus_type_CLU
  *
+ 1.3
+	Added more whistle sound and increased sound range to 2000
+ 1.2
+	Replaced BIS_fnc_randomPos with CBA_fnc_randPos
  1.1
 	Added header, default params
 	Added safety exit
@@ -29,14 +33,14 @@ params [
 ];
 
 //Start bombarment
-for "_i" from 0 to (_number - 1) do {
+for "_i" from 1 to _number do {
 	[{
 		params ["_pos", "_radius","_i"];
-		private _barrage = [[[_pos, _radius]],[]] call BIS_fnc_randomPos;
+		private _barrage = [_pos, _radius] call CBA_fnc_randPos;
 		private _sound_pos = [_barrage select 0, _barrage select 1, 200];
 		private _h = createVehicle ["Land_HelipadEmpty_F", _sound_pos, [], 0, "CAN_COLLIDE"];
-		private _whistle = selectRandom ["whistle01","whistle02","whistle03","whistle04","whistle05","whistle06"];
-		[_h, [_whistle, 1600, 1]] remoteExec ["say3D"];
+		private _whistle = selectRandom ["whistle01","whistle02","whistle03","whistle04","whistle05","whistle06","shell1","shell2","shell3","shell4"];
+		[_h, [_whistle, 2000, 1]] remoteExec ["say3D"];
 		[_pos] call Rev_arty_fnc_react;
 
 		[{

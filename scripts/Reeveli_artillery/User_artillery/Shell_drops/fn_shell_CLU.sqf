@@ -12,17 +12,8 @@
  * Return Value <BOOL>
  *
  * Example:
- * [_pos,_range,_angle,_radius,_index,_number] call Rev_arty_fnc_shell_SMK
+ * [_pos,_range,_angle,_radius,_index,_number] call Rev_arty_fnc_shell_CLU
  *
- 1.2
-	Code rewritten for simplified params	
- 1.1
-	Replaced BIS_fnc_randomPos with CBA_fnc_randPos
-	Removed code accounting for radio
-	Added base game sounds to whistle pool
-	Increased whistle sound range by 400
-	Fixed ancient bug where whistel was played twice
-	Increased time from whistle to shell by  1 sec
  */
 
 params [
@@ -34,7 +25,7 @@ params [
 if (_final) then {["Shells",false] call Rev_arty_fnc_user_completed};
 
 private _barrage = [_pos, _radius] call CBA_fnc_randPos;
-private _smoke_pos = [_barrage select 0, _barrage select 1, 100];
+private _smoke_pos = [_barrage select 0, _barrage select 1, 200];
 private _h = createVehicle ["#particlesource", _smoke_pos, [], 0, "CAN_COLLIDE"];
 private _whistle = selectRandom ["whistle01","whistle02","whistle03","whistle04","whistle05","whistle06","shell1","shell2","shell3","shell4"];
 
@@ -43,16 +34,12 @@ private _whistle = selectRandom ["whistle01","whistle02","whistle03","whistle04"
 
 //Extra delay to alow sound to play out first
 [{
-	params ["_smoke_pos","_h"];
-	private _b = createVehicle ["Smoke_120mm_AMOS_White", _smoke_pos, [], 0, "CAN_COLLIDE"];
+	params ["_smoke_pos"];
+	private _b = createVehicle ["Cluster_155mm_AMOS", _smoke_pos, [], 0, "CAN_COLLIDE"];
 	_b setVectorDirandUp [[0,0,-1],[0.1,0.1,1]];
-	_b setVelocity [0,0,-15];
-	private _exp = selectRandom ["shell_1","shell_2","shell_3","shell_4"];
-	[_h, [_exp, 8600, 1]] remoteExec ["say3D"];
-	//Airburst
-	[_smoke_pos] remoteExec ["Rev_arty_fnc_smoke_effect",0,true];
+	_b setVelocity [0,0,-100];
 
-}, [_smoke_pos,_h], 5] call CBA_fnc_waitAndExecute;
+}, [_smoke_pos], 4] call CBA_fnc_waitAndExecute;
 
 
 [{

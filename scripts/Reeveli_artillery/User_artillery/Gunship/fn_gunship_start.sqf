@@ -18,6 +18,7 @@
  *
  1.2
 	BIS_fnc_dirTo replaced with getDir
+	Updated _timer saving method
  1.1
 	Switch objNull on controlled disconnect to Rev_air_pilot to enable waypoint management on manual disconnect
 	Additional variable saved on Rev_air_pilot for waypoint management on fn_air_disconnect 
@@ -121,7 +122,7 @@ Rev_air_machine = [[player]] call CBA_statemachine_fnc_create;
 [Rev_air_machine, "Controlled", "NotControlled", {cameraOn isEqualTo player}] call CBA_statemachine_fnc_addTransition;
 [Rev_air_machine, "NotControlled", "Controlled", {cameraOn isEqualTo Rev_air_pilot}] call CBA_statemachine_fnc_addTransition;
 
-timer = [{
+private _timer = [{
 	params ["_args","_handel"];
 	_args params ["_start","_time","_plane","_stateMachine","_group","_fin_pos"];
 	if (cba_missiontime >= (_start + _time)) then {
@@ -130,7 +131,7 @@ timer = [{
 		[_plane,_stateMachine,false] call Rev_arty_fnc_air_disconnect;
 	} else {hintSilent format ["Remaining time %1", round (_time - (cba_missiontime - _start))];};
 }, 0, [_start,Rev_arty_GUN_duration,Rev_air_pilot,Rev_air_machine,_group,_fin_pos]] call CBA_fnc_addPerFrameHandler;
-
+missionNamespace setVariable ["Rev_arty_timer_air",_timer];
 
 //EHs pilot
 Rev_air_pilot addEventHandler ["Deleted", {

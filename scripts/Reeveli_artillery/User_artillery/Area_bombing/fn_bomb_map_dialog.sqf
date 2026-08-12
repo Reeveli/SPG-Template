@@ -10,8 +10,16 @@
  * Example:
  * [] call Rev_arty_fnc_bomb_map_dialog
  *
+ 1.4
+	Adjusted amount slider start value calculation
+	Code adjusted for new hashmap usage
+ 1.3
+	Target marker is now deleted if <50m from TRP to prevent marker overlap
+	Target circle marker is now 50m radius (was 100)
+	Approach arrows are now spaced more evenly on flight path
+	Approach arrows are now mil triangles and not drawn arrows
  1.2
-	Pattren list neutered
+	Pattern list neutered
  1.1
 	Arrow, target and target circle updated
 	Target marker alpha is now set same way as in other types (1 unless TRP used)
@@ -19,19 +27,19 @@
  */
 
 private _args = missionNamespace getVariable ['Rev_artillery_call',nil];
-private _target = _args select 3;
-private _pos = _args select 5;
+_args params ["_location","_angle","_range","_target","_round_type","_finalPos","_number","_delay"];
 
 
-//Variables for artillery call later
-player setVariable ["Rev_arty_bom_call",[_pos]];
 
 private _alpha = 1;
-if (typeName _target isEqualTo "STRING") then {_alpha = 0};
+if (typeName _target isEqualTo "STRING") then {
+	private _markerPos = getMarkerPos _target;
+	if ((_finalPos distance _markerPos) < 50) then {_alpha = 0;};	
+};
 
 
 //Target marker
-private _target_pos = createMarkerLocal ["Rev_arty_bom_tgt",_pos];
+private _target_pos = createMarkerLocal ["Rev_arty_bom_tgt",_finalPos];
 
 "Rev_arty_bom_tgt" setMarkerTextLocal "Target";
 "Rev_arty_bom_tgt" setMarkerShapeLocal "ICON";
@@ -41,21 +49,22 @@ private _target_pos = createMarkerLocal ["Rev_arty_bom_tgt",_pos];
 
 
 //Target circle marker
-private _target_circle = createMarkerLocal ["Rev_arty_bom_circle",_pos];
+private _target_circle = createMarkerLocal ["Rev_arty_bom_circle",_finalPos];
 "Rev_arty_bom_circle" setMarkerShapeLocal "ELLIPSE";
 "Rev_arty_bom_circle" setMarkerBrush "Border";
 "Rev_arty_bom_circle" setMarkerColorLocal "ColorRed";
-"Rev_arty_bom_circle" setMarkerSizeLocal [100,100];
+"Rev_arty_bom_circle" setMarkerSizeLocal [50,50];
+"Rev_arty_bom_tgt" setMarkerAlphaLocal _alpha;
 
 //Area marker
-private _target_area = createMarkerLocal ["Rev_arty_bom_area",_pos];
+private _target_area = createMarkerLocal ["Rev_arty_bom_area",_finalPos];
 "Rev_arty_bom_area" setMarkerShapeLocal "ELLIPSE";
 "Rev_arty_bom_area" setMarkerBrush "Border";
 "Rev_arty_bom_area" setMarkerColorLocal "ColorRed";
 "Rev_arty_bom_area" setMarkerSizeLocal [3000, 3000];
 
 //Plane marker
-private _plane_dir = createMarkerLocal ["Rev_arty_bom_dir",_pos];
+private _plane_dir = createMarkerLocal ["Rev_arty_bom_dir",_finalPos];
 "Rev_arty_bom_dir" setMarkerShapeLocal "ICON";
 "Rev_arty_bom_dir" setMarkerAlphaLocal 0;
 //Updating plane maker type based on class
@@ -68,22 +77,25 @@ private _name = getText (configFile >> "CfgVehicles" >> Rev_arty_bom_class >> "d
 "Rev_arty_bom_dir" setMarkerTextLocal _name;
 
 //Direction arrow markers
-private _arrow1 = createMarkerLocal ["Rev_arty_bom_arrow_1",_pos];
+private _arrow1 = createMarkerLocal ["Rev_arty_bom_arrow_1",_finalPos];
 "Rev_arty_bom_arrow_1" setMarkerShapeLocal "ICON";
-"Rev_arty_bom_arrow_1" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_bom_arrow_1" setMarkerColorLocal "ColorBlack";
+"Rev_arty_bom_arrow_1" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_bom_arrow_1" setMarkerColorLocal "ColorWEST";
+"Rev_arty_bom_arrow_1" setMarkerSizeLocal [1,2];
 "Rev_arty_bom_arrow_1" setMarkerAlphaLocal 0;
 
-private _arrow2 = createMarkerLocal ["Rev_arty_bom_arrow_2",_pos];
+private _arrow2 = createMarkerLocal ["Rev_arty_bom_arrow_2",_finalPos];
 "Rev_arty_bom_arrow_2" setMarkerShapeLocal "ICON";
-"Rev_arty_bom_arrow_2" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_bom_arrow_2" setMarkerColorLocal "ColorBlack";
+"Rev_arty_bom_arrow_2" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_bom_arrow_2" setMarkerColorLocal "ColorWEST";
+"Rev_arty_bom_arrow_2" setMarkerSizeLocal [1,2];
 "Rev_arty_bom_arrow_2" setMarkerAlphaLocal 0;
 
-private _arrow3 = createMarkerLocal ["Rev_arty_bom_arrow_3",_pos];
+private _arrow3 = createMarkerLocal ["Rev_arty_bom_arrow_3",_finalPos];
 "Rev_arty_bom_arrow_3" setMarkerShapeLocal "ICON";
-"Rev_arty_bom_arrow_3" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_bom_arrow_3" setMarkerColorLocal "ColorBlack";
+"Rev_arty_bom_arrow_3" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_bom_arrow_3" setMarkerColorLocal "ColorWEST";
+"Rev_arty_bom_arrow_3" setMarkerSizeLocal [1,2];
 "Rev_arty_bom_arrow_3" setMarkerAlphaLocal 0;
 
 
@@ -99,11 +111,11 @@ private _underscore = _display displayCtrl 6071;
 
 //EH for map click
 private _id = addMissionEventHandler ["MapSingleClick", {
-	params ["_units", "_pos", "_alt", "_shift"];
+	params ["_units", "_finalPos", "_alt", "_shift"];
 	_thisArgs params ["_warning","_ok","_underscore"];
 
 	//Display warning if clicked inside minimum area
-	if (_pos inArea "Rev_arty_bom_area") exitWith {
+	if (_finalPos inArea "Rev_arty_bom_area") exitWith {
 		ctrlSetText [6072, "Position is too close to target! Select approach direction from outside the red circle."];
 		_warning ctrlSetTextColor [0,0,0,1];
 		playSound "FD_Start_F";
@@ -113,30 +125,25 @@ private _id = addMissionEventHandler ["MapSingleClick", {
 	//disable warning, enable OK button and set plane marker alpha + pos, target area marker alpha
 	ctrlSetText [6072,"Ready to send!"];
 	_warning ctrlSetTextColor [0,0,0,0.3];
-    "Rev_arty_bom_dir" setMarkerPosLocal _pos;
+    "Rev_arty_bom_dir" setMarkerPosLocal _finalPos;
     "Rev_arty_bom_dir" setMarkerAlphaLocal 1;
 	_ok ctrlEnable true;
 	_underscore ctrlShow true;
 	
-	/*
-	//If horizontal pattern is selected turn target marker again
-	private _mode = (findDisplay 6050) getVariable ["Rev_arty_pattern","Linear"];
-	if (_mode isEqualTo "Horizontal") then {"Rev_arty_bom_tgt" setMarkerDirLocal ((markerDir "Rev_arty_bom_tgt") + 90)};
-	*/
-
 	private _relDir = (markerPos "Rev_arty_bom_dir") getDir (markerPos "Rev_arty_bom_tgt");
+	private _relDistance = (markerPos "Rev_arty_bom_dir") distance (markerPos "Rev_arty_bom_tgt");
 
 	//Set direction arrow facing and position
-	"Rev_arty_bom_arrow_1" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_bom_arrow_1" setMarkerPosLocal ((markerPos "Rev_arty_bom_tgt") getpos [750,_relDir - 180]);
+	"Rev_arty_bom_arrow_1" setMarkerDirLocal (_relDir);
+	"Rev_arty_bom_arrow_1" setMarkerPosLocal ((markerPos "Rev_arty_bom_dir") getpos [(_relDistance / 6),_relDir]);
 	"Rev_arty_bom_arrow_1" setMarkerAlphaLocal 1;
 
-	"Rev_arty_bom_arrow_2" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_bom_arrow_2" setMarkerPosLocal ((markerPos "Rev_arty_bom_tgt") getpos [1500,_relDir - 180]);
+	"Rev_arty_bom_arrow_2" setMarkerDirLocal (_relDir);
+	"Rev_arty_bom_arrow_2" setMarkerPosLocal ((markerPos "Rev_arty_bom_dir") getpos [(_relDistance / 6) * 3,_relDir]);
 	"Rev_arty_bom_arrow_2" setMarkerAlphaLocal 1;
 
-	"Rev_arty_bom_arrow_3" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_bom_arrow_3" setMarkerPosLocal ((markerPos "Rev_arty_bom_tgt") getpos [2250,_relDir - 180]);
+	"Rev_arty_bom_arrow_3" setMarkerDirLocal (_relDir);
+	"Rev_arty_bom_arrow_3" setMarkerPosLocal ((markerPos "Rev_arty_bom_dir") getpos [(_relDistance / 6) * 5,_relDir]);
 	"Rev_arty_bom_arrow_3" setMarkerAlphaLocal 1;
 
 	//Target cicrle marker alpha
@@ -197,12 +204,26 @@ private _control = findDisplay 6050 displayCtrl 6052;
 
 //Ordnance amount
 sliderSetRange [6054, 1, Rev_arty_BOM_amount];
-sliderSetPosition [6054, [Rev_arty_BOM_amount, 1] call BIS_fnc_arithmeticMean];
+sliderSetPosition [6054, floor (Rev_arty_BOM_amount / 2)];
 sliderSetSpeed [6054, 1, 1];
 ctrlSetText [6053, format ['Ordnance amount: %1',round (sliderPosition 6054)]];
 
 
-/* //Pattern list neutered, left as legacy
+
+
+//hashmap for later data use
+Rev_arty_bombData set ["TargetPos", _finalPos];
+Rev_arty_bombData set ["BombType", _round_type];
+Rev_arty_bombData set ["BombAmount", _number];
+Rev_arty_bombData set ["TargetDirection", _angle];
+Rev_arty_bombData set ["PlaneClass", Rev_arty_bom_class];
+Rev_arty_bombData set ["PlaneSide", side player];
+Rev_arty_bombData set ["Caller", player];
+
+//Variable set to check for double loops
+player setVariable ["Rev_arty_bom_call",true,false];
+
+/* //Pattern list neutered, left as legacy. Possible reuse for gun runs in the future
 private _patternList = _display displayCtrl 6057;
 //Drop pattern
 {

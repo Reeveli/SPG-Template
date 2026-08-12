@@ -10,6 +10,8 @@
  * Example:
  * call Rev_fnc_dynamic_briefing
  *
+ 1.2.1
+	Renamed cluster missiles to artillery as per new scripts
  1.2
  	Deleted all refences to old dynamic webpage, iclusinf taking entire brieing put of spawn scope
 	Added clustermissile, supplydrop, gunship support, area bombing to briefing
@@ -47,6 +49,14 @@ if (Rev_arty_HE_enabled) then {
 		};
 	};
 
+if (Rev_arty_CLU_enable) then {
+		_b_text = _b_text + "Cluster artillery: " + str Rev_arty_CLU_amount_sys + "<br/>";
+
+		if (Rev_arty_CLU_regen > 0) then {
+			_regen_text = _regen_text + "Cluster artillery: " + str Rev_arty_CLU_regen + "<br/>";
+		};
+	};
+
 if (Rev_arty_SMK_enable) then {
 		_b_text = _b_text + "White smoke: " + str Rev_arty_SMK_amount_sys + "<br/>";
 
@@ -68,14 +78,6 @@ if (Rev_arty_MIS_enable) then {
 
 		if (Rev_arty_MIS_regen > 0) then {
 			_regen_text = _regen_text + "Tactical missile: " + str Rev_arty_MIS_regen + "<br/>";
-		};
-	};
-
-if (Rev_arty_CLU_enable) then {
-		_b_text = _b_text + "Cluster missile: " + str Rev_arty_CLU_amount_sys + "<br/>";
-
-		if (Rev_arty_CLU_regen > 0) then {
-			_regen_text = _regen_text + "Cluster missile: " + str Rev_arty_CLU_regen + "<br/>";
 		};
 	};
 

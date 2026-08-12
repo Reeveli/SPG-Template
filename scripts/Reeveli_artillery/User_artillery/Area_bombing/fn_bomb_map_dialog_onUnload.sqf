@@ -18,6 +18,11 @@
  * Example:
  * [_display,_exitCode] call Rev_arty_fnc_bomb_map_dialog_onUnload
  *
+ 1.3
+	Adjustments for hashmap usage for data transfer
+ 1.2
+	Removed separate MP code as radio is no longer required
+	Replaced waitAndExecute with execNextFrame
  1.1
 	_amount is now rounded to avoid weirdness
 	_pattern is now neutered, left as legacy
@@ -35,9 +40,10 @@ params [
 if !(_exitCode == 1) then {player setVariable ['Rev_arty_bom_call',nil]};
 
 
-private _attachment = lnbData [6052, [lbCurSel 6052,1]];
+private _bombType = lnbData [6052, [lbCurSel 6052,1]];
 private _amount = round sliderPosition 6054;
-private _start_pos = getMarkerPos 'Rev_arty_bom_dir';
+private _relDir = (markerPos "Rev_arty_bom_dir") getDir (markerPos "Rev_arty_bom_tgt");
+
 //private _pattern = (findDisplay 6050) getVariable ['Rev_arty_pattern','Linear'];
 
 removeMissionEventHandler ['MapSingleClick', missionNameSpace getVariable ['Rev_arty_bom_event',-1]];
@@ -85,25 +91,16 @@ private _map_scale = ctrlMapScale _map;
 
 
 //If cancel reopen previous dialog
-if (_exitCode == 3) exitWith {	
-	[{[] call Rev_arty_fnc_dialog}, [],0.01] call CBA_fnc_waitAndExecute;	
-};
+if (_exitCode == 3) exitWith {[{call Rev_arty_fnc_dialog}, []] call CBA_fnc_execNextFrame};
 
 
-private _args = player getVariable "Rev_arty_bom_call";
 
-//Values below were extracted at script start
-_args pushBack _attachment;
-_args pushBack _amount;
-_args pushBack _start_pos;
-//_args pushBack _pattern;
+//Adjusting hashMap baseed on data at dialog close
+Rev_arty_bombData set ["BombType", _bombType];
+Rev_arty_bombData set ["BombAmount", _amount];
+Rev_arty_bombData set ["TargetDirection", _relDir];
 
 
 private _radio_args = missionNamespace getVariable ['Rev_artillery_call',nil];
-if !(isMultiplayer) exitWith {
-	hint 'Radio dialog only works in multiplayer';
-	[] spawn Rev_arty_fnc_bomb_plane;
-	missionNamespace setVariable ['Rev_artillery_call',nil];
-};
 Rev_arty_radio_dialog = _radio_args execVM 'scripts\Reeveli_artillery\User_artillery\Radio_dialog\radio_dialog.sqf';
 missionNamespace setVariable ['Rev_artillery_call',nil];

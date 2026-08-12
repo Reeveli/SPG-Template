@@ -12,6 +12,11 @@
  * Example:
  * [_target,_pos] call Rev_arty_fnc_air_map_dialog
  *
+ 2.5
+	'Flying Altitude' changed to 'Starting altitude'
+	Target marker is now deleted if <50m from TRP to prevent marker overlap
+	Approach arrows are now spaced more evenly on flight path
+	Approach arrows are now mil triangles and not drawn arrows
  2.4.2
 	Header example call updated
  2.4.1
@@ -43,7 +48,11 @@ player setVariable ["Rev_arty_air_call",[_pos]];
 
 
 private _alpha = 1;
-if (typeName _target isEqualTo "STRING") then {_alpha = 0};
+private _size = 1;
+if (typeName _target isEqualTo "STRING") then {
+	private _markerPos = getMarkerPos _target;
+	if ((_pos distance _markerPos) < 50) then {_alpha = 0;};	
+};
 
 //Target marker
 private _target_pos = createMarkerLocal ["Rev_arty_air_tgt",_pos];
@@ -51,6 +60,7 @@ private _target_pos = createMarkerLocal ["Rev_arty_air_tgt",_pos];
 "Rev_arty_air_tgt" setMarkerShapeLocal "ICON";
 "Rev_arty_air_tgt" setMarkerTypeLocal "waypoint";
 "Rev_arty_air_tgt" setMarkerColorLocal "ColorRed";
+"Rev_arty_air_tgt" setMarkerSizeLocal [_size,_size];
 "Rev_arty_air_tgt" setMarkerAlphaLocal _alpha;
 
 //Area marker
@@ -68,20 +78,23 @@ private _plane_dir = createMarkerLocal ["Rev_arty_air_dir",_pos];
 //Direction arrow markers
 private _arrow1 = createMarkerLocal ["Rev_arty_air_arrow_1",_pos];
 "Rev_arty_air_arrow_1" setMarkerShapeLocal "ICON";
-"Rev_arty_air_arrow_1" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_air_arrow_1" setMarkerColorLocal "ColorBlack";
+"Rev_arty_air_arrow_1" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_air_arrow_1" setMarkerColorLocal "ColorWEST";
+"Rev_arty_air_arrow_1" setMarkerSizeLocal [1,2];
 "Rev_arty_air_arrow_1" setMarkerAlphaLocal 0;
 
 private _arrow2 = createMarkerLocal ["Rev_arty_air_arrow_2",_pos];
 "Rev_arty_air_arrow_2" setMarkerShapeLocal "ICON";
-"Rev_arty_air_arrow_2" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_air_arrow_2" setMarkerColorLocal "ColorBlack";
+"Rev_arty_air_arrow_2" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_air_arrow_2" setMarkerColorLocal "ColorWEST";
+"Rev_arty_air_arrow_2" setMarkerSizeLocal [1,2];
 "Rev_arty_air_arrow_2" setMarkerAlphaLocal 0;
 
 private _arrow3 = createMarkerLocal ["Rev_arty_air_arrow_3",_pos];
 "Rev_arty_air_arrow_3" setMarkerShapeLocal "ICON";
-"Rev_arty_air_arrow_3" setMarkerTypeLocal "hd_arrow";
-"Rev_arty_air_arrow_3" setMarkerColorLocal "ColorBlack";
+"Rev_arty_air_arrow_3" setMarkerTypeLocal "mil_triangle";
+"Rev_arty_air_arrow_3" setMarkerColorLocal "ColorWEST";
+"Rev_arty_air_arrow_3" setMarkerSizeLocal [1,2];
 "Rev_arty_air_arrow_3" setMarkerAlphaLocal 0;
 
 //Creating and populating dialog
@@ -117,18 +130,21 @@ private _id = addMissionEventHandler ["MapSingleClick", {
 	
 	//Set direction arrow facing and position
 	private _relDir = (markerPos "Rev_arty_air_dir") getDir (markerPos "Rev_arty_air_tgt");
+	private _relDistance = (markerPos "Rev_arty_air_dir") distance (markerPos "Rev_arty_air_tgt");
 
-	"Rev_arty_air_arrow_1" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_air_arrow_1" setMarkerPosLocal ((markerPos "Rev_arty_air_tgt") getpos [750,_relDir - 180]);
+	//Set direction arrow facing and position
+	"Rev_arty_air_arrow_1" setMarkerDirLocal (_relDir);
+	"Rev_arty_air_arrow_1" setMarkerPosLocal ((markerPos "Rev_arty_air_dir") getpos [(_relDistance / 6),_relDir]);
 	"Rev_arty_air_arrow_1" setMarkerAlphaLocal 1;
 
-	"Rev_arty_air_arrow_2" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_air_arrow_2" setMarkerPosLocal ((markerPos "Rev_arty_air_tgt") getpos [1500,_relDir - 180]);
+	"Rev_arty_air_arrow_2" setMarkerDirLocal (_relDir);
+	"Rev_arty_air_arrow_2" setMarkerPosLocal ((markerPos "Rev_arty_air_dir") getpos [(_relDistance / 6) * 3,_relDir]);
 	"Rev_arty_air_arrow_2" setMarkerAlphaLocal 1;
 
-	"Rev_arty_air_arrow_3" setMarkerDirLocal (_relDir + 8);
-	"Rev_arty_air_arrow_3" setMarkerPosLocal ((markerPos "Rev_arty_air_tgt") getpos [2250,_relDir - 180]);
+	"Rev_arty_air_arrow_3" setMarkerDirLocal (_relDir);
+	"Rev_arty_air_arrow_3" setMarkerPosLocal ((markerPos "Rev_arty_air_dir") getpos [(_relDistance / 6) * 5,_relDir]);
 	"Rev_arty_air_arrow_3" setMarkerAlphaLocal 1;
+
 },[_warning,_ok,_underscore]];
 
 missionNameSpace setVariable ["Rev_arty_air_map_event",_id,false];
@@ -164,4 +180,4 @@ lbSetCurSel [4081, 0];
 sliderSetRange [4085, 100, 800];
 sliderSetPosition [4085, 300];
 sliderSetSpeed [4085, 10, 10];
-ctrlSetText [4084, format ['Flying Altitude: %1M',round (sliderPosition 4085)]];
+ctrlSetText [4084, format ['Starting altitude: %1M',round (sliderPosition 4085)]];

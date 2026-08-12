@@ -18,6 +18,10 @@
  * Example:
  * [_location,_target,_range,_angle,_number,_caller_pos,"Missile",_delay] call Rev_arty_fnc_type_MIS
  *
+1.9
+	Removed code for cluster missiles
+1.8
+	TRPs can now be used as relative positions with angle + distance	
 1.7
 	Safety checks on number streamlined
 1.6.1
@@ -57,23 +61,26 @@ params [
 	["_delay",0,[0]]
 ];
 
-private _start_pos = [_location, true] call CBA_fnc_mapGridToPos;
-
 //Check ammunition amount
 private _unmodified_number = _number;
-if (Rev_arty_MIS_amount + Rev_arty_CLU_amount == 0) exitWith {[{playSound "FD_Start_F"; hint "No missiles available!";}, []] call CBA_fnc_execNextFrame;};
+if (Rev_arty_MIS_amount < 1) exitWith {[{playSound "FD_Start_F"; hint "No missiles available!";}, []] call CBA_fnc_execNextFrame;};
 if !(_number == 1) exitWith {[{playSound "FD_Start_F"; hint "Select 1 as the round amount!";}, []] call CBA_fnc_execNextFrame;};
 if ((_number <= Rev_arty_MIS_amount) && (_number != 0) && (_number == _unmodified_number)) then {hintSilent "";};
 
-//Check if laser target
-private _pos = _start_pos getPos [_range,_angle];
-if (typeName _target isEqualTo "STRING") then {_pos = getMarkerPos _target};
-if (count (_pos nearEntities ['LaserTarget', 100]) == 0) exitWith {[{playSound "FD_Start_F"; hint "No target designated with laser. Check your coordinates.";}, []] call CBA_fnc_execNextFrame;};
-private _tgt = (_pos nearEntities ['LaserTarget', 100] ) select 0;
+private _start_pos = [_location, true] call CBA_fnc_mapGridToPos;
+if (typeName _target isEqualTo "STRING") then {
+	_start_pos = getMarkerPos _target;
+	_location = mapGridPosition _start_pos;
+};
+private _finalPos = _start_pos getPos [_range,_angle];
+
+//Check if laser found
+if (count (_finalPos nearEntities ['LaserTarget', 100]) == 0) exitWith {[{playSound "FD_Start_F"; hint "No target designated with laser. Check your coordinates.";}, []] call CBA_fnc_execNextFrame;};
+private _tgt = (_finalPos nearEntities ['LaserTarget', 100] ) select 0;
 
 //Check if a previous missile is being called to avoid duplicate varibales being used
 if !(isNil {player getvariable ['Rev_arty_mis_call',nil]}) exitWith {[{playSound "FD_Start_F"; hint "Previous missile strike is still processing!";}, []] call CBA_fnc_execNextFrame;};
 
 
-[{[param [0],param [1],param [2]] call Rev_arty_fnc_missile_map_dialog},[_target,_tgt,_pos]] call CBA_fnc_execNextFrame;
-missionNamespace setVariable ["Rev_artillery_call",[_location,_angle,_range,_target,_round_type,_pos,_number,_delay,_tgt]];
+[{[param [0],param [1],param [2]] call Rev_arty_fnc_missile_map_dialog},[_target,_tgt,_finalPos]] call CBA_fnc_execNextFrame;
+missionNamespace setVariable ["Rev_artillery_call",[_location,_angle,_range,_target,_round_type,_finalPos,_number,_delay,_tgt]];

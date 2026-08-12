@@ -5,22 +5,62 @@ class Rev_rus_arty_request {
 };
 class Rev_rus_air_request {
 	name = "";
-	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male01RUS\Normal\220_support\supportrequestrgcashelicopter.ogg", 0.001, 1.0 };
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male01RUS\Normal\220_support\supportrequestrgcashelicopter.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_rus_supply_request {
 	name = "";
-	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male01RUS\Normal\220_support\supportrequestrgsupplydrop.ogg", 0.001, 1.0 };
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male01RUS\Normal\220_support\supportrequestrgsupplydrop.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_rus_bomb_request {
 	name = "";
-	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male01RUS\Normal\220_support\supportrequestrgcasbombing.ogg", 0.001, 1.0 };
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male01RUS\Normal\220_support\supportrequestrgcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_bomb_roger {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\requestacknowledgedsgcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_bomb_complete {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\requestaccomplishedsgcasbombing.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_rus_arty_roger {
 	name = "";
 	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\requestacknowledgedsgarty.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_air_roger {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\requestacknowledgedsgcashelicopter.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_supply_roger {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\requestacknowledgedsgsupplydrop.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_supply_complete {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\requestaccomplishedsgsupplydrop.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_air_complete {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\requestaccomplishedsgcashelicopter.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_air_killed {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\unitdestroyedhqcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_rus_arty_complete {
+	name = "";
+	sound[] = {"@A3\Dubbing_Radio_F_Enoch\data\RUS\Male03RUS\normal\220_support\artysgsupportroundscomplete.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_rus_arty_fire1 {

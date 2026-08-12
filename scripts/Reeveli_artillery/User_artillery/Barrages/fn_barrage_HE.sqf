@@ -4,9 +4,8 @@
  * Client side function to start the artillery barrage. Called from radio_dialog.
  *
  * Arguments:
- * 0: Target angle <NUMBER> (default: 0) (not used)
- * 1: Target range <NUMBER> (default: 0) (not used)
- * 2: Target position <ARRAY>
+ * 0: Target position <ARRAY>
+ * 1: Shell dispersion <NUMBER> (default: 10)
  * 3: Amount of rounds fired <NUMBER> (default: 1)
  * 4: Delay between rounds <NUMBER> (default: 0)
  *
@@ -14,23 +13,38 @@
  * Return Value <BOOL>
  *
  * Example:
- * [_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_HE;
+ * [_finalPos,(_number * 10),_number,_delay] call Rev_arty_fnc_barrage_HE
  *
+1.2.2
+	Reverted changes to number calcs to correctly NOT apply delay on first round
+1.2.1
+	Fixed wrong calc never sending correct param for final call
+1.2
+	Function rewritten for simplified params
 1.1
 	Ammo regen event moved to type_HE
  */
 
 params [
-	["_angle",0,[0]],
-	["_range",0,[0]],
 	["_pos",[0,0,0],[[]],[2,3]],
-	["_number",1,[0]],
+	["_radius",150,[0]], 
+	["_number",3,[0]], 
 	["_delay",0,[0]]
 ];
 
-
-private _dispersion = _number * 10;
 //Start bombarment
-for "_i" from 0 to (_number - 1) do {
-	[{params ["_pos", "_range","_angle","_dispersion","_index","_number"];[_pos, _range,_angle,_dispersion,_index,_number] call Rev_arty_fnc_shell_HE;}, [_pos, _range,_angle,_dispersion,_i,_number], ((_i * _delay) + (random 2))] call CBA_fnc_waitAndExecute;
+for "_i" from 0 to (_number -1) do {
+	[
+		{
+			params ["_pos","_radius","_index","_number"];
+			private _final = false;
+			if (_index == (_number -1)) then {_final = true};	
+			[_pos,_radius,_final,Rev_arty_HE_crater,Rev_arty_HE_type] call Rev_arty_fnc_shell_HE;
+			
+		},
+		[_pos, _radius,_i,_number],
+		(_i * _delay) + (random 2)
+	] call CBA_fnc_waitAndExecute;
 };
+
+true;

@@ -10,6 +10,13 @@
  * Example:
  * call Rev_arty_fnc_player_init
  *
+ 1.5
+	New module to adjust ammo values live
+ 1.4
+	Hashmaps for artillery use are now created here
+ 1.3
+	New curator module for removing existing TRPs
+		Removed add TRP context action for consistency
  1.2.1
 	sideLogic made to array in Rev_zeus_trp CBA EH
 	Cleaned function header
@@ -25,6 +32,9 @@
 
 if !(hasInterface) exitWith {};
 
+//hashmaps for user artillery
+Rev_arty_bombData = createHashMap;
+
 //ZEN modules
 if (isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) then
 {
@@ -32,6 +42,8 @@ if (isClass (configFile >> "CfgPatches" >> "zen_custom_modules")) then
 	["Reeveli's ZEN Fire Support", "Air Strike", {[_this select 0] call Rev_arty_fnc_zeus_air_strike},"\a3\Modules_F_Curator\Data\portraitCAS_ca.paa"] call zen_custom_modules_fnc_register;
 	["Reeveli's ZEN Fire Support", "Tactical Missile", {[_this select 0] call Rev_arty_fnc_zeus_missile},"\a3\Modules_F_Curator\Data\portraitOrdnanceRocket_ca.paa"] call zen_custom_modules_fnc_register;
 	["Reeveli's ZEN Fire Support", "Add TRP", {[_this select 0] call Rev_arty_fnc_zeus_trp_dialog},"\A3\ui_f\data\map\markers\military\destroy_CA.paa"] call zen_custom_modules_fnc_register;
+	["Reeveli's ZEN Fire Support", "Remove TRP", {call Rev_arty_fnc_zeus_removeTRP_dialog},"a3\3den\data\displays\display3den\panelleft\entitylist_delete_ca.paa"] call zen_custom_modules_fnc_register;
+	["Reeveli's ZEN Fire Support", "Adjust ammunition", {call Rev_arty_fnc_zeus_ammoDialog},"x\zen\addons\context_actions\ui\ammo_ca.paa"] call zen_custom_modules_fnc_register;
 };
 
 //Icon for ACE action
@@ -133,15 +145,7 @@ if (isClass (configFile >> "CfgPatches" >> "zen_context_menu")) then
 					{true}
 				] call zen_context_menu_fnc_createAction;
 
-				private _trp = [
-					"Rev_arty_trp",
-					"Add TRP",
-					"\A3\ui_f\data\map\markers\military\destroy_CA.paa",
-					{[_position] call Rev_arty_fnc_zeus_trp_dialog},
-					{true}
-				] call zen_context_menu_fnc_createAction;
-
-				[[_artillery_strike,[],3],[_air_strike,[],2],[_missile_strike,[],1],[_trp,[],0]];
+				[[_artillery_strike,[],3],[_air_strike,[],2],[_missile_strike,[],1]];
 				
 		}
 	] call zen_context_menu_fnc_createAction;

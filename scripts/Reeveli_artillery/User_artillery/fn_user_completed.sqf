@@ -4,15 +4,16 @@
  * Client side function to handle completed support missions.
  *
  * Arguments:
- * 0: Did player have radio on call <BOOL> (default: false)
- * 1: Ordnance type <STRING> (default "Shells")
- * 2: Was player killed <BOOL> (default: false)
+ * 0: Ordnance type <STRING> (default "Shells")
+ * 1: Was player killed <BOOL> (default: false)
  *
  * Return Value: <NONE>
  *
  * Example:
- * [false,"Shells",false] call Rev_arty_fnc_user_completed
+ * ["Shells",false] call Rev_arty_fnc_user_completed
  *
+ 1.3
+	Script rewritten to no longer raquire radio, code and input arguments adjusted
  1.2
 	Code for area bombing exit
  1.1
@@ -20,7 +21,6 @@
  */
 
 params [
-	["_initial_radio",false,[false]],
 	["_type","Shells",[""]],
 	["_killed",false,[false]]
 ];
@@ -61,23 +61,23 @@ private _name = format ["Rev_arty_completed_%1", player];
 _unit setVariable [_name, true];
 
 
-switch (_type) do {
-	case "Air": {
-					if (_killed) then {_unit sideRadio format ["Rev_%1_air_killed", _protocol];}
-					else {_unit sideRadio format ["Rev_%1_air_complete", _protocol]; hintSilent "";};
-				};
-	case "Supply": {_unit sideRadio format ["Rev_%1_supply_complete", _protocol];};
-	case "Bombing": {_unit sideRadio format ["Rev_%1_bomb_complete", _protocol];};
-	default {_unit sideRadio format ["Rev_%1_arty_complete", _protocol]};	
+private _fnc_playMessage = {
+	params ["_unit","_root","_protocol"];
+	private _sound = format [_root, _protocol];	
+	private _text = getText (missionConfigFile >> "CfgRadio" >> _sound >> "title");
+
+	_unit sideChat _text;
+	private _source = playSound _sound;
 };
 
 
+switch (_type) do {
+	case "Air": {
+					if (_killed) then {[_unit,"Rev_%1_air_killed", _protocol] call _fnc_playMessage;}
+					else {_unit sideRadio format ["Rev_%1_air_complete", _protocol]; hintSilent "";};
+				};
+	case "Supply": {[_unit,"Rev_%1_supply_complete", _protocol] call _fnc_playMessage;};
+	case "Bombing": {[_unit,"Rev_%1_bomb_complete", _protocol] call _fnc_playMessage;};
+	default {[_unit,"Rev_%1_arty_complete", _protocol] call _fnc_playMessage;};	
+};
 
-//Radio removal
-[{
-	params["_unit","_initial_radio"];
-	if (!_initial_radio) then {
-		player unlinkItem ((assignedItems player) select {getNumber (configfile >> "CfgWeapons" >> _x >> "tf_radio") != 0} select 0);
-	};
-	deleteVehicle (_this select 0);
-}, [_unit,_initial_radio], 5] call CBA_fnc_waitAndExecute;

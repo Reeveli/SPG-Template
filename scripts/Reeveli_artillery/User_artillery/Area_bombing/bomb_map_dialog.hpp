@@ -11,7 +11,7 @@
 
 #define IDD_REV_BOM  					6050
 
-#define IDC_REV_BOM_ATTC_LIST  			6052
+#define IDC_REV_BOM_ATTC_LIST 			6052
 #define IDC_REV_BOM_AMOUNT_TXT			6053
 #define IDC_REV_BOM_AMOUNT 				6054
 #define IDC_REV_BOM_PATTERN				6057

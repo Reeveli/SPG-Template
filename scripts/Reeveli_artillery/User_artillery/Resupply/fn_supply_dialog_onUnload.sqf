@@ -18,6 +18,8 @@
  * Example:
  * [_display,_exitCode] call Rev_arty_fnc_supply_dialog_onUnload
  *
+ 1.1.1
+	Replaced waitAndExecute with execNextFrame
  1.1
 	Added map marker deletion
  */
@@ -71,9 +73,9 @@ private _map_scale = ctrlMapScale _map;
 
 
 //If cancel reopen previous dialog
-if (_exitCode == 3) exitWith {	
-	[{[] call Rev_arty_fnc_dialog}, [],0.01] call CBA_fnc_waitAndExecute;	
-};
+if (_exitCode == 3) exitWith {[{call Rev_arty_fnc_dialog}, []] call CBA_fnc_execNextFrame};
 
 //If 'Continue' open supply map dialog
-[{[] call Rev_arty_fnc_supply_map_dialog}, [],0.01] call CBA_fnc_waitAndExecute;
+[{call Rev_arty_fnc_supply_map_dialog}, []] call CBA_fnc_execNextFrame;
+
+

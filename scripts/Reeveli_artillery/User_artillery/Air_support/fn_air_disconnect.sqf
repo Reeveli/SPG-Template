@@ -13,6 +13,9 @@
  * Example:
  * [_plane,_stateMachine,false] call Rev_arty_fnc_air_disconnect
  *
+ 1.3
+	Removed code and input params requiring radio
+	Updated _timer loading method
  1.2.1
 	TFAR_spg_radio_beta item requirement removed (not sure when it was inserted)
  1.2
@@ -34,7 +37,8 @@ Rev_arty_gun_view = nil;
 
 findDisplay 46 displayRemoveEventHandler ["keyDown",Rev_air_curator];
 
-[timer] call CBA_fnc_removePerFrameHandler;
+private _timer = missionNamespace getVariable ["Rev_arty_timer_air",-1];
+[_timer] call CBA_fnc_removePerFrameHandler;
 player connectTerminalToUAV objNull;
 objNull remoteControl _entity;
 player disableUAVConnectability [_entity, true];
@@ -65,11 +69,4 @@ if (!isNull Rev_air_pilot && (alive Rev_air_pilot)) then {
 Rev_air_pilot = nil;
 if !(alive player) exitWith {};
 
-//Check if user has radio (needed for sideradio command)
-private _condition = {getNumber (configfile >> "CfgWeapons" >> _x >> "tf_radio") != 0};
-private _initial_radio = true;
-if (_condition count assignedItems player == 0) then {
-	_initial_radio = false;
-	player linkItem "TFAR_anprc148jem";
-	[{params ["_condition","_initial_radio","_killed"];_condition count assignedItems player > 0}, {[_this select 1,"Air",_this select 2] call Rev_arty_fnc_user_completed}, [_condition,_initial_radio,_killed],5] call CBA_fnc_waitUntilAndExecute;
-} else {[_initial_radio,"Air",_killed] call Rev_arty_fnc_user_completed};
+["Air",_killed] call Rev_arty_fnc_user_completed

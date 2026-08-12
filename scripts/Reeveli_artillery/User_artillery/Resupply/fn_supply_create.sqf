@@ -11,6 +11,8 @@
  * Example:
  * [_plane] spawn Rev_arty_fnc_supply_create
  *
+ 1.2
+	Removed radio code
  1.1.1
 	Fixed parachute creation value to be determined by the same value as box altitude
  1.1
@@ -22,19 +24,7 @@ params [
 	["_plane",objNull,[objNull]]
 ];
 
-////////Radio////////
-if ((isMultiplayer) AND (isClass (configFile >> "CfgPatches" >> "tfar_handhelds"))) then 
-{
-	//Check if user has radio (needed for sideradio command)
-	private _condition = {getNumber (configfile >> "CfgWeapons" >> _x >> "tf_radio") != 0};
-	private _initial_radio = true;
-	if (_condition count assignedItems player == 0) then {
-		_initial_radio = false;
-		player linkItem "tf_anprc148jem";
-		[{params ["_condition","_initial_radio","_killed"];_condition count assignedItems player > 0}, {[_this select 1,"Supply",_this select 2] call Rev_arty_fnc_user_completed}, [_condition,_initial_radio,false],5] call CBA_fnc_waitUntilAndExecute;
-	} else {[_initial_radio,"Supply",false] call Rev_arty_fnc_user_completed};
-};
-/////////////////////
+["Supply",false] call Rev_arty_fnc_user_completed;
 
 
 private _attachment = (_plane getVariable "Rev_arty_sup_cargo") select 0;

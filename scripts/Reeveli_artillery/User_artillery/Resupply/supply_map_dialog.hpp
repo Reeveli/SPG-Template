@@ -1,3 +1,7 @@
+/*
+1.1
+	Fixed wrong parachute altitude tooltip
+*/
 #define IDD_REV_SUP_MAP  					6020
 
 #define IDC_REV_SUP_MAP_PLANE_IMG  			6022
@@ -136,7 +140,7 @@ class Rev_arty_supply_map_dialog
 			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 4 * pixelGridNoUIScale * pixelW";
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 45 * pixelGridNoUIScale * pixelH";
 			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6024, format ['Chute opening altitude: %1M',round _newValue]];";
-			tooltip = "On what altitude will the aircraft be spawned in";
+			tooltip = "On what altitude will the crate parachute open";
 		};
 		
 		

@@ -75,7 +75,7 @@ class Rev_arty_air_map
 			arrowFull = "scripts\Reeveli_artillery\images\combobox_arrowD.paa";
 			onLBSelChanged = "params ['_control', '_selectedIndex'];[_control lbData _selectedIndex] call Rev_arty_fnc_air_selection;";			
 		};
-		//Aircraft list frame
+		//Aircraft image frame
 		class Frame_aircraft: Rev_arty_frame 
 		{
 			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 4 * pixelGridNoUIScale * pixelW";
@@ -100,9 +100,9 @@ class Rev_arty_air_map
 		class Loadout_selection: Aircraft_list
 		{
 			idc = IDC_ARTY_AIR_LOAD_SEL;
-			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 22 * pixelGridNoUIScale * pixelW";
+			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 15 * pixelGridNoUIScale * pixelW";
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 26 * pixelGridNoUIScale * pixelH";
-			w = 8 * pixelGridNoUIScale * pixelW;
+			w = 15 * pixelGridNoUIScale * pixelW;
 			tooltip = "Selected aircraft loadout";			
 			onLBSelChanged = "params ['_control', '_selectedIndex'];[lbData  [4081, lbCurSel 4081],_control lbData _selectedIndex,_control] call Rev_arty_fnc_air_loadout_parse;";			
 		};
@@ -159,7 +159,7 @@ class Rev_arty_air_map
 		{
 			idc = IDC_ARTY_AIR_ALT_TXT;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 42 * pixelGridNoUIScale * pixelH";
-			text = "Flying Altitude: ";
+			text = "Starting altitude:";
 			tooltip = "";		
 		};
 		class Altitude_slider: Rev_arty_slider
@@ -167,7 +167,7 @@ class Rev_arty_air_map
 			idc = IDC_ARTY_AIR_ALT;			
 			x = "(uiNamespace getvariable ['Rev_arty_dialog_x',safezoneX + (safezoneW * 0.50) - ((64 * pixelGridNoUIScale * pixelW) * 0.5)]) + 4 * pixelGridNoUIScale * pixelW";
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 45 * pixelGridNoUIScale * pixelH";
-			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [4084, format ['Flying altitude: %1M',round _newValue]];";
+			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [4084, format ['Starting altitude: %1M',round _newValue]];";
 			tooltip = "On what altitude will the aircraft be spawned in";
 		};
 

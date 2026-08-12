@@ -1,3 +1,9 @@
+/*
+1.1	
+	Some pretty text capitalisation consistency fixes
+*/
+
+
 #define IDD_REV_GUN_MAP  					6040
 
 #define IDC_REV_GUN_MAP_LOITER_TXT  		6042
@@ -64,7 +70,7 @@ class Rev_arty_gun_map_dialog
 		{
 			idc = IDC_REV_GUN_MAP_LOITER_TXT;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 28 * pixelGridNoUIScale * pixelH";
-			text = "Loiter Radius: ";
+			text = "Loiter radius:";
 			tooltip = "";	
 			onLoad = "";	
 		};
@@ -79,26 +85,26 @@ class Rev_arty_gun_map_dialog
 		{
 			idc = IDC_REV_GUN_MAP_ALT_TXT;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 34 * pixelGridNoUIScale * pixelH";
-			text = "Loiter Altitude: ";			
+			text = "Loiter altitude:";			
 		};
 		class Altitude_slider: Rev_arty_slider
 		{
 			idc = IDC_REV_GUN_MAP_ALT;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 37 * pixelGridNoUIScale * pixelH";
-			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6044, format ['Loiterin Altitude: %1M',round _newValue]];";
+			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6044, format ['Loiterin altitude: %1M',round _newValue]];";
 			tooltip = "What altitude will the aircraft try to maintain";
 		};
 		class View_title: Loiter_title
 		{
 			idc = IDC_REV_GUN_MAP_VIEW_TXT;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 40 * pixelGridNoUIScale * pixelH";
-			text = "View Distance: ";			
+			text = "View distance:";			
 		};
 		class View_slider: Rev_arty_slider
 		{
 			idc = IDC_REV_GUN_MAP_VIEW;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 43 * pixelGridNoUIScale * pixelH";
-			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6048, format ['View Distance: %1M',round _newValue]];";
+			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6048, format ['View distance: %1M',round _newValue]];";
 			tooltip = "Increase your view distance for the duration of the gunship support";
 		};
 		//Buttons

@@ -5,31 +5,64 @@ class Rev_eng_arty_request {
 };
 class Rev_eng_air_request {
 	name = "";
-	sound[] = {"@a3\dubbing_radio_f\data\eng\male01eng\radioprotocoleng\normal\220_support\supportrequestrgcashelicopter.ogg", 0.001, 1.0 };
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male01eng\radioprotocoleng\normal\220_support\supportrequestrgcashelicopter.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_eng_supply_request {
 	name = "";
-	sound[] = {"@a3\dubbing_radio_f\data\eng\male01eng\radioprotocoleng\normal\220_support\supportrequestrgsupplydrop.ogg", 0.001, 1.0 };
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male01eng\radioprotocoleng\normal\220_support\supportrequestrgsupplydrop.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_eng_bomb_request {
 	name = "";
-	sound[] = {"@a3\dubbing_radio_f\data\eng\male01eng\radioprotocoleng\normal\220_support\supportrequestrgcasbombing.ogg", 0.001, 1.0 };
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male01eng\radioprotocoleng\normal\220_support\supportrequestrgcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_eng_bomb_roger {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestacknowledgedsgcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_eng_bomb_complete {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestaccomplishedsgcasbombing.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_eng_arty_roger {
 	name = "";
-	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestacknowledgedsgarty.ogg", 10, 1.0 };
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestacknowledgedsgarty.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
-/*Unsued prototype
+class Rev_eng_air_roger {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestacknowledgedsgcashelicopter.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_eng_supply_roger {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestacknowledgedsgsupplydrop.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_eng_supply_complete {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestaccomplishedsgsupplydrop.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_eng_air_complete {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\requestaccomplishedsgcashelicopter.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_eng_air_killed {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\unitdestroyedhqcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
 class Rev_eng_arty_complete {
 	name = "";
 	sound[] = {"@a3\dubbing_radio_f\data\eng\male11eng\radioprotocoleng\normal\220_support\artysgsupportroundscomplete.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
-*/
 class Rev_eng_arty_fire1 {
 	name = "";
 	sound[] = {"@a3\dubbing_radio_f\data\eng\male01eng\radioprotocoleng\normal\015_targeting\fire_1.ogg", 1, 1.0 };

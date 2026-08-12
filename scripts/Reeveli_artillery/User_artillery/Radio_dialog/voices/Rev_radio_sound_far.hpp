@@ -5,22 +5,62 @@ class Rev_far_arty_request {
 };
 class Rev_far_air_request {
 	name = "";
-	sound[] = {"@A3\Dubbing_Radio_F\data\per\Male01per\radioprotocolper\Normal\220_support\supportrequestrgcashelicopter.ogg", 0.001, 1.0 };
+	sound[] = {"@A3\Dubbing_Radio_F\data\per\Male01per\radioprotocolper\Normal\220_support\supportrequestrgcashelicopter.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_far_supply_request {
 	name = "";
-	sound[] = {"@A3\Dubbing_Radio_F\data\per\Male01per\radioprotocolper\Normal\220_support\supportrequestrgsupplydrop.ogg", 0.001, 1.0 };
+	sound[] = {"@A3\Dubbing_Radio_F\data\per\Male01per\radioprotocolper\Normal\220_support\supportrequestrgsupplydrop.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_far_bomb_request {
 	name = "";
-	sound[] = {"@A3\Dubbing_Radio_F\data\per\Male01per\radioprotocolper\Normal\220_support\supportrequestrgcasbombing.ogg", 0.001, 1.0 };
+	sound[] = {"@A3\Dubbing_Radio_F\data\per\Male01per\radioprotocolper\Normal\220_support\supportrequestrgcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_bomb_roger {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\requestacknowledgedsgcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_bomb_complete {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\requestaccomplishedsgcasbombing.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_far_arty_roger {
 	name = "";
 	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\requestacknowledgedsgarty.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_air_roger {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\requestacknowledgedsgcashelicopter.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_supply_roger {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\requestacknowledgedsgsupplydrop.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_supply_complete {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\requestaccomplishedsgsupplydrop.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_air_complete {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\requestaccomplishedsgcashelicopter.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_air_killed {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\unitdestroyedhqcasbombing.ogg", 1, 1.0 };
+	titles[] = {0, ""};
+};
+class Rev_far_arty_complete {
+	name = "";
+	sound[] = {"@a3\dubbing_radio_f\data\per\male03per\radioprotocolper\normal\220_support\artysgsupportroundscomplete.ogg", 1, 1.0 };
 	titles[] = {0, ""};
 };
 class Rev_far_arty_fire1 {

@@ -1,56 +1,21 @@
 /*
 By Reeveli
 
-Script to handle radio discussion between the player and battery when calling artillery in multiplayer.
+Script to handle radio discussion between the player and battery.
 Must be executed in scheduled environment, hence script format and not compiled function.
+Called from "Type" functions
 
-2.2.2
-	Updared header, argument listing had old legacy mention of missile type, this is no longer passed into the script
-2.2.1
-	Rev_fnc_barrage_BOM replaced with Rev_arty_fnc_bomb_plane
-2.2
-	Added code for area bombing ordnance type
-	Added more general comments
-2.1
-	Added new line to define distance if its over 1000 as that would cause no voice line being available
-2.0
-	Removed params from spawn Rev_arty_fnc_supply_transport as they are now longer needed since the supply system rewrite
-	Removed missile_type param as obsolete
-	Fixed missing radio protocol bit in initial missile call
-	Added code for gunship support
-1.9.1
-	Added two seconds to last sleep to prevent air callout from being cut out
-1.9
-	Added missing _delay param
-1.8
-	Default values for params
-	Added interface safety condition
-1.7.1
-	Tripled 3d voice range 
-1.7
-	Another stab at remoteExec problems
-1.6
-	Fixed (hopefully) all remoteExec problems
-1.5
-	Code for resupply
-	Begin conversation changed from if-statement to switch do-block
-	Removed unnecessary arguments being passed into supply_transport
-	supply_transport is now spawned instead of called
+3.2
+	Bearings are no longer called out if range < 50m
+3.1.1
+	< 50m distances are no longer called out
+3.1
+	Added code for cluster arty
 
-	Changed code for air support to allow the radio dialof to run afger the dialog
-1.4
-	Code for new air selection system
-1.3
-	New commands for 3d voice lines
-	Increased pverral time multiplier by 1
-	Added varibale to battery logic to facilitate removal frm ACE unconscious and killed EHs
-	New params for missile type
-	Massive changes otherwise to fix missile lasre loss issues
-	Incorporated code for air
-1.2
-	Added code for temporary radio if player had none (needed for sideradio command)
-1.1
-	Fixed missile acknowledgement in line 103
+3.0 (2026 overhaul)
+	All sideRAdio commands pruned, script is no longer requires radio item in inventory
+	Grid is now single chat line, voices still separate
+	Code simplified with new in-line function for sound and chat execution
 
 
 Arguments:
@@ -73,22 +38,13 @@ params [
 	["_range",100,[0]],
 	["_target",0,["",0]],
 	["_round_type","HE",[""]],
-	["_pos",[0,0,0],[[]],[2,3]],
+	["_finalPos",[0,0,0],[[]],[2,3]],
 	["_number",1,[0]],
 	["_delay",0,[0]],
 	["_tgt", objNull, [objNull]]
 ];
 
 private _players = (call CBA_fnc_players) - [player];
-
-//Check if user has radio (needed for sideradio command)
-private _condition = {getNumber (configfile >> "CfgWeapons" >> _x >> "tf_radio") != 0};
-private _initial_radio = true;
-if (_condition count assignedItems player == 0) then {
-	_initial_radio = false;
-	player linkItem "TFAR_anprc148jem";
-	waitUntil {_condition count assignedItems player > 0};
-};
 
 //Create speaker for radio
 private _side = side player;
@@ -109,123 +65,86 @@ switch (Rev_arty_protocol) do {
 	case 5: {_protocol = "rus";};
 	case 6: {_protocol = "pol";};
 	default {_protocol = "eng";};
+};
+
+private _fnc_playMessage = {
+	params ["_unit","_root","_protocol","_players",["_type",""],["_chat",true],["_3d",true]];
+	private _sound = format [_root, _protocol,_type];
+	
+	if (_chat) then {
+	private _text = getText (missionConfigFile >> "CfgRadio" >> _sound >> "title");
+	_unit sideChat _text;
 	};
 
+	private _source = playSound _sound;
+	localNamespace setVariable ["Rev_arty_dialog_sound",_source];
+	if (_3d) then {[_unit,[_sound,45]] remoteExec ["say3D",_players,"",true];};
+
+	waitUntil {isNull (localNamespace getVariable ["Rev_arty_dialog_sound",objNull])};
+};
 
 //Begin coversation
 switch (_round_type) do {
-	case "HE": {	
-		player sideRadio format ["Rev_%1_arty_request", _protocol];
-		[player,[format ["Rev_%1_arty_request", _protocol],45]] remoteExec ["say3D",_players,true];
+	case "HE": {
+		[player,"Rev_%1_%2_request", _protocol,_players,"arty"] call _fnc_playMessage;
 	};
-	case "Smoke": {	
-		player sideRadio format ["Rev_%1_arty_request", _protocol];
-		[player,[format ["Rev_%1_arty_request", _protocol],45]] remoteExec ["say3D",_players,true];
+	case "Cluster": {
+		[player,"Rev_%1_%2_request", _protocol,_players,"arty"] call _fnc_playMessage;
 	};
-	case "Flare": {	
-		player sideRadio format ["Rev_%1_arty_request", _protocol];
-		[player,[format ["Rev_%1_arty_request", _protocol],45]] remoteExec ["say3D",_players,true];
+	case "Smoke": {
+		[player,"Rev_%1_%2_request", _protocol,_players,"arty"] call _fnc_playMessage;
 	};
-	case "Missile": {	
-		player sideRadio format ["Rev_%1_arty_request", _protocol];
-		[player,[format ["Rev_%1_arty_request", _protocol],45]] remoteExec ["say3D",_players,true];
+	case "Flare": {
+		[player,"Rev_%1_%2_request", _protocol,_players,"arty"] call _fnc_playMessage;
+	};
+	case "Missile": {
+		[player,"Rev_%1_%2_request", _protocol,_players,"arty"] call _fnc_playMessage;
 	};
 	case "Air": {
 		_group setGroupId ["Air Control"];
-		player sideRadio format ["Rev_%1_air_request", _protocol];
-		[player,[format ["Rev_%1_air_request", _protocol],45]] remoteExec ["say3D",_players,true];
+		[player,"Rev_%1_%2_request", _protocol,_players,"air"] call _fnc_playMessage;
 	};
 	case "Supply": {
 		_group setGroupId ["Air Control"];
-		player sideRadio format ["Rev_%1_supply_request", _protocol];
-		[player,[format ["Rev_%1_supply_request", _protocol],45]] remoteExec ["say3D",_players,true];
+		[player,"Rev_%1_%2_request", _protocol,_players,"supply"] call _fnc_playMessage;
 	};
 	case "Gunship": {
 		_group setGroupId ["Air Control"];
-		player sideRadio format ["Rev_%1_air_request", _protocol];
-		[player,[format ["Rev_%1_air_request", _protocol],45]] remoteExec ["say3D",_players,true];
+		[player,"Rev_%1_%2_request", _protocol,_players,"air"] call _fnc_playMessage;
 	};
 	case "Bombing": {
 		_group setGroupId ["Air Control"];
-		player sideRadio format ["Rev_%1_bomb_request", _protocol];
-		[player,[format ["Rev_%1_bomb_request", _protocol],45]] remoteExec ["say3D",_players,true];
+		[player,"Rev_%1_%2_request", _protocol,_players,"bomb"] call _fnc_playMessage;
 	};
-	default { };
+	default {};
 };
 
-
-//Case TRP
-if (typeName _target isEqualTo "STRING") exitWith {
-	player sideRadio format ["Rev_%1_arty_target", _protocol];
-	[player,[format ["Rev_%1_arty_target", _protocol],45]] remoteExec ["say3D",_players,true];
-
-
-	switch (_round_type) do {
-	case "HE": {
-		player sideRadio format ["Rev_%1_arty_fire1", _protocol];
-		[player,[format ["Rev_%1_arty_fire1", _protocol],45]] remoteExec ["say3D",_players,true];
-		player sideRadio format ["Rev_%1_arty_fire1", _protocol];
-		[player,[format ["Rev_%1_arty_fire1", _protocol],45]] remoteExec ["say3D",_players,true];
-		player sideRadio format ["Rev_%1_arty_fire2", _protocol];
-		[player,[format ["Rev_%1_arty_fire2", _protocol],45]] remoteExec ["say3D",_players,true];
-		};
-	case "Smoke": {player sideRadio format ["Rev_%1_arty_fire1", _protocol];[player,[format ["Rev_%1_arty_fire1", _protocol],45]] remoteExec ["say3D",_players,true];};
-	case "Flare": {player sideRadio format ["Rev_%1_arty_flares", _protocol];[player,[format ["Rev_%1_arty_flares", _protocol],45]] remoteExec ["say3D",_players,true];};
-	case "Missile": {player sideRadio format ["Rev_%1_arty_call_missiles", _protocol];[player,[format ["Rev_%1_arty_call_missiles", _protocol],45]] remoteExec ["say3D",_players,true];};
-	};
-	sleep 10;
-
-	switch (_round_type) do {
-		case "Missile": {
-				if !(alive _tgt) exitWith {playSound "FD_Start_F"; hint "No target designated with laser. Check your coordinates.";};
-				_unit sideRadio format ["Rev_%1_arty_missiles", _protocol];
-			};
-		case "Air": {_unit sideRadio format ["Rev_%1_air_roger", _protocol]};
-		case "Supply": {_unit sideRadio format ["Rev_%1_supply_roger", _protocol]};
-		case "Gunship": {_unit sideRadio format ["Rev_%1_air_roger", _protocol]};
-		case "Bombing": {_unit sideRadio format ["Rev_%1_bomb_roger", _protocol]};
-		default {_unit sideRadio format ["Rev_%1_arty_roger", _protocol];};	
-	};
-
-	sleep 5;
-	switch (_round_type) do {
-		case "HE": {[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_HE;};
-		case "Flare": {[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_ILM;};
-		case "Smoke": {[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_SMK;};
-		case "Missile": {
-				if !(alive _tgt) exitWith {hint "No target designated with laser. Check your coordinates.";};
-				[] spawn Rev_arty_fnc_missile_launch;
-			};
-		case "Air": {[] spawn Rev_arty_fnc_air_start};
-		case "Supply": {[] spawn Rev_arty_fnc_supply_transport;};
-		case "Gunship": {[] spawn Rev_arty_fnc_gunship_start;};
-		case "Bombing": {[] spawn Rev_arty_fnc_bomb_plane};
-		
-	};
-
-	//Remove generated radio if had none before
-	if (!_initial_radio) then {
-		player unlinkItem ((assignedItems player) select {getNumber (configfile >> "CfgWeapons" >> _x >> "tf_radio") != 0} select 0);
-	};
-
-	deleteVehicle _unit;
-
-};
 
 //Create grid lines
 private _list = _location splitString "";
 private _first = _list select 0;
 _list deleteRange [0, 1];
 parsenumber _first;
-player sideRadio format ["Rev_%1_grid_1_%2", _protocol,_first];
-[player,[format ["Rev_%1_grid_1_%2", _protocol,_first],45]] remoteExec ["say3D",_players,true];
 
+//First line
+player sideChat ("Grid " + _location);
+[player,"Rev_%1_grid_1_%2", _protocol,_players,_first,false] call _fnc_playMessage;
+
+
+//Grid lines
 {
 	parsenumber _x;
-	player sideRadio format ["Rev_%1_grid_%2", _protocol,_x];
-	[player,[format ["Rev_%1_grid_%2", _protocol,_x],45]] remoteExec ["say3D",_players,true];
-	
+	[player,"Rev_%1_grid_%2",_protocol,_players,_x,false] call _fnc_playMessage;
+	waitUntil {isNull (localNamespace getVariable ["Rev_arty_dialog_sound",objNull])};
 } forEach _list;
+
+//Create distance
+private _distance = _range;
+private _vaihtoehdot2 = [100,200,300,400,500,600,700,800,900,1000];
+private _distance_a = _vaihtoehdot2 select {(abs (_range - _x)) < 51};
+if (_range < 50) then {_distance = 0} else {_distance = _distance_a select 0;};
+if (_range > 1000) then {_distance = 1000};
+
 
 //Create angle
 private _vaihtoehdot = [000,015,030,045,060,075,090,105,120,135,150,165,180,195,210,225,240,255,270,285,300,315,330,345,360];
@@ -236,56 +155,60 @@ private _switch = 0;
 if (_bearing < 15) then {_switch = 0};
 if ((_bearing >= 15) && (_bearing < 100)) then {_switch = 1};
 if (_bearing >= 100) then {_switch = 2};
+if (_range < 50) then {_switch = 3}; //we are skipping bearings on short ranges
 
+//Playing bearing call
 switch (_switch) do {
-	case 0: {player sideRadio format ["Rev_%1_bear_000", _protocol];[player,[format ["Rev_%1_bear_000", _protocol],45]] remoteExec ["say3D",_players,true];};
-	case 1: {player sideRadio format ["Rev_%1_bear_0%2", _protocol,_bearing];[player,[format ["Rev_%1_bear_0%2", _protocol,_bearing],45]] remoteExec ["say3D",_players,true]};
-	case 2: {player sideRadio format ["Rev_%1_bear_%2", _protocol,_bearing];[player,[format ["Rev_%1_bear_%2", _protocol,_bearing],45]] remoteExec ["say3D",_players,true]};
+	case 0: {[player,"Rev_%1_bear_000",_protocol,_players] call _fnc_playMessage;};
+	case 1: {[player,"Rev_%1_bear_0%2",_protocol,_players,_bearing] call _fnc_playMessage;};
+	case 2: {[player,"Rev_%1_bear_%2",_protocol,_players,_bearing] call _fnc_playMessage;};
+	case 3: {};
 };
 
-//Create distance
-private _distance = _range;
-private _vaihtoehdot2 = [100,200,300,400,500,600,700,800,900,1000];
-private _distance_a = _vaihtoehdot2 select {(abs (_range - _x)) < 51};
-if (_range < 50) then {_distance = 100} else {_distance = _distance_a select 0;};
-if (_range > 1000) then {_distance = 1000};
-player sideRadio format ["Rev_%1_dis_%2",_protocol,_distance];
-[player,[format ["Rev_%1_dis_%2", _protocol,_distance],45]] remoteExec ["say3D",_players,true];
+//Distance calculated above so that it can be used to skip bearings if needed, but called here bc I believe that is more 'realistic'
+//Small ranges left out
+if !(_distance == 0) then {[player,"Rev_%1_dis_%2",_protocol,_players,_distance] call _fnc_playMessage;};
+
+
 
 //Fire call
 switch (_round_type) do {
 	case "HE": {
-		player sideRadio format ["Rev_%1_arty_fire1", _protocol];
-		[player,[format ["Rev_%1_arty_fire1", _protocol],45]] remoteExec ["say3D",_players,true];
-		player sideRadio format ["Rev_%1_arty_fire1", _protocol];
-		[player,[format ["Rev_%1_arty_fire1", _protocol],45]] remoteExec ["say3D",_players,true];
-		player sideRadio format ["Rev_%1_arty_fire2", _protocol];
-		[player,[format ["Rev_%1_arty_fire2", _protocol],45]] remoteExec ["say3D",_players,true];
-		};
-	case "Smoke": {player sideRadio format ["Rev_%1_arty_fire1", _protocol];[player,[format ["Rev_%1_arty_fire1", _protocol],45]] remoteExec ["say3D",_players,true];};
-	case "Flare": {player sideRadio format ["Rev_%1_arty_flares", _protocol];[player,[format ["Rev_%1_arty_flares", _protocol],45]] remoteExec ["say3D",_players,true];};
-	case "Missile": {player sideRadio format ["Rev_%1_arty_call_missiles", _protocol];[player,[format ["Rev_%1_arty_call_missiles", _protocol],45]] remoteExec ["say3D",_players,true];};
+		[player,"Rev_%1_arty_fire1",_protocol,_players] call _fnc_playMessage;
+		[player,"Rev_%1_arty_fire1",_protocol,_players,"",false] call _fnc_playMessage;
+		[player,"Rev_%1_arty_fire1",_protocol,_players,"",false] call _fnc_playMessage;
 	};
+	case "Cluster": {
+		[player,"Rev_%1_arty_fire1",_protocol,_players] call _fnc_playMessage;
+		[player,"Rev_%1_arty_fire1",_protocol,_players,"",false] call _fnc_playMessage;
+		[player,"Rev_%1_arty_fire1",_protocol,_players,"",false] call _fnc_playMessage;
+	};
+	case "Smoke": {[player,"Rev_%1_arty_fire1",_protocol,_players] call _fnc_playMessage;};
+	case "Flare": {[player,"Rev_%1_arty_flares",_protocol,_players] call _fnc_playMessage;};
+	case "Missile": {[player,"Rev_%1_arty_call_missiles",_protocol,_players] call _fnc_playMessage;};
+};
 
 private _aika = count _list;
 sleep (_aika * 1.5);
 
 //Radio acknowledge
 switch (_round_type) do {
-	case "Missile": {_unit sideRadio format ["Rev_%1_arty_missiles", _protocol];};
-	case "Air": {_unit sideRadio format ["Rev_%1_air_roger", _protocol]};
-	case "Supply": {_unit sideRadio format ["Rev_%1_supply_roger", _protocol]};
-	case "Gunship": {_unit sideRadio format ["Rev_%1_air_roger", _protocol]};
-	case "Bombing": {_unit sideRadio format ["Rev_%1_bomb_roger", _protocol]};
-	default {_unit sideRadio format ["Rev_%1_arty_roger", _protocol];};	
+	case "Missile": {[_unit,"Rev_%1_arty_missiles",_protocol,_players,"",true,false] call _fnc_playMessage;};
+	case "Air": {[_unit,"Rev_%1_air_roger",_protocol,_players,"",true,false] call _fnc_playMessage;};
+	case "Supply": {[_unit,"Rev_%1_supply_roger",_protocol,_players,"",true,false] call _fnc_playMessage;};
+	case "Gunship": {[_unit,"Rev_%1_air_roger",_protocol,_players,"",true,false] call _fnc_playMessage;};
+	case "Bombing": {[_unit,"Rev_%1_bomb_roger",_protocol,_players,"",true,false] call _fnc_playMessage;};
+	default {[_unit,"Rev_%1_arty_roger",_protocol,_players,"",true,false] call _fnc_playMessage;};	
 };
+
 
 //Execute barrage function
 sleep 7;
 switch (_round_type) do {
-	case "HE": {[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_HE;};
-	case "Flare": {[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_ILM;};
-	case "Smoke": {[_angle,_range,_pos,_number,_delay] spawn Rev_arty_fnc_barrage_SMK;};
+	case "HE": {[_finalPos,(_number * 10),_number,_delay] call Rev_arty_fnc_barrage_HE;};
+	case "Cluster": {[_finalPos,(_number * 20),_number,_delay] call Rev_arty_fnc_barrage_CLU;};
+	case "Flare": {[_finalPos,(_number * 10),_number,_delay] call Rev_arty_fnc_barrage_ILM;};
+	case "Smoke": {[_finalPos,(_number * 10),_number,_delay] call Rev_arty_fnc_barrage_SMK;};
 	case "Missile": {[] spawn Rev_arty_fnc_missile_launch;};
 	case "Air": {[] spawn Rev_arty_fnc_air_start};
 	case "Supply": {[] spawn Rev_arty_fnc_supply_transport;};
@@ -293,10 +216,6 @@ switch (_round_type) do {
 	case "Bombing": {[] spawn Rev_arty_fnc_bomb_plane};
 };
 
-//Remove generated radio if had none before
-if (!_initial_radio) then {
-	player unlinkItem ((assignedItems player) select {getNumber (configfile >> "CfgWeapons" >> _x >> "tf_radio") != 0} select 0);
-};
 
 //Delete radio speaker
 deleteVehicle _unit;

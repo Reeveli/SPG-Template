@@ -29,6 +29,13 @@ params [
 ];
 
 //Start bombarment
-for "_i" from 0 to (_number - 1) do {
-	[{params ["_pos", "_range","_angle","_dispersion"];[_pos, _range,_angle,_dispersion] call Rev_arty_fnc_shell_SMK;}, [_pos, 0,0,_radius], ((_i * _delay) + (random 2))] call CBA_fnc_waitAndExecute;
+for "_i" from 1 to _number do {
+	[
+		{
+			params ["_pos","_radius"];
+			[_pos,_radius,false] call Rev_arty_fnc_shell_SMK;
+		},
+		[_pos,_radius],
+		(_i * _delay) + (random 2)
+	] call CBA_fnc_waitAndExecute;
 };

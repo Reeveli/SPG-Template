@@ -12,6 +12,8 @@
  * Example:
  * [_x] spawn Rev_arty_fnc_napalm_vehicles}
  *
+ 1.1
+	Updated ACE engone fire function name, apparently they chnaged it at some point
  */
 
 
@@ -29,7 +31,7 @@ private _currentDamage = _vehicle getHitPointDamage "hitengine";
 if ((_vehicle getHitPointDamage "hitengine") <= 0.9) exitwith {};
 
 //Set engine on fire 
-_vehicle call ace_cookoff_fnc_engineFire;
+_vehicle call ace_cookoff_fnc_enginefireserver;
 
 //Setting crew on fire if high damage on vehicle
 private _crew = fullCrew _vehicle;

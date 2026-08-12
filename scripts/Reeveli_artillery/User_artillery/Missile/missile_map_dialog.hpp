@@ -112,14 +112,14 @@ class Rev_arty_fnc_missile_map
 		{
 			idc = IDC_REV_MIS_ALT_TXT;
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 40 * pixelGridNoUIScale * pixelH";
-			text = "Flying Altitude: ";
+			text = "Flying altitude: ";
 			tooltip = "";		
 		};
 		class Altitude_slider: Rev_arty_slider
 		{
 			idc = IDC_REV_MIS_ALT;		
 			y = "(uiNamespace getvariable ['Rev_arty_dialog_y',safezoneY + (safezoneH * 0.50) - ((64 * pixelGridNoUIScale * pixelH) * 0.5)]) + 43 * pixelGridNoUIScale * pixelH";
-			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6034, format ['Flying Altitude: %1M',round _newValue]];";
+			onSliderPosChanged = "params ['_control', '_newValue']; ctrlSetText [6034, format ['Flying altitude: %1M',round _newValue]];";
 			tooltip = "Flying altitude of the missile";
 		};
 
