@@ -14,8 +14,8 @@
 	Function rewritten with Arma 2.22 update commands
  */
 
+if !(Rev_marker_briefing) exitWith {};
 if !(hasInterface) exitWith {};
-
 
 [
 	{
